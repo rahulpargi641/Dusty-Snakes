@@ -1,0 +1,1523 @@
+fileFormatVersion: 2
+guid: 2e95b956b487ad34fa5b46570f7e3f48
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 149
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b50b973f849804c9dc4f943f23812c
+      internalID: -2068112306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 149
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8130540e66143fb44af6128ca245a5f5
+      internalID: 667303120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_2
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 149
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e5531461154e974fbd2a0805e0656e7
+      internalID: -2121432676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 149
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2433ed1f7bffa14abe4cc06f189db5e
+      internalID: 1369773739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_4
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 149
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc3812e26db3e3d4dad15cb3ba67f889
+      internalID: -805685971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_5
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 149
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eea0b692e6e9e0647bbc5680eb61dd2c
+      internalID: -2073468451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_6
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508faa217e693c548afaefa213382f12
+      internalID: -646615105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_7
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe733b3e1b76a14f9552620e9d1c3af
+      internalID: -1499746641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_8
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e104f5b71216cf74baf4d2b5a2e7b265
+      internalID: -1590591430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_9
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6224c08b06b7ae84bae43d30d28a5072
+      internalID: -669951916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_10
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31f686ab3364800488901ece4b6abaa8
+      internalID: -462976392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36eedc89a86d6ba478f732b2ba70deb1
+      internalID: -1185604483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_12
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcdb49ea8e8bde246a96b6862964998b
+      internalID: 1197993533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_13
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 132
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f32665e4c1fde19449ba0c31c814462c
+      internalID: -1290303865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_14
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b83ccf633dbf644388e8d9294262179
+      internalID: 1051760930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_15
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 534c85843df1eef41b7884156048fb59
+      internalID: -1925166391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_16
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21be993182a255b4d83c44ec77f15519
+      internalID: -1480173924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a650c4630b03eb247aac8d6d964c3556
+      internalID: 806061120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_18
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03565611840d15e48b2494c146f9c989
+      internalID: -127131516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_19
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d1a2311a5d6e5c489c769af84ae3031
+      internalID: -978835008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_20
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a97387e6ad460c48b63f72f5192d00d
+      internalID: -357761211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_21
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 558cbbc8b22ed9a45a807ecc61c9ae1e
+      internalID: -220164163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_22
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cab7fd2c303ae34693c7050da8a1e7d
+      internalID: -1134618514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_23
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 115
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e19906a119889845bc0a992d42d3a9d
+      internalID: 544178022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_24
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0acbd6663d52652489564961f9318677
+      internalID: -707679972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_25
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec1bac275191a9419f9c983f59ac7a8
+      internalID: -1886712197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_26
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f7b16635e535b246b8a46d900b1fdf1
+      internalID: 1295597834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ee82ef0e0765a4eaa4e2e8d0be3dc8
+      internalID: -1690188212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_28
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793652df2860c754786d2b87f6b07a26
+      internalID: 1618736645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_29
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deb6d412f364d254fa57e14b216d042a
+      internalID: -643134001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_30
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bd98a6d1543b2a4dae1180bad0a8135
+      internalID: -137143523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_31
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51671713b7aa36944a9f046c1d14f15e
+      internalID: -1572817313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_32
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1efcb119c96ad694db558601d99cc7c0
+      internalID: -1795548643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_33
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 98
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183ec1fc402e5e8468bc2123f8bbae8f
+      internalID: -1497427752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_34
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e4371cd861f414cac647ae42765672
+      internalID: 1337544232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_35
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3b6a119dacfaf43b851c9a1d8bc5bb
+      internalID: -490790856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_36
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aa2fc8771ba1c14689d8eb320fb0578
+      internalID: 947963503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_37
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc778480b92e634ab7cb23ff1536ef5
+      internalID: -1993151185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_38
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe8dc5d26b71ba4dadb80d3cd852515
+      internalID: -762713576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_39
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 81
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d86768baab5e114b8570c1d612eb678
+      internalID: -1941969767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_40
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1962046f8aa0bf643a9e2b80e493b7f9
+      internalID: -637158172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_41
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c80f1aab0567f7848b8921995a947463
+      internalID: -2127068495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_42
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 72
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33183d9a4d5d3c04ab39947117eb7921
+      internalID: 1480882376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_43
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b18aa638379be49a061dfda457c197
+      internalID: 1569700864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_44
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eeec61904144d046a0a6b20f532b61a
+      internalID: 1536149830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_45
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb86383e001090d4cb372ac2b1c274ed
+      internalID: -1036890060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_46
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 47
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b402ecfc2b1f4784db37154e5d6a37b9
+      internalID: -1546398399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_47
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 47
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0601dd54d0dbcf47bad3eb3bfa92cb3
+      internalID: 503906547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_48
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 30
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef909c270acb9e4409780a78598310e2
+      internalID: 1753760531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_49
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 30
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04c92205ebfca524e8717ee0ba400fc7
+      internalID: -1741937693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_50
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 30
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 576649f38abf3fa4f8f10e25067ad256
+      internalID: -140730910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_51
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 30
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55716af4631f7e24a8052764f8c08783
+      internalID: -114168846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_52
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 30
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae9139185f512643981d289dedd92c3
+      internalID: 460875989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_53
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 30
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fd9b4db8baa37d48b1720fd9413d77d
+      internalID: -169258218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_54
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 9
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27874399df2011246b98522d14caecf8
+      internalID: -105143784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_55
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 9
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba2104dd508d5b4c9b62f9b48a3d432
+      internalID: -1680646242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_56
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 9
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cc3ad3994db2c14ab8ce2e7ce84df06
+      internalID: -91997307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_57
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 9
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562a7463544ce7447a1d120d9a3c89d4
+      internalID: -1778654530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_58
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 9
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a2dba9e1b2ab7f47b334139fbf4f6de
+      internalID: 384871712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_59
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 9
+        width: 23
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0acf57dd133a8be4cbcfd3783bd98913
+      internalID: 941780062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_60
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 9
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d502f5dad3770754187a3e4599893e35
+      internalID: 1723825704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_61
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 9
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb7e3b21caf1e2a478255319921337ad
+      internalID: -132533272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_13: -1290303865
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_46: -1546398399
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_59: 941780062
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_23: 544178022
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_31: -1572817313
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_43: 1569700864
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_49: -1741937693
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_25: -1886712197
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_16: -1480173924
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_26: 1295597834
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_27: -1690188212
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_22: -1134618514
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_10: -462976392
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_47: 503906547
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_28: 1618736645
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_24: -707679972
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_29: -643134001
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_9: -669951916
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_12: 1197993533
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_1: 667303120
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_15: -1925166391
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_41: -2127068495
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_45: -1036890060
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_57: -1778654530
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_17: 806061120
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_35: -490790856
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_8: -1590591430
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_48: 1753760531
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_7: -1499746641
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_40: -637158172
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_37: -1993151185
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_11: -1185604483
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_4: -805685971
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_42: 1480882376
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_19: -978835008
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_2: -2121432676
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_5: -2073468451
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_3: 1369773739
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_20: -357761211
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_39: -1941969767
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_18: -127131516
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_53: -169258218
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_52: 460875989
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_56: -91997307
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_21: -220164163
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_33: -1497427752
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_44: 1536149830
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_14: 1051760930
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_32: -1795548643
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_61: -132533272
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_34: 1337544232
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_55: -1680646242
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_38: -762713576
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_54: -105143784
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_58: 384871712
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_60: 1723825704
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_30: -137143523
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_36: 947963503
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_50: -140730910
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_0: -2068112306
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_6: -646615105
+      Custom Edited - Mega Man Customs - Snake Man Tileset MMIII GBC-Style_51: -114168846
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
