@@ -7,21 +7,9 @@ public class SnakeController : MonoBehaviour
 {
     public static event Action<int> onFoodEaten;
     public static event Action onSnakeDeath;
-    enum EDirection
-    {
-        Left, Right, Up, Down
-    }
-    enum ESnakeState
-    {
-        Alive, Dead
-    }
-    enum EInput
-    {
-        WASDKeys, ArrowKeys
-    }
 
-    EDirection ED_CurrentFacingDir;
-    ESnakeState ES_SnakeState;
+    EDirection currentFacingDir;
+    ESnakeState snakeState;
 
     [SerializeField] EInput m_InputPreference;
     [SerializeField] Vector2Int m_InititalSnakePos;
@@ -43,16 +31,15 @@ public class SnakeController : MonoBehaviour
     bool m_ScoreBoostActive = false;
 
 
-
     private void Awake()
     {
         m_SnakeHeadPositions = new List<SnakeVector>();
         m_SnakeBodyParts = new List<SnakeBodyPart>();
 
         m_CurrentSnakeHeadPos = m_InititalSnakePos;
-        ED_CurrentFacingDir = EDirection.Right;
+        currentFacingDir = EDirection.Right;
         m_SnakeBodySize = 0;
-        ES_SnakeState = ESnakeState.Alive;
+        snakeState = ESnakeState.Alive;
 
         m_MoveTimerMax = 0.2f;
         m_MoveTimer = m_MoveTimerMax;
@@ -66,7 +53,7 @@ public class SnakeController : MonoBehaviour
 
     private void Update()
     {
-        switch(ES_SnakeState)
+        switch(snakeState)
         {
             case ESnakeState.Alive:
                 ProcessFacingDirection(); // Snake Facing Direction based on Input
@@ -74,6 +61,24 @@ public class SnakeController : MonoBehaviour
                 break;
             case ESnakeState.Dead:
                 break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Food eatenFood = collision.GetComponent<Food>();
+        if (eatenFood)
+        {
+            ProcessSnakeEating(eatenFood);
+            eatenFood.gameObject.SetActive(false);
+            return;
+        }
+
+        PowerUp eatenPowerUp = collision.GetComponent<PowerUp>();
+        if(eatenPowerUp)
+        {
+            ProcessSnakePoweringUp(eatenPowerUp);
+            eatenPowerUp.gameObject.SetActive(false);
         }
     }
 
@@ -90,33 +95,33 @@ public class SnakeController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (ED_CurrentFacingDir != EDirection.Down)
+            if (currentFacingDir != EDirection.Down)
             {
-                ED_CurrentFacingDir = EDirection.Up;
+                currentFacingDir = EDirection.Up;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (ED_CurrentFacingDir != EDirection.Up)
+            if (currentFacingDir != EDirection.Up)
             {
-                ED_CurrentFacingDir = EDirection.Down;
+                currentFacingDir = EDirection.Down;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (ED_CurrentFacingDir != EDirection.Right)
+            if (currentFacingDir != EDirection.Right)
             {
-                ED_CurrentFacingDir = EDirection.Left;
+                currentFacingDir = EDirection.Left;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (ED_CurrentFacingDir != EDirection.Left)
+            if (currentFacingDir != EDirection.Left)
             {
-                ED_CurrentFacingDir = EDirection.Right;
+                currentFacingDir = EDirection.Right;
             }
         }
     }
@@ -125,33 +130,33 @@ public class SnakeController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (ED_CurrentFacingDir != EDirection.Down)
+            if (currentFacingDir != EDirection.Down)
             {
-                ED_CurrentFacingDir = EDirection.Up;
+                currentFacingDir = EDirection.Up;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (ED_CurrentFacingDir != EDirection.Up)
+            if (currentFacingDir != EDirection.Up)
             {
-                ED_CurrentFacingDir = EDirection.Down;
+                currentFacingDir = EDirection.Down;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (ED_CurrentFacingDir != EDirection.Right)
+            if (currentFacingDir != EDirection.Right)
             {
-                ED_CurrentFacingDir = EDirection.Left;
+                currentFacingDir = EDirection.Left;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (ED_CurrentFacingDir != EDirection.Left)
+            if (currentFacingDir != EDirection.Left)
             {
-                ED_CurrentFacingDir = EDirection.Right;
+                currentFacingDir = EDirection.Right;
             }
         }
     }
@@ -168,10 +173,6 @@ public class SnakeController : MonoBehaviour
 
             ProcessSnakeHeadTranslation();
 
-            ProcessInCaseSnakeEatsFood();
-
-            ProcessInCaseSnakeEatsPowerUp();
-
             ProcessMovingWithoutEatingFood();
 
             ProcessSnakeBodyPartsTranslation();
@@ -184,7 +185,7 @@ public class SnakeController : MonoBehaviour
 
     private void StoreSnakeHeadPositionAndDirection()
     {
-        SnakeVector snakeHeadVector = new SnakeVector(m_CurrentSnakeHeadPos, ED_CurrentFacingDir);
+        SnakeVector snakeHeadVector = new SnakeVector(m_CurrentSnakeHeadPos, currentFacingDir);
         m_SnakeHeadPositions.Insert(0, snakeHeadVector);
     }
 
@@ -224,7 +225,7 @@ public class SnakeController : MonoBehaviour
     {
         Vector2Int nextPoint;
 
-        switch (ED_CurrentFacingDir)
+        switch (currentFacingDir)
         {
             default:
             case EDirection.Right:
@@ -245,71 +246,60 @@ public class SnakeController : MonoBehaviour
     }
 
 
-    private void ProcessInCaseSnakeEatsFood()
+    private void ProcessSnakeEating(Food eatenFood)
     {
-        bool foodItemEaten = m_ItemController.IsFoodEaten(m_CurrentSnakeHeadPos);
 
-        if (foodItemEaten)
+        if (eatenFood.foodType == FoodType.MassGainer)
         {
-            Food EatenFoodItem = m_ItemController.GetEatenFood();
-            Food.FoodType EatenFoodItemType= EatenFoodItem.foodType;
-            if (EatenFoodItemType == Food.FoodType.MassGainer)
-            {
-                m_MassGainerFoodEatenCounter++;
-                AddSnakeBodyPart();
-                AddScore(EatenFoodItem.m_PointGain);
-                Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
-                AudioService.Instance.PlaySound(SoundType.AteFood);
-            }
-            else if (EatenFoodItemType == Food.FoodType.MassBurner)
-            {
-                m_MassBurnerFoodEatenCounter++;
-                RemoveSnakeBodyPart();
-                AddScore(EatenFoodItem.m_PointGain);
-                Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
-                AudioService.Instance.PlaySound(SoundType.AteFood);
-            }
-            else
-            {
-                Debug.LogError("Wrong Logic, Food was not Eaten");
-            }
+            m_MassGainerFoodEatenCounter++;
+            AddSnakeBodyPart();
+            AddScore(eatenFood.m_PointGain);
+            Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
+            AudioService.Instance.PlaySound(SoundType.AteFood);
+        }
+        else if (eatenFood.foodType == FoodType.MassBurner)
+        {
+            m_MassBurnerFoodEatenCounter++;
+            RemoveSnakeBodyPart();
+            AddScore(eatenFood.m_PointGain);
+            Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
+            AudioService.Instance.PlaySound(SoundType.AteFood);
+        }
+        else
+        {
+            Debug.LogError("Wrong Logic, Food was not Eaten");
         }
     }
-    private void ProcessInCaseSnakeEatsPowerUp()
+
+    private void ProcessSnakePoweringUp(PowerUp eatenPowerUp)
     {
-        bool powerUpEaten = m_ItemController.IsPowerUpEaten(m_CurrentSnakeHeadPos);
-        if(powerUpEaten)
+        if (eatenPowerUp.powerUpType == PowerUpType.Shield)
         {
-            Debug.LogError("Snake Ate the Powerup Item");
-            PowerUps.EPowerType EatenPowerUpItemType = m_ItemController.GetEatenPowerUpItemType();
-            if(EatenPowerUpItemType == PowerUps.EPowerType.Shield)
-            {
-                m_ShieldActive = true;
-                StartCoroutine(ShieldCoolDown());
-                AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
-                ChangeSnakeBodyColor(m_ColorController.Blue);
-                Debug.Log("SHield Power Eaten");
-            }
-            else if (EatenPowerUpItemType == PowerUps.EPowerType.ScoreBoost)
-            {
-                m_ScoreBoostActive = true;
-                StartCoroutine(ScoreBoostCoolDown());
-                AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
-                ChangeSnakeBodyColor(m_ColorController.Violet);
-                Debug.Log("ScooreBoost Eaten");
-            }
-            else if(EatenPowerUpItemType == PowerUps.EPowerType.SpeedUp)
-            {
-                Time.timeScale = 2f;
-                StartCoroutine(SpeedUpCoolDown());
-                AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
-                ChangeSnakeBodyColor(m_ColorController.Red);
-                Debug.LogError("SPeed Up Consumed");
-            }
-            else
-            {
-                Debug.Log("Wrong Logic, Eaten Powerup Item Must be set");
-            }
+            m_ShieldActive = true;
+            StartCoroutine(ShieldCoolDown());
+            AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
+            ChangeSnakeBodyColor(m_ColorController.Blue);
+            Debug.Log("SHield Power Eaten");
+        }
+        else if (eatenPowerUp.powerUpType == PowerUpType.ScoreBoost)
+        {
+            m_ScoreBoostActive = true;
+            StartCoroutine(ScoreBoostCoolDown());
+            AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
+            ChangeSnakeBodyColor(m_ColorController.Violet);
+            Debug.Log("ScooreBoost Eaten");
+        }
+        else if (eatenPowerUp.powerUpType == PowerUpType.SpeedUp)
+        {
+            Time.timeScale = 2f;
+            StartCoroutine(SpeedUpCoolDown());
+            AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
+            ChangeSnakeBodyColor(m_ColorController.Red);
+            Debug.LogError("SPeed Up Consumed");
+        }
+        else
+        {
+            Debug.Log("Wrong Logic, Eaten Powerup Item Must be set");
         }
     }
 
@@ -370,7 +360,7 @@ public class SnakeController : MonoBehaviour
                 {
                     return;
                 }
-                ES_SnakeState = ESnakeState.Dead;
+                snakeState = ESnakeState.Dead;
                 //m_LevelController.SnakeCollided();
                 onSnakeDeath?.Invoke();
                 AudioService.Instance.PlaySound(SoundType.Death);
@@ -443,7 +433,7 @@ public class SnakeController : MonoBehaviour
                     Debug.LogError("SHiled is Active Snake cannot die");
                     return;
                 }
-                ES_SnakeState = ESnakeState.Dead;
+                snakeState = ESnakeState.Dead;
                 //m_LevelController.SnakeCollided();
                 onSnakeDeath?.Invoke();
                 Debug.Log("Snake Collied With Other Snake Body!");

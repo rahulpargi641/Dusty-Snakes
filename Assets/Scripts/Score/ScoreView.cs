@@ -8,7 +8,7 @@ public class ScoreView : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     public ScoreController Controller { private get; set; }
 
-    private void Awake()
+    private void Start()
     {
         scoreText.text = Controller.GetCurrentScore().ToString();
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5367650588329556270}
   - component: {fileID: 2541131142781794621}
   - component: {fileID: 7445167432333917417}
+  - component: {fileID: 6319672688910612080}
   m_Layer: 0
   m_Name: Potion ScoreBoost
   m_TagString: Untagged
@@ -99,4 +100,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PointGain: 0
   m_DestroyAfterTime: 10
-  EP_PowerType: 1
+  powerUpType: 0
+--- !u!61 &6319672688910612080
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815014462937598411}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0666667, y: 1.0666667}
+    newSize: {x: 1.6, y: 1.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0666667, y: 1.0666667}
+  m_EdgeRadius: 0

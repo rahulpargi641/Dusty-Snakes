@@ -5,14 +5,14 @@ using System;
 
 public class Food : Item
 {
-    public enum FoodType
-    {
-        MassGainer, MassBurner
-    }
-
     public FoodType foodType;
 }
 
+public enum FoodType
+
+{
+    MassGainer, MassBurner
+}
 
 public enum SoundType
 {
@@ -30,3 +30,17 @@ public enum GameState
     Pause, Running
 }
 
+enum EDirection
+{
+    Left, Right, Up, Down
+}
+
+enum ESnakeState
+{
+    Alive, Dead
+}
+
+enum EInput
+{
+    WASDKeys, ArrowKeys
+}

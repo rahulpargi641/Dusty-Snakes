@@ -1,26 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsController : MonoBehaviour
 {
+
     [SerializeField] Food[] m_FoodArray;
-    [SerializeField] PowerUps[] m_PowerUpsArray;
-    [SerializeField] LevelController m_LevelController;
+    [SerializeField] PowerUp[] m_PowerUpsArray;
     [SerializeField] SnakeController m_Snake;
+
     Food m_EatenFoodItem;
-    PowerUps.EPowerType EP_EatenPowerUpItem;
+    PowerUp m_EatenPowerUpItem;
     int m_Width;
     int m_Height;
     int m_ItemSpawnInterwalDelay;
   
     Dictionary<Vector2Int, Food> m_FoodDictionary;
-    Dictionary<Vector2Int, PowerUps> m_PowerUpsDictionary;
+    Dictionary<Vector2Int, PowerUp> m_PowerUpsDictionary;
 
     private void Awake()
     {
         m_FoodDictionary = new Dictionary<Vector2Int, Food>();
-        m_PowerUpsDictionary = new Dictionary<Vector2Int, PowerUps>();
+        m_PowerUpsDictionary = new Dictionary<Vector2Int, PowerUp>();
         m_ItemSpawnInterwalDelay = 1;
         m_Width = 30;
         m_Height = 30;
@@ -30,6 +32,7 @@ public class ItemsController : MonoBehaviour
     {
         StartCoroutine(SpawnFoodItem());
         StartCoroutine(SpawnPowerUpItem());
+
     }
 
     private IEnumerator SpawnFoodItem()
@@ -75,8 +78,8 @@ public class ItemsController : MonoBehaviour
             yield return new WaitForSeconds(5f);
             randomPowerUpPos = GenerateRandomPowerUpNotAtSnakeBody();
 
-            PowerUps powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
-            PowerUps powerUp = Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), transform.rotation);
+            PowerUp powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
+            PowerUp powerUp = Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), transform.rotation);
             m_PowerUpsDictionary.Add(randomPowerUpPos, powerUp);
 
             yield return new WaitForSeconds(powerUpToSpawn.m_DestroyAfterTime);
@@ -126,8 +129,8 @@ public class ItemsController : MonoBehaviour
     {
         if (m_PowerUpsDictionary.ContainsKey(snakeCurrentPos))
         {
-            PowerUps eatenPowerUpItem = GetEatenPowerupAndRemoveFromDictionary(snakeCurrentPos);
-            EP_EatenPowerUpItem = eatenPowerUpItem.EP_PowerType;
+            PowerUp eatenPowerUpItem = GetEatenPowerupAndRemoveFromDictionary(snakeCurrentPos);
+            m_EatenPowerUpItem = eatenPowerUpItem;
             Destroy(eatenPowerUpItem.gameObject);
             return true;
         }
@@ -135,9 +138,9 @@ public class ItemsController : MonoBehaviour
             return false;
     }
 
-    private PowerUps GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
+    private PowerUp GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
     {
-        if (m_PowerUpsDictionary.TryGetValue(snakeCurrentPos, out PowerUps powerUpToDestroy))
+        if (m_PowerUpsDictionary.TryGetValue(snakeCurrentPos, out PowerUp powerUpToDestroy))
         {
             m_PowerUpsDictionary.Remove(snakeCurrentPos);
         }
@@ -159,8 +162,8 @@ public class ItemsController : MonoBehaviour
         return m_EatenFoodItem;
     }
 
-    public PowerUps.EPowerType GetEatenPowerUpItemType()
+    public PowerUp GetEatenPowerUpItemType()
     {
-        return EP_EatenPowerUpItem;
+        return m_EatenPowerUpItem;
     }
 }
