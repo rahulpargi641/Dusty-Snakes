@@ -14,4 +14,15 @@ public class Food : Item
 }
 
 
+public enum SoundType
+{
+    ButtonClick,
+    AteFood,
+    PowerupShiledPickup,
+    PowerupScoreBoosterPickup,
+    PowerupSpeedUpPickup,
+    Death,
+    SnakeCollide
+}
+
 

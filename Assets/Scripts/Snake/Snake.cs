@@ -233,7 +233,7 @@ public class Snake : MonoBehaviour
                 AddSnakeBodyPart();
                 AddScore(EatenFoodItem.m_PointGain);
                 Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
-                SoundManager.PlaySound(SoundManager.ESoundType.AteFood);
+                AudioService.Instance.PlaySound(SoundType.AteFood);
             }
             else if (EatenFoodItemType == Food.EFoodType.MassBurner)
             {
@@ -241,7 +241,7 @@ public class Snake : MonoBehaviour
                 RemoveSnakeBodyPart();
                 AddScore(EatenFoodItem.m_PointGain);
                 Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
-                SoundManager.PlaySound(SoundManager.ESoundType.AteFood);
+                AudioService.Instance.PlaySound(SoundType.AteFood);
             }
             else
             {
@@ -260,7 +260,7 @@ public class Snake : MonoBehaviour
             {
                 m_ShieldActive = true;
                 StartCoroutine(ShieldCoolDown());
-                SoundManager.PlaySound(SoundManager.ESoundType.PowerupShiledPickup);
+                AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
                 ChangeSnakeBodyColor(m_ColorController.Blue);
                 Debug.Log("SHield Power Eaten");
             }
@@ -268,7 +268,7 @@ public class Snake : MonoBehaviour
             {
                 m_ScoreBoostActive = true;
                 StartCoroutine(ScoreBoostCoolDown());
-                SoundManager.PlaySound(SoundManager.ESoundType.PowerupScoreBoosterPickup);
+                AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
                 ChangeSnakeBodyColor(m_ColorController.Violet);
                 Debug.Log("ScooreBoost Eaten");
             }
@@ -276,7 +276,7 @@ public class Snake : MonoBehaviour
             {
                 Time.timeScale = 2f;
                 StartCoroutine(SpeedUpCoolDown());
-                SoundManager.PlaySound(SoundManager.ESoundType.PowerupSpeedUpPickup);
+                AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
                 ChangeSnakeBodyColor(m_ColorController.Red);
                 Debug.LogError("SPeed Up Consumed");
             }
@@ -346,7 +346,7 @@ public class Snake : MonoBehaviour
                 }
                 ES_SnakeState = ESnakeState.Dead;
                 m_LevelController.SnakeCollided();
-                SoundManager.PlaySound(SoundManager.ESoundType.DeathVoice);
+                AudioService.Instance.PlaySound(SoundType.Death);
             }
         }
     }
@@ -419,7 +419,7 @@ public class Snake : MonoBehaviour
                 ES_SnakeState = ESnakeState.Dead;
                 m_LevelController.SnakeCollided();
                 Debug.Log("Snake Collied With Other Snake Body!");
-                SoundManager.PlaySound(SoundManager.ESoundType.DeathVoice);
+                AudioService.Instance.PlaySound(SoundType.Death);
             }
         }
 
