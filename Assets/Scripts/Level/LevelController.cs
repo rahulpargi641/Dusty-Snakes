@@ -33,17 +33,12 @@ public class LevelController
         model.GameState = gameState;
     }
 
-    public void UpdateCurrentScore(int points)
-    {
-        model.CurrentScore += points;
-    }
-
     public void ProcessGameOver() // if snake dies
     {
         view.EnableGameOverGO();
     }
 
-    public void ProcessIfLevelWin() // Achievement System
+    public void ProcessIfLevelWin() // Achievement System, get the score from score service
     {
         if (model.CurrentScore >= model.ScoreToWin)
         {

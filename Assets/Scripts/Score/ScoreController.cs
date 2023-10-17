@@ -1,36 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ScoreController : MonoBehaviour
+public class ScoreController
 {
-    [SerializeField] TMP_Text m_ScoreText;
-    int m_Score;
-    private void Awake()
+    private ScoreModel model;
+    private ScoreView view;
+
+    public ScoreController(ScoreModel model, ScoreView view)
     {
-        m_ScoreText.text = m_Score.ToString();
+        this.model = model;
+        this.view = view;
+
+        view.Controller = this;
     }
 
-    private void Start()
-    {
-        SnakeController.onFoodEaten += UpdateScore;
-    }
-
-    private void OnDestroy()
-    {
-        SnakeController.onFoodEaten -= UpdateScore;
-    }
-
-    public void UpdateScore(int pointGain)
-    {
-        m_Score += pointGain;
-        m_ScoreText.text = m_Score.ToString();
-    }
-     
     public int GetCurrentScore()
     {
-        return m_Score;
+        return model.CurrentScore;
+    }
+
+    public void UpdateCurrentScore(int pointsGain)
+    {
+        model.CurrentScore += pointsGain;
+        view.UpdateScoreUI(model.CurrentScore);
+
+        if(model.CurrentScore > model.HighScore)
+        {
+            // Invoke event to notify achivement system
+            PlayerPrefs.SetInt("HighScore", model.CurrentScore);
+            PlayerPrefs.Save(); 
+        }
     }
 }

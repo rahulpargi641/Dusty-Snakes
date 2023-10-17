@@ -11,15 +11,14 @@ public class LevelService : MonoSingletonGeneric<LevelService>
         LevelModel levelModel = new LevelModel();
         levelController = new LevelController(levelModel, levelView);
 
-        SnakeController.onFoodEaten += UpdateCurrentScore;
         SnakeController.onSnakeDeath += ProcessGameOver;
     }
 
     private void OnDestroy()
     {
-        SnakeController.onFoodEaten -= UpdateCurrentScore;
         SnakeController.onSnakeDeath -= ProcessGameOver;
     }
+
     private void ProcessGameOver()
     {
         levelController.ProcessGameOver();
@@ -33,10 +32,5 @@ public class LevelService : MonoSingletonGeneric<LevelService>
     public int GetLevelHeight()
     {
         return levelController.GetLevelHeight();
-    }
-
-    public void UpdateCurrentScore(int points)
-    {
-        levelController.UpdateCurrentScore(points);
     }
 }
