@@ -37,7 +37,7 @@ public class ItemsController : MonoBehaviour
         while (true)
         {
             Vector2Int randomFoodPos;
-            randomFoodPos = ProcessNotToGenerateRandomFoodPostionAtSnakeBody();
+            randomFoodPos = GenerateRandomFoodNotAtSnakeBody();
 
             Food foodToSpawn = RandomItemSelector(m_FoodArray);
             Food food = Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), transform.rotation);
@@ -48,20 +48,21 @@ public class ItemsController : MonoBehaviour
             if (m_FoodDictionary.ContainsValue(food))
             {
                 Destroy(food.gameObject);
-                RemoveFoodFromDictionary(randomFoodPos);
+                GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
             }
 
             yield return new WaitForSeconds(m_ItemSpawnInterwalDelay);
         }
     }
 
-    private Vector2Int ProcessNotToGenerateRandomFoodPostionAtSnakeBody()
+    private Vector2Int GenerateRandomFoodNotAtSnakeBody()
     {
         Vector2Int randomFoodPos;
         do
         {
             randomFoodPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
-        } while (m_Snake.GetFullSnakeGridPositionList().IndexOf(randomFoodPos) != -1);
+        } while (m_Snake.GetWholeSnakeBodyPositions().IndexOf(randomFoodPos) != -1);
+
         return randomFoodPos;
     }
 
@@ -72,7 +73,7 @@ public class ItemsController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(5f);
-            randomPowerUpPos = ProcessNotToGenerateRandomPowerUpPositionAtSnakeBody();
+            randomPowerUpPos = GenerateRandomPowerUpNotAtSnakeBody();
 
             PowerUps powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
             PowerUps powerUp = Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), transform.rotation);
@@ -83,7 +84,7 @@ public class ItemsController : MonoBehaviour
             if (m_PowerUpsDictionary.ContainsValue(powerUp))
             {
                 Destroy(powerUp.gameObject);
-                RemovePowerUpItemDictionary(randomPowerUpPos);
+                GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
             }
 
             yield return new WaitForSeconds(m_ItemSpawnInterwalDelay);
@@ -91,13 +92,13 @@ public class ItemsController : MonoBehaviour
         }
     }
 
-    private Vector2Int ProcessNotToGenerateRandomPowerUpPositionAtSnakeBody()
+    private Vector2Int GenerateRandomPowerUpNotAtSnakeBody()
     {
         Vector2Int RandomPowerUpPos;
         do
         {
             RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
-        } while (m_Snake.GetFullSnakeGridPositionList().IndexOf(RandomPowerUpPos) != -1);
+        } while (m_Snake.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
         return RandomPowerUpPos;
     }
 
@@ -107,11 +108,11 @@ public class ItemsController : MonoBehaviour
         return items[randomIndex];
     }
 
-    public bool FoodItemEaten(Vector2Int snakeCurrentPos)
+    public bool IsFoodEaten(Vector2Int snakeCurrentPos)
     {
         if (m_FoodDictionary.ContainsKey(snakeCurrentPos))
         {
-            Food eatenFoodItem = RemoveFoodFromDictionary(snakeCurrentPos);
+            Food eatenFoodItem = GetEatenFoodAndRemoveFromDictionary(snakeCurrentPos);
             m_EatenFoodItem = eatenFoodItem;
             Destroy(eatenFoodItem.gameObject);
             SpawnFoodItem();
@@ -121,11 +122,11 @@ public class ItemsController : MonoBehaviour
             return false;
     }
 
-    public bool PowerUpItemEaten(Vector2Int snakeCurrentPos)
+    public bool IsPowerUpEaten(Vector2Int snakeCurrentPos)
     {
         if (m_PowerUpsDictionary.ContainsKey(snakeCurrentPos))
         {
-            PowerUps eatenPowerUpItem = RemovePowerUpItemDictionary(snakeCurrentPos);
+            PowerUps eatenPowerUpItem = GetEatenPowerupAndRemoveFromDictionary(snakeCurrentPos);
             EP_EatenPowerUpItem = eatenPowerUpItem.EP_PowerType;
             Destroy(eatenPowerUpItem.gameObject);
             return true;
@@ -134,7 +135,7 @@ public class ItemsController : MonoBehaviour
             return false;
     }
 
-    private PowerUps RemovePowerUpItemDictionary(Vector2Int snakeCurrentPos)
+    private PowerUps GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
     {
         if (m_PowerUpsDictionary.TryGetValue(snakeCurrentPos, out PowerUps powerUpToDestroy))
         {
@@ -144,7 +145,7 @@ public class ItemsController : MonoBehaviour
     }
 
  
-    private Food RemoveFoodFromDictionary(Vector2Int removeAtPosition)
+    private Food GetEatenFoodAndRemoveFromDictionary(Vector2Int removeAtPosition)
     {
         if (m_FoodDictionary.TryGetValue(removeAtPosition, out Food eatenFood))
         {
@@ -153,7 +154,7 @@ public class ItemsController : MonoBehaviour
         return eatenFood;
     }
 
-    public Food GetEatenFoodItem()
+    public Food GetEatenFood()
     {
         return m_EatenFoodItem;
     }

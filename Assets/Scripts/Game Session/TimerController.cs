@@ -8,6 +8,7 @@ public class TimerController : MonoBehaviour
     [SerializeField] LevelController m_LevelController;
     [SerializeField] float m_MaxTime;
     float m_CurrentTime;
+
     private void Awake()
     {
         m_TimerText.text = m_MaxTime.ToString();
@@ -28,7 +29,6 @@ public class TimerController : MonoBehaviour
                 m_CurrentTime = 0;
                 UpdateTimerText();
             }
-            
         }
     }
 

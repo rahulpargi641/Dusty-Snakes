@@ -102,7 +102,7 @@ public class LevelController : MonoBehaviour
     }
 
  
-    public Vector2Int ProcessIfSnakeWentOutsideTheGrid(Vector2Int snakePosition)
+    public Vector2Int InCaseSnakeWentOusideCalculateNewPos(Vector2Int snakePosition)
     {
         if(snakePosition.x < 0)
         {
