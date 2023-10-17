@@ -7,7 +7,7 @@ public class ItemsController : MonoBehaviour
     [SerializeField] Food[] m_FoodArray;
     [SerializeField] PowerUps[] m_PowerUpsArray;
     [SerializeField] LevelController m_LevelController;
-    [SerializeField] Snake m_Snake;
+    [SerializeField] SnakeController m_Snake;
     Food m_EatenFoodItem;
     PowerUps.EPowerType EP_EatenPowerUpItem;
     int m_Width;

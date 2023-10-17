@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : MonoBehaviour
+public class SnakeController : MonoBehaviour
 {
+    public static event Action<int> onFoodEaten;
     enum EDirection
     {
         Left, Right, Up, Down
@@ -22,10 +24,9 @@ public class Snake : MonoBehaviour
 
     [SerializeField] EInput m_InputPreference;
     [SerializeField] Vector2Int m_InititalSnakePos;
-    [SerializeField] Snake m_OtherSnake;
+    [SerializeField] SnakeController m_OtherSnake;
 
     [SerializeField] LevelController m_LevelController;
-    [SerializeField] ScoreController m_ScoreController;
     [SerializeField] ItemsController m_ItemController;
     [SerializeField] ColorController m_ColorController;
 
@@ -303,7 +304,7 @@ public class Snake : MonoBehaviour
     internal void AddScore(int pointGain)
     {
         if (m_ScoreBoostActive) pointGain *= 2;
-        m_ScoreController.UpdateScore(pointGain);
+        onFoodEaten?.Invoke(pointGain);
     }
 
     private IEnumerator ScoreBoostCoolDown()

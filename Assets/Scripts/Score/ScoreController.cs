@@ -12,7 +12,17 @@ public class ScoreController : MonoBehaviour
     {
         m_ScoreText.text = m_Score.ToString();
     }
- 
+
+    private void Start()
+    {
+        SnakeController.onFoodEaten += UpdateScore;
+    }
+
+    private void OnDestroy()
+    {
+        SnakeController.onFoodEaten -= UpdateScore;
+    }
+
     public void UpdateScore(int pointGain)
     {
         m_Score += pointGain;
