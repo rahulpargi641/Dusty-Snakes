@@ -6,7 +6,6 @@ public class GameWinController : MonoBehaviour
 {
     [SerializeField] Button m_PlayAgain;
     [SerializeField] string m_SceneToLoad;
-    [SerializeField] LevelController m_LevelController;
 
     private void Awake()
     {

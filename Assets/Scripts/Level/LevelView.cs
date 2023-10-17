@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelController : MonoBehaviour
+public class LevelView : MonoBehaviour
 {
+    public LevelController Controller { private get; set; }
     enum EGameState
     {
         Pause, Running
@@ -13,7 +14,7 @@ public class LevelController : MonoBehaviour
     EGameState EG_GameState;
 
     [SerializeField] GameObject PauseGO;
-    [SerializeField] GameObject GameWinGO;
+    [SerializeField] GameObject LevelCompleteGO;
     [SerializeField] GameObject GameOverGO;
     [SerializeField] ScoreController m_ScoreController;
     [SerializeField] int m_MaxScore;
@@ -32,6 +33,7 @@ public class LevelController : MonoBehaviour
 
     private void Update()
     {
+        if(Contro)
         ProcessPauseResumeCheck();
         ProcessGameWinCheck();
         ProceesGameOverCheck();
@@ -66,7 +68,7 @@ public class LevelController : MonoBehaviour
         int currentScore = m_ScoreController.GetCurrentScore();
         if (currentScore >= m_MaxScore)
         {
-            GameWinGO.SetActive(true);
+            LevelCompleteGO.SetActive(true);
         }
     }
     private void ResumeGame()
@@ -102,7 +104,7 @@ public class LevelController : MonoBehaviour
     }
 
  
-    public Vector2Int InCaseSnakeWentOusideCalculateNewPos(Vector2Int snakePosition)
+    public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int snakePosition)
     {
         if(snakePosition.x < 0)
         {

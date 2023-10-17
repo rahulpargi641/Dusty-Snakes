@@ -22,8 +22,8 @@ public class ItemsController : MonoBehaviour
         m_FoodDictionary = new Dictionary<Vector2Int, Food>();
         m_PowerUpsDictionary = new Dictionary<Vector2Int, PowerUps>();
         m_ItemSpawnInterwalDelay = 1;
-        m_Width = m_LevelController.GetLevelGridWidth();
-        m_Height = m_LevelController.GetLevelGridHeight();
+        m_Width = 30;
+        m_Height = 30;
     }
 
     private void Start()

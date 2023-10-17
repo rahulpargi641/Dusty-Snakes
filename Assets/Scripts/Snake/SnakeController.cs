@@ -26,7 +26,6 @@ public class SnakeController : MonoBehaviour
     [SerializeField] Vector2Int m_InititalSnakePos;
     [SerializeField] SnakeController m_OtherSnake;
 
-    [SerializeField] LevelController m_LevelController;
     [SerializeField] ItemsController m_ItemController;
     [SerializeField] ColorController m_ColorController;
 
@@ -41,6 +40,8 @@ public class SnakeController : MonoBehaviour
     int m_MassBurnerFoodEatenCounter;
     bool m_ShieldActive = false;
     bool m_ScoreBoostActive = false;
+
+
 
     private void Awake()
     {
@@ -188,14 +189,37 @@ public class SnakeController : MonoBehaviour
 
     private void ProcessSnakeHeadTranslation()
     {
-        Vector2Int nextPoint = CalculateNextPoint();
-        m_CurrentSnakeHeadPos += nextPoint;
-        m_CurrentSnakeHeadPos = m_LevelController.InCaseSnakeWentOusideCalculateNewPos(m_CurrentSnakeHeadPos);
+        Vector2Int nextMmovePoint = CalculateNextMovePoint();
+        m_CurrentSnakeHeadPos += nextMmovePoint;
+
+        ///m_CurrentSnakeHeadPos = m_LevelController.GetNewMovePointIfSnakeWentOutsideGrid(m_CurrentSnakeHeadPos);
+        m_CurrentSnakeHeadPos = GetNewMovePointIfSnakeWentOutsideGrid(m_CurrentSnakeHeadPos);
 
         transform.position = new Vector3(m_CurrentSnakeHeadPos.x, m_CurrentSnakeHeadPos.y);
     }
 
-    private Vector2Int CalculateNextPoint()
+    public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int snakePosition)
+    {
+        if (snakePosition.x < 0)
+        {
+            snakePosition.x = LevelService.Instance.GetLevelWidth() - 1;
+        }
+        if (snakePosition.x > LevelService.Instance.GetLevelWidth() - 1)
+        {
+            snakePosition.x = 0;
+        }
+        if (snakePosition.y < 0)
+        {
+            snakePosition.y = LevelService.Instance.GetLevelHeight() - 1;
+        }
+        if (snakePosition.y > LevelService.Instance.GetLevelHeight() - 1)
+        {
+            snakePosition.y = 0;
+        }
+        return snakePosition;
+    }
+
+    private Vector2Int CalculateNextMovePoint()
     {
         Vector2Int nextPoint;
 
@@ -346,7 +370,7 @@ public class SnakeController : MonoBehaviour
                     return;
                 }
                 ES_SnakeState = ESnakeState.Dead;
-                m_LevelController.SnakeCollided();
+                //m_LevelController.SnakeCollided();
                 AudioService.Instance.PlaySound(SoundType.Death);
             }
         }
@@ -418,7 +442,7 @@ public class SnakeController : MonoBehaviour
                     return;
                 }
                 ES_SnakeState = ESnakeState.Dead;
-                m_LevelController.SnakeCollided();
+                //m_LevelController.SnakeCollided();
                 Debug.Log("Snake Collied With Other Snake Body!");
                 AudioService.Instance.PlaySound(SoundType.Death);
             }
