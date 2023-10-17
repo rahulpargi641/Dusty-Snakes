@@ -6,6 +6,7 @@ using UnityEngine;
 public class SnakeController : MonoBehaviour
 {
     public static event Action<int> onFoodEaten;
+    public static event Action onSnakeDeath;
     enum EDirection
     {
         Left, Right, Up, Down
@@ -251,8 +252,8 @@ public class SnakeController : MonoBehaviour
         if (foodItemEaten)
         {
             Food EatenFoodItem = m_ItemController.GetEatenFood();
-            Food.EFoodType EatenFoodItemType= EatenFoodItem.EF_FoodType;
-            if (EatenFoodItemType == Food.EFoodType.MassGainer)
+            Food.FoodType EatenFoodItemType= EatenFoodItem.foodType;
+            if (EatenFoodItemType == Food.FoodType.MassGainer)
             {
                 m_MassGainerFoodEatenCounter++;
                 AddSnakeBodyPart();
@@ -260,7 +261,7 @@ public class SnakeController : MonoBehaviour
                 Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
                 AudioService.Instance.PlaySound(SoundType.AteFood);
             }
-            else if (EatenFoodItemType == Food.EFoodType.MassBurner)
+            else if (EatenFoodItemType == Food.FoodType.MassBurner)
             {
                 m_MassBurnerFoodEatenCounter++;
                 RemoveSnakeBodyPart();
@@ -371,6 +372,7 @@ public class SnakeController : MonoBehaviour
                 }
                 ES_SnakeState = ESnakeState.Dead;
                 //m_LevelController.SnakeCollided();
+                onSnakeDeath?.Invoke();
                 AudioService.Instance.PlaySound(SoundType.Death);
             }
         }
@@ -443,6 +445,7 @@ public class SnakeController : MonoBehaviour
                 }
                 ES_SnakeState = ESnakeState.Dead;
                 //m_LevelController.SnakeCollided();
+                onSnakeDeath?.Invoke();
                 Debug.Log("Snake Collied With Other Snake Body!");
                 AudioService.Instance.PlaySound(SoundType.Death);
             }

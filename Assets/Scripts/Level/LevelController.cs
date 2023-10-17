@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class LevelController
 {
@@ -26,14 +23,31 @@ public class LevelController
         return model.Height;
     }
 
-    public void TimerExpired()
+    public GameState GetGameState()
     {
-        view.TimerExpired();
+        return model.GameState;
     }
 
-    public void SnakeCollided()
+    public void SetGameState(GameState gameState)
     {
-        view.SnakeCollided();
+        model.GameState = gameState;
     }
 
+    public void UpdateCurrentScore(int points)
+    {
+        model.CurrentScore += points;
+    }
+
+    public void ProcessGameOver() // if snake dies
+    {
+        view.EnableGameOverGO();
+    }
+
+    public void ProcessIfLevelWin() // Achievement System
+    {
+        if (model.CurrentScore >= model.ScoreToWin)
+        {
+            view.EnableLevelWinGO();
+        }
+    }
 }

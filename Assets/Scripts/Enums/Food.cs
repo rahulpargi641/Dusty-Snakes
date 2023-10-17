@@ -5,12 +5,12 @@ using System;
 
 public class Food : Item
 {
-    public enum EFoodType
+    public enum FoodType
     {
         MassGainer, MassBurner
     }
 
-    public EFoodType EF_FoodType;
+    public FoodType foodType;
 }
 
 
@@ -25,4 +25,8 @@ public enum SoundType
     SnakeCollide
 }
 
+public enum GameState
+{
+    Pause, Running
+}
 

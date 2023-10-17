@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelService : MonoSingletonGeneric<LevelService>
@@ -12,6 +10,19 @@ public class LevelService : MonoSingletonGeneric<LevelService>
     {
         LevelModel levelModel = new LevelModel();
         levelController = new LevelController(levelModel, levelView);
+
+        SnakeController.onFoodEaten += UpdateCurrentScore;
+        SnakeController.onSnakeDeath += ProcessGameOver;
+    }
+
+    private void OnDestroy()
+    {
+        SnakeController.onFoodEaten -= UpdateCurrentScore;
+        SnakeController.onSnakeDeath -= ProcessGameOver;
+    }
+    private void ProcessGameOver()
+    {
+        levelController.ProcessGameOver();
     }
 
     public int GetLevelWidth()
@@ -24,13 +35,8 @@ public class LevelService : MonoSingletonGeneric<LevelService>
         return levelController.GetLevelHeight();
     }
 
-    public void TimerExpired()
+    public void UpdateCurrentScore(int points)
     {
-        levelController.TimerExpired();
-    }
-
-    public void SnakeCollided()
-    {
-        levelController.SnakeCollided();
+        levelController.UpdateCurrentScore(points);
     }
 }

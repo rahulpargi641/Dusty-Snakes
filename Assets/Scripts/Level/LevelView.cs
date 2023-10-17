@@ -1,127 +1,51 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelView : MonoBehaviour
 {
+    [SerializeField] GameObject gamePauseGO;
+    [SerializeField] GameObject levelWinGO;
+    [SerializeField] GameObject gameOverGO;
     public LevelController Controller { private get; set; }
-    enum EGameState
-    {
-        Pause, Running
-    }
-
-    EGameState EG_GameState;
-
-    [SerializeField] GameObject PauseGO;
-    [SerializeField] GameObject LevelCompleteGO;
-    [SerializeField] GameObject GameOverGO;
-    [SerializeField] ScoreController m_ScoreController;
-    [SerializeField] int m_MaxScore;
-    [SerializeField] int m_Width;
-    [SerializeField] int m_Height;
-
-    bool m_SnakeCollided;
-    bool m_TimerExpired;
-
-    private void Awake()
-    {
-        EG_GameState = EGameState.Running;
-        m_SnakeCollided = false;
-        m_TimerExpired = false;
-    }
 
     private void Update()
     {
-        if(Contro)
-        ProcessPauseResumeCheck();
-        ProcessGameWinCheck();
-        ProceesGameOverCheck();
+        ProcessGameStateChange();
+
+        Controller.ProcessIfLevelWin(); // Achivement System
     }
 
-    private void ProceesGameOverCheck()
+    private void ProcessGameStateChange()
     {
-        if(m_SnakeCollided)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameOverGO.SetActive(true);
-        }
-        else if(m_TimerExpired)
-        {
-            GameOverGO.SetActive(true);
+            if (Controller.GetGameState() == GameState.Running)
+                PauseGame();
+            else if (Controller.GetGameState() == GameState.Pause)
+                ResumeGame();
         }
     }
-
-    private void ProcessPauseResumeCheck()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && EG_GameState == EGameState.Running)
-        {
-            PauseGame();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && EG_GameState == EGameState.Pause)
-        {
-            ResumeGame();
-        }
-    }
-
-    private void ProcessGameWinCheck()
-    {
-        int currentScore = m_ScoreController.GetCurrentScore();
-        if (currentScore >= m_MaxScore)
-        {
-            LevelCompleteGO.SetActive(true);
-        }
-    }
+  
     private void ResumeGame()
     {
         Time.timeScale = 1;
-        EG_GameState = EGameState.Running;
-        PauseGO.SetActive(false);
+        Controller.SetGameState(GameState.Running);
+        gamePauseGO.SetActive(false);
     }
 
     private void PauseGame()
     {
         Time.timeScale = 0;
-        EG_GameState = EGameState.Pause;
-        PauseGO.SetActive(true);
+        Controller.SetGameState(GameState.Pause);
+        gamePauseGO.SetActive(true);
     }
 
-    public int GetLevelGridHeight()
+    public void EnableLevelWinGO()
     {
-        return m_Height;
-    }
-    public int GetLevelGridWidth()
-    {
-        return m_Width;
+        levelWinGO.SetActive(true);
     }
 
-    public void SnakeCollided()
+    public void EnableGameOverGO()
     {
-        m_SnakeCollided = true;
-    }
-    public void TimerExpired()
-    {
-        m_TimerExpired = true;
-    }
-
- 
-    public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int snakePosition)
-    {
-        if(snakePosition.x < 0)
-        {
-            snakePosition.x = m_Width - 1;
-        }
-        if(snakePosition.x > m_Width - 1)
-        {
-            snakePosition.x = 0;
-        }
-        if(snakePosition.y < 0)
-        {
-            snakePosition.y = m_Height - 1;
-        }
-        if(snakePosition.y > m_Width-1)
-        {
-            snakePosition.y = 0;
-        }
-        return snakePosition;
+        gameOverGO.SetActive(true);
     }
 }

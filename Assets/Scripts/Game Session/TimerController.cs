@@ -22,7 +22,7 @@ public class TimerController : MonoBehaviour
             m_MaxTime -=1;
             if(m_MaxTime < 0)
             {
-                m_LevelController.TimerExpired();
+                //m_LevelController.TimerExpired();
             }
             else
             {
