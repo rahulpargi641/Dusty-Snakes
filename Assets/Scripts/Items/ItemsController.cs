@@ -8,26 +8,19 @@ public class ItemsController : MonoBehaviour
     [SerializeField] Food[] m_FoodArray;
     [SerializeField] PowerUp[] m_PowerUpsArray;
 
-    Food m_EatenFoodItem;
-    PowerUp m_EatenPowerUpItem;
-    int m_Width;
-    int m_Height;
-    int m_ItemSpawnInterwalDelay;
-  
-    Dictionary<Vector2Int, Food> m_FoodDictionary;
-    Dictionary<Vector2Int, PowerUp> m_PowerUpsDictionary;
-
-    private void Awake()
-    {
-        m_FoodDictionary = new Dictionary<Vector2Int, Food>();
-        m_PowerUpsDictionary = new Dictionary<Vector2Int, PowerUp>();
-        m_ItemSpawnInterwalDelay = 1;
-        m_Width = 30;
-        m_Height = 30;
-    }
+    private ItemsModel model;
+    //public ItemsController(ItemsModel model)
+    //{
+    //    this.model = model;
+    //}
 
     private void Start()
     {
+        model = new ItemsModel();
+
+        model.LevelWidth = LevelService.Instance.GetLevelWidth();
+        model.LevelHeight = LevelService.Instance.GetLevelHeight();
+
         StartCoroutine(SpawnFoodItem());
         StartCoroutine(SpawnPowerUpItem());
     }
@@ -41,17 +34,17 @@ public class ItemsController : MonoBehaviour
 
             Food foodToSpawn = RandomItemSelector(m_FoodArray);
             Food food = Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), transform.rotation);
-            m_FoodDictionary.Add(randomFoodPos, food);
+            model.Foods.Add(randomFoodPos, food);
 
-            yield return new WaitForSeconds(foodToSpawn.m_DestroyAfterTime);
+            yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
 
-            if (m_FoodDictionary.ContainsValue(food))
+            if (model.Foods.ContainsValue(food))
             {
                 Destroy(food.gameObject);
                 GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
             }
 
-            yield return new WaitForSeconds(m_ItemSpawnInterwalDelay);
+            yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
         }
     }
 
@@ -60,7 +53,7 @@ public class ItemsController : MonoBehaviour
         Vector2Int randomFoodPos;
         do
         {
-            randomFoodPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
+            randomFoodPos = new Vector2Int(UnityEngine.Random.Range(1, model.LevelWidth - 1), UnityEngine.Random.Range(1, model.LevelHeight - 1));
         } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(randomFoodPos) != -1);
 
         return randomFoodPos;
@@ -77,28 +70,32 @@ public class ItemsController : MonoBehaviour
 
             PowerUp powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
             PowerUp powerUp = Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), transform.rotation);
-            m_PowerUpsDictionary.Add(randomPowerUpPos, powerUp);
+            model.PowerUps.Add(randomPowerUpPos, powerUp);
 
-            yield return new WaitForSeconds(powerUpToSpawn.m_DestroyAfterTime);
+            yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
 
-            if (m_PowerUpsDictionary.ContainsValue(powerUp))
+            if (model.PowerUps.ContainsValue(powerUp))
             {
                 Destroy(powerUp.gameObject);
                 GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
             }
 
-            yield return new WaitForSeconds(m_ItemSpawnInterwalDelay);
+            yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
 
         }
     }
 
     private Vector2Int GenerateRandomPowerUpNotAtSnakeBody()
     {
+        int width = LevelService.Instance.GetLevelWidth();
+        int height = LevelService.Instance.GetLevelHeight();
+
         Vector2Int RandomPowerUpPos;
         do
         {
-            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
+            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, width-1), UnityEngine.Random.Range(1, height-1));
         } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
+
         return RandomPowerUpPos;
     }
 
@@ -110,10 +107,10 @@ public class ItemsController : MonoBehaviour
 
     public bool IsFoodEaten(Vector2Int snakeCurrentPos)
     {
-        if (m_FoodDictionary.ContainsKey(snakeCurrentPos))
+        if (model.Foods.ContainsKey(snakeCurrentPos))
         {
             Food eatenFoodItem = GetEatenFoodAndRemoveFromDictionary(snakeCurrentPos);
-            m_EatenFoodItem = eatenFoodItem;
+            model.EatenFoodItem = eatenFoodItem;
             Destroy(eatenFoodItem.gameObject);
             SpawnFoodItem();
             return true;
@@ -124,10 +121,10 @@ public class ItemsController : MonoBehaviour
 
     public bool IsPowerUpEaten(Vector2Int snakeCurrentPos)
     {
-        if (m_PowerUpsDictionary.ContainsKey(snakeCurrentPos))
+        if (model.PowerUps.ContainsKey(snakeCurrentPos))
         {
             PowerUp eatenPowerUpItem = GetEatenPowerupAndRemoveFromDictionary(snakeCurrentPos);
-            m_EatenPowerUpItem = eatenPowerUpItem;
+            model.EatenPowerUpItem = eatenPowerUpItem;
             Destroy(eatenPowerUpItem.gameObject);
             return true;
         }
@@ -137,9 +134,9 @@ public class ItemsController : MonoBehaviour
 
     private PowerUp GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
     {
-        if (m_PowerUpsDictionary.TryGetValue(snakeCurrentPos, out PowerUp powerUpToDestroy))
+        if (model.PowerUps.TryGetValue(snakeCurrentPos, out PowerUp powerUpToDestroy))
         {
-            m_PowerUpsDictionary.Remove(snakeCurrentPos);
+            model.PowerUps.Remove(snakeCurrentPos);
         }
         return powerUpToDestroy;
     }
@@ -147,20 +144,20 @@ public class ItemsController : MonoBehaviour
  
     private Food GetEatenFoodAndRemoveFromDictionary(Vector2Int removeAtPosition)
     {
-        if (m_FoodDictionary.TryGetValue(removeAtPosition, out Food eatenFood))
+        if (model.Foods.TryGetValue(removeAtPosition, out Food eatenFood))
         {
-            m_FoodDictionary.Remove(removeAtPosition);
+            model.Foods.Remove(removeAtPosition);
         }
         return eatenFood;
     }
 
     public Food GetEatenFood()
     {
-        return m_EatenFoodItem;
+        return model.EatenFoodItem;
     }
 
     public PowerUp GetEatenPowerUpItemType()
     {
-        return m_EatenPowerUpItem;
+        return model.EatenPowerUpItem;
     }
 }

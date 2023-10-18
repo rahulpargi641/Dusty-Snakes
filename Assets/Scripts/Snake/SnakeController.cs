@@ -192,7 +192,7 @@ public class SnakeController
             Debug.LogError("Wrong Logic, Food was not Eaten");
         }
 
-        AddScore(eatenFood.m_PointGain);
+        AddScore(eatenFood.pointGain);
     }
 
     public void ProcessSnakeEatingPowerUp(PowerUp eatenPowerUp)

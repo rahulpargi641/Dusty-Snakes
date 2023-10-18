@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470059a2fe58ad84cad6e0e382ae7414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointGain: 10
-  m_DestroyAfterTime: 8
-  foodType: 0
+  pointGain: 10
+  destroyAfterTime: 8
+  foodType: 1

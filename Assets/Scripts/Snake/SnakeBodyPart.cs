@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SnakeBodyPart
 {
-    SnakeVector snakeBodyPartPosVector;
+    private SnakeVector snakeBodyPartPosVector;
+    private GameObject snakeBodyPart;
     //Transform transform;
-    GameObject snakeBodyPart;
 
     public SnakeBodyPart(int bodyPartNo) // body index - count of SnakeBodyPart list
     {

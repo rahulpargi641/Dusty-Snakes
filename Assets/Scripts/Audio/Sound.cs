@@ -56,3 +56,13 @@ public class Sound
     }
 }
 
+public enum SoundType
+{
+    ButtonClick,
+    AteFood,
+    PowerupShiledPickup,
+    PowerupScoreBoosterPickup,
+    PowerupSpeedUpPickup,
+    Death,
+    SnakeCollide
+}
