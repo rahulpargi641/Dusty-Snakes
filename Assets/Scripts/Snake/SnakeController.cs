@@ -3,60 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeController : MonoBehaviour
+public class SnakeController: MonoBehaviour
 {
     public static event Action<int> onFoodEaten;
     public static event Action onSnakeDeath;
 
-    EDirection currentFacingDir;
-    ESnakeState snakeState;
+    private SnakeModel model;
+    private SnakeView view;
 
-    [SerializeField] EInput m_InputPreference;
-    [SerializeField] Vector2Int m_InititalSnakePos;
-    [SerializeField] SnakeController m_OtherSnake;
-
-    [SerializeField] ItemsController m_ItemController;
-    [SerializeField] ColorController m_ColorController;
-
-    Vector2Int m_CurrentSnakeHeadPos;
-    int m_SnakeBodySize;
-    List<SnakeVector> m_SnakeHeadPositions;
-    List<SnakeBodyPart> m_SnakeBodyParts;
-
-    float m_MoveTimer;
-    float m_MoveTimerMax;
-    int m_MassGainerFoodEatenCounter;
-    int m_MassBurnerFoodEatenCounter;
-    bool m_ShieldActive = false;
-    bool m_ScoreBoostActive = false;
-
-
-    private void Awake()
+    public SnakeController(SnakeModel model, SnakeView view)
     {
-        m_SnakeHeadPositions = new List<SnakeVector>();
-        m_SnakeBodyParts = new List<SnakeBodyPart>();
+        this.model = model;
+        this.view = view;
 
-        m_CurrentSnakeHeadPos = m_InititalSnakePos;
-        currentFacingDir = EDirection.Right;
-        m_SnakeBodySize = 0;
-        snakeState = ESnakeState.Alive;
-
-        m_MoveTimerMax = 0.2f;
-        m_MoveTimer = m_MoveTimerMax;
+        view.Controller = this;
     }
+
 
     private void Start()
     {
-        for(int i=0; i< 2; i++) // Create 2 Snake Body Part
+        model = new SnakeModel();
+
+        for (int i=0; i< 2; i++) // Create 2 Snake Body Part
         AddSnakeBodyPart();
+
     }
 
     private void Update()
     {
-        switch(snakeState)
+        switch(model.SnakeState)
         {
             case ESnakeState.Alive:
-                ProcessFacingDirection(); // Snake Facing Direction based on Input
+                SetFacingDirection(); // Snake Facing Direction based on Input
                 ProcessTranslation(); // Moving Snake One point to another
                 break;
             case ESnakeState.Dead:
@@ -71,6 +49,7 @@ public class SnakeController : MonoBehaviour
         {
             ProcessSnakeEating(eatenFood);
             eatenFood.gameObject.SetActive(false);
+            // Spawn food
             return;
         }
 
@@ -79,125 +58,126 @@ public class SnakeController : MonoBehaviour
         {
             ProcessSnakePoweringUp(eatenPowerUp);
             eatenPowerUp.gameObject.SetActive(false);
+            // Spawn Powerup
         }
     }
 
-    private void ProcessFacingDirection()
+    private void SetFacingDirection()
     {
-        if(m_InputPreference == EInput.ArrowKeys)
+        //if(m_InputPreference == EInput.ArrowKeys)
             ProcessBasedOnInputPreference1();
 
-        if (m_InputPreference == EInput.WASDKeys)
-            ProcessBasedOnInputPreference2();
+        //if (m_InputPreference == EInput.WASDKeys)
+        //    ProcessBasedOnInputPreference2();
     }
 
     private void ProcessBasedOnInputPreference1()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (currentFacingDir != EDirection.Down)
+            if (model.CurrentFacingDir != EDirection.Down)
             {
-                currentFacingDir = EDirection.Up;
+                model.CurrentFacingDir = EDirection.Up;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (currentFacingDir != EDirection.Up)
+            if (model.CurrentFacingDir != EDirection.Up)
             {
-                currentFacingDir = EDirection.Down;
+                model.CurrentFacingDir = EDirection.Down;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (currentFacingDir != EDirection.Right)
+            if (model.CurrentFacingDir != EDirection.Right)
             {
-                currentFacingDir = EDirection.Left;
+                model.CurrentFacingDir = EDirection.Left;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (currentFacingDir != EDirection.Left)
+            if (model.CurrentFacingDir != EDirection.Left)
             {
-                currentFacingDir = EDirection.Right;
+                model.CurrentFacingDir = EDirection.Right;
             }
         }
     }
 
-    private void ProcessBasedOnInputPreference2()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentFacingDir != EDirection.Down)
-            {
-                currentFacingDir = EDirection.Up;
-            }
-        }
+    //private void ProcessBasedOnInputPreference2()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.UpArrow))
+    //    {
+    //        if (currentFacingDir != EDirection.Down)
+    //        {
+    //            currentFacingDir = EDirection.Up;
+    //        }
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentFacingDir != EDirection.Up)
-            {
-                currentFacingDir = EDirection.Down;
-            }
-        }
+    //    if (Input.GetKeyDown(KeyCode.DownArrow))
+    //    {
+    //        if (currentFacingDir != EDirection.Up)
+    //        {
+    //            currentFacingDir = EDirection.Down;
+    //        }
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (currentFacingDir != EDirection.Right)
-            {
-                currentFacingDir = EDirection.Left;
-            }
-        }
+    //    if (Input.GetKeyDown(KeyCode.LeftArrow))
+    //    {
+    //        if (currentFacingDir != EDirection.Right)
+    //        {
+    //            currentFacingDir = EDirection.Left;
+    //        }
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (currentFacingDir != EDirection.Left)
-            {
-                currentFacingDir = EDirection.Right;
-            }
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.RightArrow))
+    //    {
+    //        if (currentFacingDir != EDirection.Left)
+    //        {
+    //            currentFacingDir = EDirection.Right;
+    //        }
+    //    }
+    //}
 
     private void ProcessTranslation()
     {
-        m_MoveTimer += Time.deltaTime;
+        model.MoveTimer += Time.deltaTime;
 
-        if (m_MoveTimer > m_MoveTimerMax)
+        if (model.MoveTimer > model.MoveTimerMax)
         {
-            m_MoveTimer -= m_MoveTimerMax;
+            model.MoveTimer -= model.MoveTimerMax;
 
             StoreSnakeHeadPositionAndDirection();
 
-            ProcessSnakeHeadTranslation();
+            MoveSnakeHead();
 
-            ProcessMovingWithoutEatingFood();
+            ProcessIfMovedWithoutEatingFood();
 
-            ProcessSnakeBodyPartsTranslation();
+            MoveSnakeBodyParts();
 
-            ProcessSnakeAliveOrNot();
+            ProcessIfSnakeBiteItself();
 
-            ProcessSnakeBitingOtherSnake();
+            //ProcessSnakeBitingOtherSnake();
         }
     }
 
     private void StoreSnakeHeadPositionAndDirection()
     {
-        SnakeVector snakeHeadVector = new SnakeVector(m_CurrentSnakeHeadPos, currentFacingDir);
-        m_SnakeHeadPositions.Insert(0, snakeHeadVector);
+        SnakeVector snakeHeadVector = new SnakeVector(model.CurrentSnakeHeadPos, model.CurrentFacingDir);
+        model.SnakeHeadPositions.Insert(0, snakeHeadVector);
     }
 
-    private void ProcessSnakeHeadTranslation()
+    private void MoveSnakeHead()
     {
         Vector2Int nextMmovePoint = CalculateNextMovePoint();
-        m_CurrentSnakeHeadPos += nextMmovePoint;
+        model.CurrentSnakeHeadPos += nextMmovePoint;
 
         ///m_CurrentSnakeHeadPos = m_LevelController.GetNewMovePointIfSnakeWentOutsideGrid(m_CurrentSnakeHeadPos);
-        m_CurrentSnakeHeadPos = GetNewMovePointIfSnakeWentOutsideGrid(m_CurrentSnakeHeadPos);
+        model.CurrentSnakeHeadPos = GetNewMovePointIfSnakeWentOutsideGrid(model.CurrentSnakeHeadPos);
 
-        transform.position = new Vector3(m_CurrentSnakeHeadPos.x, m_CurrentSnakeHeadPos.y);
+        transform.position = new Vector3(model.CurrentSnakeHeadPos.x, model.CurrentSnakeHeadPos.y);
     }
 
     public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int snakePosition)
@@ -225,7 +205,7 @@ public class SnakeController : MonoBehaviour
     {
         Vector2Int nextPoint;
 
-        switch (currentFacingDir)
+        switch (model.CurrentFacingDir)
         {
             default:
             case EDirection.Right:
@@ -251,18 +231,18 @@ public class SnakeController : MonoBehaviour
 
         if (eatenFood.foodType == FoodType.MassGainer)
         {
-            m_MassGainerFoodEatenCounter++;
+            model.MassGainerFoodEatenCounter++;
             AddSnakeBodyPart();
             AddScore(eatenFood.m_PointGain);
-            Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
+            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
         else if (eatenFood.foodType == FoodType.MassBurner)
         {
-            m_MassBurnerFoodEatenCounter++;
+            model.MassBurnerFoodEatenCounter++;
             RemoveSnakeBodyPart();
             AddScore(eatenFood.m_PointGain);
-            Debug.LogWarning("Snake ate the MassGainer food!" + m_MassGainerFoodEatenCounter);
+            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
         else
@@ -275,18 +255,18 @@ public class SnakeController : MonoBehaviour
     {
         if (eatenPowerUp.powerUpType == PowerUpType.Shield)
         {
-            m_ShieldActive = true;
+            model.ShieldActive = true;
             StartCoroutine(ShieldCoolDown());
             AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
-            ChangeSnakeBodyColor(m_ColorController.Blue);
+            ChangeSnakeBodyColor(ColorController.Instance.Blue);
             Debug.Log("SHield Power Eaten");
         }
         else if (eatenPowerUp.powerUpType == PowerUpType.ScoreBoost)
         {
-            m_ScoreBoostActive = true;
+            model.ScoreBoostActive = true;
             StartCoroutine(ScoreBoostCoolDown());
             AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
-            ChangeSnakeBodyColor(m_ColorController.Violet);
+            ChangeSnakeBodyColor(ColorController.Instance.Violet);
             Debug.Log("ScooreBoost Eaten");
         }
         else if (eatenPowerUp.powerUpType == PowerUpType.SpeedUp)
@@ -294,7 +274,7 @@ public class SnakeController : MonoBehaviour
             Time.timeScale = 2f;
             StartCoroutine(SpeedUpCoolDown());
             AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
-            ChangeSnakeBodyColor(m_ColorController.Red);
+            ChangeSnakeBodyColor(ColorController.Instance.Red);
             Debug.LogError("SPeed Up Consumed");
         }
         else
@@ -303,29 +283,25 @@ public class SnakeController : MonoBehaviour
         }
     }
 
-    private void ProcessMovingWithoutEatingFood()
+    private void ProcessIfMovedWithoutEatingFood()
     {
-        if (m_SnakeHeadPositions.Count >= m_SnakeBodySize + 1)
+        if (model.SnakeHeadPositions.Count >= model.SnakeBodySize + 1)
         {
-            m_SnakeHeadPositions.RemoveAt(m_SnakeHeadPositions.Count - 1);
+            model.SnakeHeadPositions.RemoveAt(model.SnakeHeadPositions.Count - 1);
         }
     }
 
-    public bool GetScoreBoostStatus()
-    {
-        return m_ScoreBoostActive;
-    }
 
     internal void AddScore(int pointGain)
     {
-        if (m_ScoreBoostActive) pointGain *= 2;
+        if (model.ScoreBoostActive) pointGain *= 2;
         onFoodEaten?.Invoke(pointGain);
     }
 
     private IEnumerator ScoreBoostCoolDown()
     {
         yield return new WaitForSeconds(10f);
-        m_ScoreBoostActive = false;
+        model.ScoreBoostActive = false;
         ChangeToNormalColor();
 
     }
@@ -333,7 +309,7 @@ public class SnakeController : MonoBehaviour
     private IEnumerator ShieldCoolDown()
     {
         yield return new WaitForSeconds(10f);
-        m_ShieldActive = false;
+        model.ShieldActive = false;
         ChangeToNormalColor();
     }
 
@@ -349,18 +325,19 @@ public class SnakeController : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    private void ProcessSnakeAliveOrNot()
+    private void ProcessIfSnakeBiteItself()
     {
-        foreach (SnakeBodyPart snakeBodyPart in m_SnakeBodyParts)
+        foreach (SnakeBodyPart snakeBodyPart in model.SnakeBodyParts)
         {
             Vector2Int snakeBodyPartPos = snakeBodyPart.GetSnakeBodyPartPosition();
-            if (m_CurrentSnakeHeadPos == snakeBodyPartPos)
+
+            if (model.CurrentSnakeHeadPos == snakeBodyPartPos)
             {
-                if (m_ShieldActive)
+                if (model.ShieldActive)
                 {
                     return;
                 }
-                snakeState = ESnakeState.Dead;
+                model.SnakeState = ESnakeState.Dead;
                 //m_LevelController.SnakeCollided();
                 onSnakeDeath?.Invoke();
                 AudioService.Instance.PlaySound(SoundType.Death);
@@ -370,26 +347,26 @@ public class SnakeController : MonoBehaviour
 
     void AddSnakeBodyPart()
     {
-        m_SnakeBodyParts.Add(new SnakeBodyPart(m_SnakeBodyParts.Count));
-        m_SnakeBodySize++;
+        model.SnakeBodyParts.Add(new SnakeBodyPart(model.SnakeBodyParts.Count));
+        model.SnakeBodySize++;
     }
 
     void RemoveSnakeBodyPart()
     {
-        if (m_SnakeBodySize < 1) return;
+        if (model.SnakeBodySize < 1) return;
 
-        GameObject snakeBodyPartToDestroy =  m_SnakeBodyParts[m_SnakeBodyParts.Count - 1].GetSnakeBodyPart();
+        GameObject snakeBodyPartToDestroy =  model.SnakeBodyParts[model.SnakeBodyParts.Count - 1].GetSnakeBodyPart();
         Destroy(snakeBodyPartToDestroy);
 
-        m_SnakeBodyParts.RemoveAt(m_SnakeBodyParts.Count - 1);
-        m_SnakeBodySize--;
+        model.SnakeBodyParts.RemoveAt(model.SnakeBodyParts.Count - 1);
+        model.SnakeBodySize--;
     }
 
-    private void ProcessSnakeBodyPartsTranslation()
+    private void MoveSnakeBodyParts()
     {
-        for (int i = 0; i < m_SnakeBodyParts.Count; i++)
+        for (int i = 0; i < model.SnakeBodyParts.Count; i++)
         {
-            m_SnakeBodyParts[i].SetSnakeBodyPartPosition(m_SnakeHeadPositions[i]);
+            model.SnakeBodyParts[i].SetSnakeBodyPartPosition(model.SnakeHeadPositions[i]);
         }
     }
 
@@ -400,120 +377,48 @@ public class SnakeController : MonoBehaviour
 
     Vector2Int GetCurrentSnakeHeadPos()
     {
-        return m_CurrentSnakeHeadPos;
+        return model.CurrentSnakeHeadPos;
     }
-    public Vector2Int GetGridPos()
-    {
-        return m_CurrentSnakeHeadPos;
-    }
+ 
 
     // Return the full list of positions occupied by the snake: Head + Body 
     public List<Vector2Int> GetWholeSnakeBodyPositions()
     {
-        List<Vector2Int> snakeFullBodyPositionList = new List<Vector2Int>() { m_CurrentSnakeHeadPos };
+        List<Vector2Int> snakeFullBodyPositionList = new List<Vector2Int>() { model.CurrentSnakeHeadPos };
 
-        foreach(SnakeVector snakeHeadPositionVector in m_SnakeHeadPositions)
+        foreach(SnakeVector snakeHeadPositionVector in model.SnakeHeadPositions)
         {
             snakeFullBodyPositionList.Add(snakeHeadPositionVector.GetGridPosition());
         }
         return snakeFullBodyPositionList;
     }
 
-    private void ProcessSnakeBitingOtherSnake()
-    {
-        Vector2Int otherSnakeHeadCurrentPos = m_OtherSnake.GetCurrentSnakeHeadPos();
 
-        foreach (SnakeBodyPart snakeBodyPart in m_SnakeBodyParts)
-        {
-            Vector2Int snakeBodyPartGridPosition = snakeBodyPart.GetSnakeBodyPartPosition();
-            if (otherSnakeHeadCurrentPos == snakeBodyPartGridPosition)
-            {
-                if (m_ShieldActive)
-                {
-                    Debug.LogError("SHiled is Active Snake cannot die");
-                    return;
-                }
-                snakeState = ESnakeState.Dead;
-                //m_LevelController.SnakeCollided();
-                onSnakeDeath?.Invoke();
-                Debug.Log("Snake Collied With Other Snake Body!");
-                AudioService.Instance.PlaySound(SoundType.Death);
-            }
-        }
+    // Later***
 
-    }
+    //private void ProcessSnakeBitingOtherSnake()
+    //{
+    //    Vector2Int otherSnakeHeadCurrentPos = m_OtherSnake.GetCurrentSnakeHeadPos();
 
-    class SnakeVector
-    {
-        Vector2Int gridPosition;
-        EDirection direction;
+    //    foreach (SnakeBodyPart snakeBodyPart in m_SnakeBodyParts)
+    //    {
+    //        Vector2Int snakeBodyPartGridPosition = snakeBodyPart.GetSnakeBodyPartPosition();
+    //        if (otherSnakeHeadCurrentPos == snakeBodyPartGridPosition)
+    //        {
+    //            if (m_ShieldActive)
+    //            {
+    //                Debug.LogError("SHiled is Active Snake cannot die");
+    //                return;
+    //            }
+    //            snakeState = ESnakeState.Dead;
+    //            //m_LevelController.SnakeCollided();
+    //            onSnakeDeath?.Invoke();
+    //            Debug.Log("Snake Collied With Other Snake Body!");
+    //            AudioService.Instance.PlaySound(SoundType.Death);
+    //        }
+    //    }
 
-        public SnakeVector(Vector2Int gridPosition, EDirection direction)
-        {
-            this.gridPosition = gridPosition;
-            this.direction = direction;
-        }
+    //}
 
-        public Vector2Int GetGridPosition()
-        {
-            return gridPosition;
-        }
-
-        public EDirection GetDirection()
-        {
-            return direction;
-        }
-    }
-
-    class SnakeBodyPart
-    {
-        SnakeVector snakeBodyPartPositionVector;
-        Transform transform;
-        GameObject snakeBody;
-        public SnakeBodyPart(int bodyIndex) // body index - count of SnakeBodyPart list
-        {
-            snakeBody = new GameObject("SnakeBody", typeof(SpriteRenderer));
-            snakeBody.GetComponent<SpriteRenderer>().sprite = GameAsset.Instance.m_SnakeBody.GetComponent<SpriteRenderer>().sprite;
-            snakeBody.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
-            transform = snakeBody.transform;
-        }
-
-        public void SetSnakeBodyPartPosition(SnakeVector snakeHeadPositionVector)
-        {
-            snakeBodyPartPositionVector = snakeHeadPositionVector;
-            transform.position = new Vector3(snakeHeadPositionVector.GetGridPosition().x, snakeHeadPositionVector.GetGridPosition().y);
-            float angle;
-            switch(snakeHeadPositionVector.GetDirection())
-            {
-                default:
-                case EDirection.Up:  // Currently going up
-                    angle = 0;
-                    break;
-                    
-                case EDirection.Down: // Currently going down
-                    angle = 180;
-                    break;
-
-                case EDirection.Left: // Currently going to the left 
-                    angle = -90; 
-                    break;
-
-                case EDirection.Right: // Currently going to the Right
-                    angle = 90;
-                    break;
-            }
-                    
-            transform.eulerAngles = new Vector3(0, 0, angle);
-        }
-
-        public Vector2Int GetSnakeBodyPartPosition()
-        {
-            return snakeBodyPartPositionVector.GetGridPosition();
-        }
-
-        public GameObject GetSnakeBodyPart()
-        {
-            return snakeBody;
-        }
-    }
+ 
 }

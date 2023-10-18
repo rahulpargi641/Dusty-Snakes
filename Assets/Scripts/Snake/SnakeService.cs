@@ -18,6 +18,6 @@ public class SnakeService : MonoBehaviour
     public void SpawnSnake(Transform spawnPoint)
     {
         SnakeModel snakeModel = new SnakeModel();
-        snakeController = new SnakeController();
+        snakeController = new SnakeController(snakeModel, snakeView);
     }
 }

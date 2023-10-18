@@ -30,17 +30,17 @@ public enum GameState
     Pause, Running
 }
 
-enum EDirection
+public enum EDirection
 {
     Left, Right, Up, Down
 }
 
-enum ESnakeState
+public enum ESnakeState
 {
     Alive, Dead
 }
 
-enum EInput
+public enum EInput
 {
     WASDKeys, ArrowKeys
 }
