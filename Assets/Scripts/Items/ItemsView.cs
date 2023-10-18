@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsView : MonoBehaviour
 {
+    public Food[] foods;
+    public PowerUp[] powerUps;
+
     public ItemsController Controller { private get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Controller != null)
+        {
+            StartCoroutine(Controller.SpawnFoodItems());
+            StartCoroutine(Controller.SpawnPowerUpItems());
+        }
     }
 }

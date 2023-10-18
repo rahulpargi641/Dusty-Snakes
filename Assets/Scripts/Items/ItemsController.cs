@@ -1,93 +1,114 @@
 using System;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
-public class ItemsController: MonoBehaviour
+public class ItemsController
 {
-    [SerializeField] Food[] m_FoodArray;
-    [SerializeField] PowerUp[] m_PowerUpsArray;
-
     private ItemsModel model;
-    public ItemsController(ItemsModel model)
+    private ItemsView view;
+    public ItemsController(ItemsModel model, ItemsView view)
     {
         this.model = model;
+        this.view = view;
 
-        model.LevelWidth = LevelService.Instance.GetLevelWidth();
-        model.LevelHeight = LevelService.Instance.GetLevelHeight();
-
-        SpawnFoodItem();
-        SpawnPowerUpItem();
+        view.Controller = this;
     }
 
-    private async void SpawnFoodItem()
+    public IEnumerator SpawnFoodItems()
     {
+        yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
+
         while (true)
         {
             Vector2Int randomFoodPos;
-            randomFoodPos = GenerateRandomFoodNotAtSnakeBody();
+            Food foodToSpawn, spawnedFood;
 
-            Food foodToSpawn = RandomItemSelector(m_FoodArray);
-            Food food = GameObject.Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), Quaternion.identity);
-            model.Foods.Add(randomFoodPos, food);
+            SpawnRandomFood(out randomFoodPos, out foodToSpawn, out spawnedFood);
 
-            //yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
-            await Task.Delay(foodToSpawn.destroyAfterTime * 1000);
+            yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
 
-            if (model.Foods.ContainsValue(food))
-            {
-                //Destroy(food.gameObject);
-                food.gameObject.SetActive(false);
-                GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
-            }
+            ProcessIfSpawnedFoodNotEaten(randomFoodPos, spawnedFood);
 
-            //yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
-            await Task.Delay(model.ItemSpawnInterwalDelay * 1000);
+            yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
         }
     }
 
-    private Vector2Int GenerateRandomFoodNotAtSnakeBody()
+    private void SpawnRandomFood(out Vector2Int randomFoodPos, out Food foodToSpawn, out Food spawnedFood)
     {
-        Vector2Int randomFoodPos;
-        do
-        {
-            randomFoodPos = new Vector2Int(UnityEngine.Random.Range(1, model.LevelWidth - 1), UnityEngine.Random.Range(1, model.LevelHeight - 1));
-        } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(randomFoodPos) != -1);
+        randomFoodPos = GenerateRandomPosNotAtSnakeBody();
 
-        return randomFoodPos;
+        foodToSpawn = RandomItemSelector(view.foods);
+        spawnedFood = GameObject.Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), Quaternion.identity);
+        model.Foods.Add(randomFoodPos, spawnedFood);
     }
 
-
-    public async void SpawnPowerUpItem()
+    private void ProcessIfSpawnedFoodNotEaten(Vector2Int randomFoodPos, Food spawnedFood)
     {
-        Vector2Int randomPowerUpPos;
+        if (model.Foods.ContainsValue(spawnedFood))
+        {
+            //Destroy(food.gameObject);
+            spawnedFood.gameObject.SetActive(false);
+            GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
+        }
+    }
+
+    private PowerUp GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
+    {
+        if (model.PowerUps.TryGetValue(snakeCurrentPos, out PowerUp powerUpToDestroy))
+        {
+            model.PowerUps.Remove(snakeCurrentPos);
+        }
+        return powerUpToDestroy;
+    }
+
+    public IEnumerator SpawnPowerUpItems()
+    {
         while (true)
         {
-            //yield return new WaitForSeconds(5f);
-            await Task.Delay(model.ItemSpawnInterwalDelay * 5 * 1000);
+            yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
 
-            randomPowerUpPos = GenerateRandomPowerUpNotAtSnakeBody();
+            Vector2Int randomPowerUpPos;
+            PowerUp powerUpToSpawn, spawnedPowerUp;
 
-            PowerUp powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
-            PowerUp powerUp = GameObject.Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), Quaternion.identity);
-            model.PowerUps.Add(randomPowerUpPos, powerUp);
+            SpawnRandomPowerUp(out randomPowerUpPos, out powerUpToSpawn, out spawnedPowerUp);
 
-            //yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
-            await Task.Delay(powerUpToSpawn.destroyAfterTime * 1000);
+            yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
 
-            if (model.PowerUps.ContainsValue(powerUp))
-            {
-                //Destroy(powerUp.gameObject);
-                powerUp.gameObject.SetActive(false);
-                GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
-            }
+            ProcessIfSpawnedPowerUpNotEaten(randomPowerUpPos, spawnedPowerUp);
 
-            //yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
-            await Task.Delay(model.ItemSpawnInterwalDelay * 1000);
-
+            yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
         }
     }
 
-    private Vector2Int GenerateRandomPowerUpNotAtSnakeBody()
+    private void SpawnRandomPowerUp(out Vector2Int randomPowerUpPos, out PowerUp powerUpToSpawn, out PowerUp powerUp)
+    {
+        randomPowerUpPos = GenerateRandomPosNotAtSnakeBody();
+
+        powerUpToSpawn = RandomItemSelector(view.powerUps);
+        powerUp = GameObject.Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), Quaternion.identity);
+        model.PowerUps.Add(randomPowerUpPos, powerUp);
+    }
+
+    private void ProcessIfSpawnedPowerUpNotEaten(Vector2Int randomPowerUpPos, PowerUp powerUp)
+    {
+        if (model.PowerUps.ContainsValue(powerUp))
+        {
+            //Destroy(powerUp.gameObject);
+            powerUp.gameObject.SetActive(false);
+            GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
+        }
+    }
+
+    private Food GetEatenFoodAndRemoveFromDictionary(Vector2Int removeAtPosition)
+    {
+        if (model.Foods.TryGetValue(removeAtPosition, out Food eatenFood))
+        {
+            model.Foods.Remove(removeAtPosition);
+        }
+        return eatenFood;
+    }
+
+    private Vector2Int GenerateRandomPosNotAtSnakeBody()
     {
         Vector2Int RandomPowerUpPos;
         do
@@ -112,7 +133,6 @@ public class ItemsController: MonoBehaviour
             model.EatenFoodItem = eatenFoodItem;
             //Destroy(eatenFoodItem.gameObject);
             eatenFoodItem.gameObject.SetActive(false);
-            SpawnFoodItem();
             return true;
         }
         else
@@ -131,25 +151,6 @@ public class ItemsController: MonoBehaviour
         }
         else
             return false;
-    }
-
-    private PowerUp GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
-    {
-        if (model.PowerUps.TryGetValue(snakeCurrentPos, out PowerUp powerUpToDestroy))
-        {
-            model.PowerUps.Remove(snakeCurrentPos);
-        }
-        return powerUpToDestroy;
-    }
-
- 
-    private Food GetEatenFoodAndRemoveFromDictionary(Vector2Int removeAtPosition)
-    {
-        if (model.Foods.TryGetValue(removeAtPosition, out Food eatenFood))
-        {
-            model.Foods.Remove(removeAtPosition);
-        }
-        return eatenFood;
     }
 
     public Food GetEatenFood()

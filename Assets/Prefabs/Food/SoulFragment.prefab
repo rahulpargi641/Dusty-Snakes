@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointGain: 0
   destroyAfterTime: 8
-  powerUpType: 0
+  powerUpType: 2
 --- !u!61 &6526576514654652439
 BoxCollider2D:
   m_ObjectHideFlags: 0
