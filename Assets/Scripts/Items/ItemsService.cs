@@ -9,12 +9,12 @@ public class ItemsService : MonoSingletonGeneric<ItemsService>
     // Start is called before the first frame update
     void Start()
     {
-        CreateItemController();
+        CreateItemsController();
     }
 
-    private void CreateItemController()
+    private void CreateItemsController()
     {
         ItemsModel itemsModel = new ItemsModel();
-        //itemsController = new ItemsController(itemsModel);
+        itemsController = new ItemsController(itemsModel);
     }
 }

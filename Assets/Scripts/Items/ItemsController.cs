@@ -1,31 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class ItemsController : MonoBehaviour
+public class ItemsController: MonoBehaviour
 {
     [SerializeField] Food[] m_FoodArray;
     [SerializeField] PowerUp[] m_PowerUpsArray;
 
     private ItemsModel model;
-    //public ItemsController(ItemsModel model)
-    //{
-    //    this.model = model;
-    //}
-
-    private void Start()
+    public ItemsController(ItemsModel model)
     {
-        model = new ItemsModel();
+        this.model = model;
 
         model.LevelWidth = LevelService.Instance.GetLevelWidth();
         model.LevelHeight = LevelService.Instance.GetLevelHeight();
 
-        StartCoroutine(SpawnFoodItem());
-        StartCoroutine(SpawnPowerUpItem());
+        SpawnFoodItem();
+        SpawnPowerUpItem();
     }
 
-    private IEnumerator SpawnFoodItem()
+    private async void SpawnFoodItem()
     {
         while (true)
         {
@@ -33,18 +27,21 @@ public class ItemsController : MonoBehaviour
             randomFoodPos = GenerateRandomFoodNotAtSnakeBody();
 
             Food foodToSpawn = RandomItemSelector(m_FoodArray);
-            Food food = Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), transform.rotation);
+            Food food = GameObject.Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), Quaternion.identity);
             model.Foods.Add(randomFoodPos, food);
 
-            yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
+            //yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
+            await Task.Delay(foodToSpawn.destroyAfterTime * 1000);
 
             if (model.Foods.ContainsValue(food))
             {
-                Destroy(food.gameObject);
+                //Destroy(food.gameObject);
+                food.gameObject.SetActive(false);
                 GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
             }
 
-            yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
+            //yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
+            await Task.Delay(model.ItemSpawnInterwalDelay * 1000);
         }
     }
 
@@ -60,40 +57,42 @@ public class ItemsController : MonoBehaviour
     }
 
 
-    private IEnumerator SpawnPowerUpItem()
+    public async void SpawnPowerUpItem()
     {
         Vector2Int randomPowerUpPos;
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            //yield return new WaitForSeconds(5f);
+            await Task.Delay(model.ItemSpawnInterwalDelay * 5 * 1000);
+
             randomPowerUpPos = GenerateRandomPowerUpNotAtSnakeBody();
 
             PowerUp powerUpToSpawn = RandomItemSelector(m_PowerUpsArray);
-            PowerUp powerUp = Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), transform.rotation);
+            PowerUp powerUp = GameObject.Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), Quaternion.identity);
             model.PowerUps.Add(randomPowerUpPos, powerUp);
 
-            yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
+            //yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
+            await Task.Delay(powerUpToSpawn.destroyAfterTime * 1000);
 
             if (model.PowerUps.ContainsValue(powerUp))
             {
-                Destroy(powerUp.gameObject);
+                //Destroy(powerUp.gameObject);
+                powerUp.gameObject.SetActive(false);
                 GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
             }
 
-            yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
+            //yield return new WaitForSeconds(model.ItemSpawnInterwalDelay);
+            await Task.Delay(model.ItemSpawnInterwalDelay * 1000);
 
         }
     }
 
     private Vector2Int GenerateRandomPowerUpNotAtSnakeBody()
     {
-        int width = LevelService.Instance.GetLevelWidth();
-        int height = LevelService.Instance.GetLevelHeight();
-
         Vector2Int RandomPowerUpPos;
         do
         {
-            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, width-1), UnityEngine.Random.Range(1, height-1));
+            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, model.LevelWidth - 1), UnityEngine.Random.Range(1, model.LevelHeight - 1));
         } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
 
         return RandomPowerUpPos;
@@ -111,7 +110,8 @@ public class ItemsController : MonoBehaviour
         {
             Food eatenFoodItem = GetEatenFoodAndRemoveFromDictionary(snakeCurrentPos);
             model.EatenFoodItem = eatenFoodItem;
-            Destroy(eatenFoodItem.gameObject);
+            //Destroy(eatenFoodItem.gameObject);
+            eatenFoodItem.gameObject.SetActive(false);
             SpawnFoodItem();
             return true;
         }
@@ -125,7 +125,8 @@ public class ItemsController : MonoBehaviour
         {
             PowerUp eatenPowerUpItem = GetEatenPowerupAndRemoveFromDictionary(snakeCurrentPos);
             model.EatenPowerUpItem = eatenPowerUpItem;
-            Destroy(eatenPowerUpItem.gameObject);
+            //Destroy(eatenPowerUpItem.gameObject);
+            eatenPowerUpItem.gameObject.SetActive(false);
             return true;
         }
         else
