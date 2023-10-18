@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class SnakeVector
 {
-    Vector2Int gridPosition;
+    Vector2Int snakePosition;
     EDirection direction;
 
-    public SnakeVector(Vector2Int gridPosition, EDirection direction)
+    public SnakeVector(Vector2Int snakePosition, EDirection direction)
     {
-        this.gridPosition = gridPosition;
+        this.snakePosition = snakePosition;
         this.direction = direction;
     }
 
-    public Vector2Int GetGridPosition()
+    public Vector2Int GetSnakePosition()
     {
-        return gridPosition;
+        return snakePosition;
     }
 
     public EDirection GetDirection()

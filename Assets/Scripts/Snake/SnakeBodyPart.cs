@@ -2,24 +2,25 @@ using UnityEngine;
 
 public class SnakeBodyPart
 {
-    SnakeVector snakeBodyPartPositionVector;
-    Transform transform;
-    GameObject snakeBody;
+    SnakeVector snakeBodyPartPosVector;
+    //Transform transform;
+    GameObject snakeBodyPart;
 
-    public SnakeBodyPart(int bodyIndex) // body index - count of SnakeBodyPart list
+    public SnakeBodyPart(int bodyPartNo) // body index - count of SnakeBodyPart list
     {
-        snakeBody = new GameObject("SnakeBody", typeof(SpriteRenderer));
-        snakeBody.GetComponent<SpriteRenderer>().sprite = GameAsset.Instance.m_SnakeBody.GetComponent<SpriteRenderer>().sprite;
-        snakeBody.GetComponent<SpriteRenderer>().sortingOrder = -bodyIndex;
-        transform = snakeBody.transform;
+        snakeBodyPart = new GameObject("SnakeBody", typeof(SpriteRenderer));
+        snakeBodyPart.GetComponent<SpriteRenderer>().sprite = GameAssetService.Instance.m_SnakeBody.GetComponent<SpriteRenderer>().sprite;
+        snakeBodyPart.GetComponent<SpriteRenderer>().sortingOrder = -bodyPartNo;
+        //transform = snakeBodyPart.transform;
     }
 
-    public void SetSnakeBodyPartPosition(SnakeVector snakeHeadPositionVector)
+    public void SetSnakeBodyPartTransform(SnakeVector snakeHeadPosVector)
     {
-        snakeBodyPartPositionVector = snakeHeadPositionVector;
-        transform.position = new Vector3(snakeHeadPositionVector.GetGridPosition().x, snakeHeadPositionVector.GetGridPosition().y);
+        snakeBodyPartPosVector = snakeHeadPosVector;
+        snakeBodyPart.transform.position = new Vector3(snakeHeadPosVector.GetSnakePosition().x, snakeHeadPosVector.GetSnakePosition().y);
+
         float angle;
-        switch (snakeHeadPositionVector.GetDirection())
+        switch (snakeHeadPosVector.GetDirection())
         {
             default:
             case EDirection.Up:  // Currently going up
@@ -39,15 +40,16 @@ public class SnakeBodyPart
                 break;
         }
 
-        transform.eulerAngles = new Vector3(0, 0, angle);
+        snakeBodyPart.transform.eulerAngles = new Vector3(0, 0, angle);
     }
+
     public Vector2Int GetSnakeBodyPartPosition()
     {
-        return snakeBodyPartPositionVector.GetGridPosition();
+        return snakeBodyPartPosVector.GetSnakePosition();
     }
 
     public GameObject GetSnakeBodyPart()
     {
-        return snakeBody;
+        return snakeBodyPart;
     }
 }

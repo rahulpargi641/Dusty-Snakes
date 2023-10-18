@@ -7,15 +7,15 @@ public class SnakeModel
     public ESnakeState SnakeState { get; set; }
     public Vector2Int CurrentSnakeHeadPos { get; set; }
     public int SnakeBodySize { get; set; } = 0;
-    public List<SnakeVector> SnakeHeadPositions { get; set; } = new List<SnakeVector>();
+    public List<SnakeVector> SnakeHeadPosVectors { get; set; } = new List<SnakeVector>();
     public List<SnakeBodyPart> SnakeBodyParts { get; set; } = new List<SnakeBodyPart>();
-    public float MoveTimer { get; set; }
+    public float TimePassed { get; set; }
     public float MoveTimerMax { get; private set; }
     public int MassGainerFoodEatenCounter { get; set; }
     public int MassBurnerFoodEatenCounter { get; set; }
+    public int PowerUpCoolDownTime { get; private set; }
     public bool ShieldActive { get; set; } = false;
     public bool ScoreBoostActive { get; set; } = false;
-    public Vector2Int InititalSnakePos { get; private set; }
 
     public SnakeModel()
     {
@@ -24,6 +24,8 @@ public class SnakeModel
         SnakeState = ESnakeState.Alive;
 
         MoveTimerMax = 0.2f;
-        MoveTimer = MoveTimerMax;
+        TimePassed = MoveTimerMax;
+
+        PowerUpCoolDownTime = 10;
     }
 }

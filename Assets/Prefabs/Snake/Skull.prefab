@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5461250197055206616}
   - component: {fileID: 3951159506906292180}
   - component: {fileID: 7268616735677437670}
+  - component: {fileID: 7267613094687744216}
   m_Layer: 0
   m_Name: Skull
   m_TagString: Untagged
@@ -133,3 +134,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7267613094687744216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572737175012109977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cd91a361767b04abdb200ea16bb227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

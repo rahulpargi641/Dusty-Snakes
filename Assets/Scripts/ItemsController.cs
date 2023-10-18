@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class ItemsController : MonoBehaviour
 {
-
     [SerializeField] Food[] m_FoodArray;
     [SerializeField] PowerUp[] m_PowerUpsArray;
-    [SerializeField] SnakeController m_Snake;
 
     Food m_EatenFoodItem;
     PowerUp m_EatenPowerUpItem;
@@ -32,7 +30,6 @@ public class ItemsController : MonoBehaviour
     {
         StartCoroutine(SpawnFoodItem());
         StartCoroutine(SpawnPowerUpItem());
-
     }
 
     private IEnumerator SpawnFoodItem()
@@ -64,7 +61,7 @@ public class ItemsController : MonoBehaviour
         do
         {
             randomFoodPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
-        } while (m_Snake.GetWholeSnakeBodyPositions().IndexOf(randomFoodPos) != -1);
+        } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(randomFoodPos) != -1);
 
         return randomFoodPos;
     }
@@ -101,7 +98,7 @@ public class ItemsController : MonoBehaviour
         do
         {
             RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, m_Width-1), UnityEngine.Random.Range(1, m_Height-1));
-        } while (m_Snake.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
+        } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
         return RandomPowerUpPos;
     }
 

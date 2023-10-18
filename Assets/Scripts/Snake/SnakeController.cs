@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class SnakeController: MonoBehaviour
+public class SnakeController
 {
     public static event Action<int> onFoodEaten;
     public static event Action onSnakeDeath;
@@ -16,25 +16,21 @@ public class SnakeController: MonoBehaviour
         this.model = model;
         this.view = view;
 
-        view.Controller = this;
+        this.view.Controller = this;
     }
 
-
-    private void Start()
+    public void CreateTwoBodyParts()
     {
-        model = new SnakeModel();
-
-        for (int i=0; i< 2; i++) // Create 2 Snake Body Part
-        AddSnakeBodyPart();
-
+        for (int i = 0; i < 2; i++)
+            AddSnakeBodyPart();
     }
 
-    private void Update()
+    public void ProcessSnakeTranslation() // called every frame
     {
-        switch(model.SnakeState)
+        switch (model.SnakeState)
         {
             case ESnakeState.Alive:
-                SetFacingDirection(); // Snake Facing Direction based on Input
+                SetFacingDirection(); // Set Snake Facing Direction based on Input
                 ProcessTranslation(); // Moving Snake One point to another
                 break;
             case ESnakeState.Dead:
@@ -42,36 +38,7 @@ public class SnakeController: MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Food eatenFood = collision.GetComponent<Food>();
-        if (eatenFood)
-        {
-            ProcessSnakeEating(eatenFood);
-            eatenFood.gameObject.SetActive(false);
-            // Spawn food
-            return;
-        }
-
-        PowerUp eatenPowerUp = collision.GetComponent<PowerUp>();
-        if(eatenPowerUp)
-        {
-            ProcessSnakePoweringUp(eatenPowerUp);
-            eatenPowerUp.gameObject.SetActive(false);
-            // Spawn Powerup
-        }
-    }
-
-    private void SetFacingDirection()
-    {
-        //if(m_InputPreference == EInput.ArrowKeys)
-            ProcessBasedOnInputPreference1();
-
-        //if (m_InputPreference == EInput.WASDKeys)
-        //    ProcessBasedOnInputPreference2();
-    }
-
-    private void ProcessBasedOnInputPreference1()
+    private void SetFacingDirection() // called every frame
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -106,54 +73,19 @@ public class SnakeController: MonoBehaviour
         }
     }
 
-    //private void ProcessBasedOnInputPreference2()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.UpArrow))
-    //    {
-    //        if (currentFacingDir != EDirection.Down)
-    //        {
-    //            currentFacingDir = EDirection.Up;
-    //        }
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.DownArrow))
-    //    {
-    //        if (currentFacingDir != EDirection.Up)
-    //        {
-    //            currentFacingDir = EDirection.Down;
-    //        }
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.LeftArrow))
-    //    {
-    //        if (currentFacingDir != EDirection.Right)
-    //        {
-    //            currentFacingDir = EDirection.Left;
-    //        }
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.RightArrow))
-    //    {
-    //        if (currentFacingDir != EDirection.Left)
-    //        {
-    //            currentFacingDir = EDirection.Right;
-    //        }
-    //    }
-    //}
-
     private void ProcessTranslation()
     {
-        model.MoveTimer += Time.deltaTime;
+        model.TimePassed += Time.deltaTime;
 
-        if (model.MoveTimer > model.MoveTimerMax)
+        if (model.TimePassed > model.MoveTimerMax)
         {
-            model.MoveTimer -= model.MoveTimerMax;
+            model.TimePassed -= model.MoveTimerMax;
 
             StoreSnakeHeadPositionAndDirection();
 
             MoveSnakeHead();
 
-            ProcessIfMovedWithoutEatingFood();
+            ProcessIfSnakeMovedWithoutEatingFood();
 
             MoveSnakeBodyParts();
 
@@ -166,39 +98,16 @@ public class SnakeController: MonoBehaviour
     private void StoreSnakeHeadPositionAndDirection()
     {
         SnakeVector snakeHeadVector = new SnakeVector(model.CurrentSnakeHeadPos, model.CurrentFacingDir);
-        model.SnakeHeadPositions.Insert(0, snakeHeadVector);
+        model.SnakeHeadPosVectors.Insert(0, snakeHeadVector);
     }
 
     private void MoveSnakeHead()
     {
         Vector2Int nextMmovePoint = CalculateNextMovePoint();
         model.CurrentSnakeHeadPos += nextMmovePoint;
-
-        ///m_CurrentSnakeHeadPos = m_LevelController.GetNewMovePointIfSnakeWentOutsideGrid(m_CurrentSnakeHeadPos);
         model.CurrentSnakeHeadPos = GetNewMovePointIfSnakeWentOutsideGrid(model.CurrentSnakeHeadPos);
 
-        transform.position = new Vector3(model.CurrentSnakeHeadPos.x, model.CurrentSnakeHeadPos.y);
-    }
-
-    public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int snakePosition)
-    {
-        if (snakePosition.x < 0)
-        {
-            snakePosition.x = LevelService.Instance.GetLevelWidth() - 1;
-        }
-        if (snakePosition.x > LevelService.Instance.GetLevelWidth() - 1)
-        {
-            snakePosition.x = 0;
-        }
-        if (snakePosition.y < 0)
-        {
-            snakePosition.y = LevelService.Instance.GetLevelHeight() - 1;
-        }
-        if (snakePosition.y > LevelService.Instance.GetLevelHeight() - 1)
-        {
-            snakePosition.y = 0;
-        }
-        return snakePosition;
+        view.transform.position = new Vector3(model.CurrentSnakeHeadPos.x, model.CurrentSnakeHeadPos.y);
     }
 
     private Vector2Int CalculateNextMovePoint()
@@ -225,15 +134,49 @@ public class SnakeController: MonoBehaviour
         return nextPoint;
     }
 
-
-    private void ProcessSnakeEating(Food eatenFood)
+    public Vector2Int GetNewMovePointIfSnakeWentOutsideGrid(Vector2Int currentSnakeHeadPos)
     {
+        if (currentSnakeHeadPos.x < 0)
+        {
+            currentSnakeHeadPos.x = LevelService.Instance.GetLevelWidth() - 1;
+        }
+        if (currentSnakeHeadPos.x > LevelService.Instance.GetLevelWidth() - 1)
+        {
+            currentSnakeHeadPos.x = 0;
+        }
+        if (currentSnakeHeadPos.y < 0)
+        {
+            currentSnakeHeadPos.y = LevelService.Instance.GetLevelHeight() - 1;
+        }
+        if (currentSnakeHeadPos.y > LevelService.Instance.GetLevelHeight() - 1)
+        {
+            currentSnakeHeadPos.y = 0;
+        }
+        return currentSnakeHeadPos;
+    }
 
+    private void ProcessIfSnakeMovedWithoutEatingFood()
+    {
+        if (model.SnakeHeadPosVectors.Count >= model.SnakeBodySize + 1)
+        {
+            model.SnakeHeadPosVectors.RemoveAt(model.SnakeHeadPosVectors.Count - 1);
+        }
+    }
+
+    private void MoveSnakeBodyParts()
+    {
+        for (int i = 0; i < model.SnakeBodyParts.Count; i++)
+        {
+            model.SnakeBodyParts[i].SetSnakeBodyPartTransform(model.SnakeHeadPosVectors[i]);
+        }
+    }
+
+    public void ProcessSnakeEatingFood(Food eatenFood)
+    {
         if (eatenFood.foodType == FoodType.MassGainer)
         {
             model.MassGainerFoodEatenCounter++;
             AddSnakeBodyPart();
-            AddScore(eatenFood.m_PointGain);
             Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
@@ -241,7 +184,6 @@ public class SnakeController: MonoBehaviour
         {
             model.MassBurnerFoodEatenCounter++;
             RemoveSnakeBodyPart();
-            AddScore(eatenFood.m_PointGain);
             Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
@@ -249,80 +191,87 @@ public class SnakeController: MonoBehaviour
         {
             Debug.LogError("Wrong Logic, Food was not Eaten");
         }
+
+        AddScore(eatenFood.m_PointGain);
     }
 
-    private void ProcessSnakePoweringUp(PowerUp eatenPowerUp)
+    public void ProcessSnakeEatingPowerUp(PowerUp eatenPowerUp)
     {
         if (eatenPowerUp.powerUpType == PowerUpType.Shield)
         {
-            model.ShieldActive = true;
-            StartCoroutine(ShieldCoolDown());
+            ActivateShieldAsync();
             AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
-            ChangeSnakeBodyColor(ColorController.Instance.Blue);
             Debug.Log("SHield Power Eaten");
         }
         else if (eatenPowerUp.powerUpType == PowerUpType.ScoreBoost)
         {
-            model.ScoreBoostActive = true;
-            StartCoroutine(ScoreBoostCoolDown());
+            ActivateScoreBoostAsync();
+
             AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
-            ChangeSnakeBodyColor(ColorController.Instance.Violet);
             Debug.Log("ScooreBoost Eaten");
         }
         else if (eatenPowerUp.powerUpType == PowerUpType.SpeedUp)
         {
-            Time.timeScale = 2f;
-            StartCoroutine(SpeedUpCoolDown());
+            ActivateSpeedBoostAsync();
             AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
-            ChangeSnakeBodyColor(ColorController.Instance.Red);
             Debug.LogError("SPeed Up Consumed");
         }
         else
         {
-            Debug.Log("Wrong Logic, Eaten Powerup Item Must be set");
+            Debug.Log("Eaten Powerup type is not set.");
         }
     }
 
-    private void ProcessIfMovedWithoutEatingFood()
+    private async void ActivateScoreBoostAsync()
     {
-        if (model.SnakeHeadPositions.Count >= model.SnakeBodySize + 1)
-        {
-            model.SnakeHeadPositions.RemoveAt(model.SnakeHeadPositions.Count - 1);
-        }
-    }
+        model.ScoreBoostActive = true;
+        ChangeSnakeBodyColor(ColorController.Instance.Violet);
 
+        await Task.Delay(model.PowerUpCoolDownTime * 1000);
 
-    internal void AddScore(int pointGain)
-    {
-        if (model.ScoreBoostActive) pointGain *= 2;
-        onFoodEaten?.Invoke(pointGain);
-    }
-
-    private IEnumerator ScoreBoostCoolDown()
-    {
-        yield return new WaitForSeconds(10f);
         model.ScoreBoostActive = false;
         ChangeToNormalColor();
 
     }
 
-    private IEnumerator ShieldCoolDown()
+    private async void ActivateShieldAsync()
     {
-        yield return new WaitForSeconds(10f);
+        model.ShieldActive = true;
+        ChangeSnakeBodyColor(ColorController.Instance.Blue);
+
+        await Task.Delay(model.PowerUpCoolDownTime * 1000);
+
         model.ShieldActive = false;
         ChangeToNormalColor();
     }
 
-    private IEnumerator SpeedUpCoolDown()
+    private async void ActivateSpeedBoostAsync()
     {
-        yield return new WaitForSeconds(30f);
+        Time.timeScale = 2f;
+        ChangeSnakeBodyColor(ColorController.Instance.Red);
+
+        await Task.Delay(model.PowerUpCoolDownTime * 1000);
+        
         Time.timeScale = 1f;
         ChangeToNormalColor();
     }
 
+    private void ChangeSnakeBodyColor(Color changeToColor)  // change entire snake body
+    {
+        view.GetComponent<SpriteRenderer>().color = changeToColor;
+    }
+
     void ChangeToNormalColor()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        view.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void AddScore(int pointGain)
+    {
+        if (model.ScoreBoostActive)
+            pointGain *= 2;
+
+        onFoodEaten?.Invoke(pointGain);
     }
 
     private void ProcessIfSnakeBiteItself()
@@ -333,12 +282,9 @@ public class SnakeController: MonoBehaviour
 
             if (model.CurrentSnakeHeadPos == snakeBodyPartPos)
             {
-                if (model.ShieldActive)
-                {
-                    return;
-                }
+                if (model.ShieldActive) return;
+
                 model.SnakeState = ESnakeState.Dead;
-                //m_LevelController.SnakeCollided();
                 onSnakeDeath?.Invoke();
                 AudioService.Instance.PlaySound(SoundType.Death);
             }
@@ -347,7 +293,7 @@ public class SnakeController: MonoBehaviour
 
     void AddSnakeBodyPart()
     {
-        model.SnakeBodyParts.Add(new SnakeBodyPart(model.SnakeBodyParts.Count));
+        model.SnakeBodyParts.Add(new SnakeBodyPart(model.SnakeBodyParts.Count)); // get from the pool
         model.SnakeBodySize++;
     }
 
@@ -356,41 +302,21 @@ public class SnakeController: MonoBehaviour
         if (model.SnakeBodySize < 1) return;
 
         GameObject snakeBodyPartToDestroy =  model.SnakeBodyParts[model.SnakeBodyParts.Count - 1].GetSnakeBodyPart();
-        Destroy(snakeBodyPartToDestroy);
+        snakeBodyPartToDestroy.SetActive(false); // send back to pool
 
         model.SnakeBodyParts.RemoveAt(model.SnakeBodyParts.Count - 1);
         model.SnakeBodySize--;
     }
 
-    private void MoveSnakeBodyParts()
+    public List<Vector2Int> GetWholeSnakeBodyPositions()  // Return the full list of positions occupied by the snake: Head + Body 
     {
-        for (int i = 0; i < model.SnakeBodyParts.Count; i++)
+        List<Vector2Int> snakeFullBodyPosVectors = new List<Vector2Int>() { model.CurrentSnakeHeadPos };
+
+        foreach(SnakeVector snakeHeadVector in model.SnakeHeadPosVectors)
         {
-            model.SnakeBodyParts[i].SetSnakeBodyPartPosition(model.SnakeHeadPositions[i]);
+            snakeFullBodyPosVectors.Add(snakeHeadVector.GetSnakePosition());
         }
-    }
-
-    private void ChangeSnakeBodyColor(Color changeToColor)
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = changeToColor;
-    }
-
-    Vector2Int GetCurrentSnakeHeadPos()
-    {
-        return model.CurrentSnakeHeadPos;
-    }
- 
-
-    // Return the full list of positions occupied by the snake: Head + Body 
-    public List<Vector2Int> GetWholeSnakeBodyPositions()
-    {
-        List<Vector2Int> snakeFullBodyPositionList = new List<Vector2Int>() { model.CurrentSnakeHeadPos };
-
-        foreach(SnakeVector snakeHeadPositionVector in model.SnakeHeadPositions)
-        {
-            snakeFullBodyPositionList.Add(snakeHeadPositionVector.GetGridPosition());
-        }
-        return snakeFullBodyPositionList;
+        return snakeFullBodyPosVectors;
     }
 
 
@@ -420,5 +346,4 @@ public class SnakeController: MonoBehaviour
 
     //}
 
- 
 }
