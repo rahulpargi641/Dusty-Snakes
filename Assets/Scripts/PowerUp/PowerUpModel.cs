@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpModel : MonoBehaviour
+public class PowerUpModel
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PowerUpController Controller { private get; set; }
 
-    // Update is called once per frame
-    void Update()
+    public PowerUpModel()
     {
-        
+
     }
 }

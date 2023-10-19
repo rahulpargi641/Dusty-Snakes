@@ -95,11 +95,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4734286127864621507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5f33e4fc724d499b7460da2a5a59f, type: 3}
+  m_Script: {fileID: 11500000, guid: b608a498b9ce6fc48b923ba6a0992a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointGain: 0
-  destroyAfterTime: 8
+  pointGain: 8
+  destroyAfterTime: 0
   powerUpType: 2
 --- !u!61 &6526576514654652439
 BoxCollider2D:

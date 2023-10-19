@@ -47,9 +47,9 @@ public class ItemsController
         }
     }
 
-    private PowerUpView GetEatenPowerupAndRemoveFromDictionary(Vector2Int powerUpPos)
+    private PowerUpController GetEatenPowerupAndRemoveFromDictionary(Vector2Int powerUpPos)
     {
-        if (model.SpawnedPowerUps.TryGetValue(powerUpPos, out PowerUpView powerUpToDestroy))
+        if (model.SpawnedPowerUps.TryGetValue(powerUpPos, out PowerUpController powerUpToDestroy))
         {
             model.SpawnedPowerUps.Remove(powerUpPos);
         }
@@ -59,38 +59,33 @@ public class ItemsController
 
     public IEnumerator SpawnPowerUpItems()
     {
+        yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
+
         while (true)
         {
-            yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
-
-            Vector2Int randomPowerUpPos;
-            PowerUpView powerUpToSpawn, spawnedPowerUp;
-
-            SpawnRandomPowerUp(out randomPowerUpPos, out powerUpToSpawn, out spawnedPowerUp);
-
-            yield return new WaitForSeconds(powerUpToSpawn.destroyAfterTime);
-
-            ProcessIfSpawnedPowerUpNotEaten(randomPowerUpPos, spawnedPowerUp);
+            SpawnRandomPowerUp();
+            //ProcessIfSpawnedPowerUpNotEaten(randomPowerUpPos, spawnedPowerUp);
 
             yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
         }
     }
 
-    private void SpawnRandomPowerUp(out Vector2Int randomPowerUpPos, out PowerUpView powerUpToSpawn, out PowerUpView powerUp)
+    private void SpawnRandomPowerUp()
     {
+        Vector2Int randomPowerUpPos;
+        PowerUpController spawnedPowerUp;
         randomPowerUpPos = GenerateRandomPosNotAtSnakeBody();
 
-        powerUpToSpawn = RandomItemSelector(view.powerUps);
-        powerUp = GameObject.Instantiate(powerUpToSpawn, new Vector3(randomPowerUpPos.x, randomPowerUpPos.y), Quaternion.identity);
-        model.SpawnedPowerUps.Add(randomPowerUpPos, powerUp);
+        //powerUpToSpawn = RandomItemSelector(view.powerUps);
+        spawnedPowerUp = PowerUpService.Instance.SpawnRandomPowerUp(randomPowerUpPos);
+        model.SpawnedPowerUps.Add(randomPowerUpPos, spawnedPowerUp);
     }
 
-    private void ProcessIfSpawnedPowerUpNotEaten(Vector2Int randomPowerUpPos, PowerUpView powerUp)
+    private void ProcessIfSpawnedPowerUpNotEaten(Vector2Int randomPowerUpPos, PowerUpController powerUp)
     {
         if (model.SpawnedPowerUps.ContainsValue(powerUp))
         {
-            //Destroy(powerUp.gameObject);
-            powerUp.gameObject.SetActive(false);
+            //powerUp.gameObject.SetActive(false);
             GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
         }
     }
