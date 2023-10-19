@@ -1,22 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class LevelModel
 {
-    public int Width { get; private set; }
-    public int Height { get; private set; }
+    public int LevelWidth { get; private set; }
+    public int LevelHeight { get; private set; }
     public int ScoreToWin { get; private set; }
     public int CurrentScore { get; set; } = 0;
-    public GameState GameState { get; set; } = GameState.Running;
+    public EGameState GameState { get; set; } = EGameState.Running;
 
     public LevelController Controller { private get; set; }
-    
-    // Scriptable Object
-    public LevelModel()
+
+    private LevelSO levelSO;
+    public LevelModel(LevelSO levelSO)
     {
-        Width = 30;
-        Height = 30;
-        ScoreToWin = 100;
+        this.levelSO = levelSO;
+
+        LevelWidth = levelSO.levelWidth;
+        LevelHeight = levelSO.levelHeight;
+        ScoreToWin = levelSO.scoreToWin;
     }
 }

@@ -1,5 +1,5 @@
 
-public enum GameState
+public enum EGameState
 {
     Pause, Running
 }
