@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SnakeView : MonoBehaviour
@@ -16,23 +17,15 @@ public class SnakeView : MonoBehaviour
         Controller.ProcessSnakeTranslation();
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    FoodView eatenFood = collision.GetComponent<FoodView>();
-    //    if (eatenFood)
-    //    {
-    //        Controller.ProcessSnakeEatingFood(eatenFood);
-    //        eatenFood.gameObject.SetActive(false);
-    //        // Spawn food
-    //        return;
-    //    }
+    // called by FoodView
+    public void FoodEaten(FoodView eatenFood)
+    {
+        Controller.ProcessSnakeEatingFood(eatenFood);
+    }
 
-    //    PowerUpView eatenPowerUp = collision.GetComponent<PowerUpView>();
-    //    if (eatenPowerUp)
-    //    {
-    //        Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);
-    //        eatenPowerUp.gameObject.SetActive(false);
-    //        // Spawn Powerup
-    //    }
-    //}
+    // called by PowerUpView
+    public void PowerUpEaten(PowerUpView eatenPowerUp)
+    {
+        Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);
+    }
 }

@@ -7,8 +7,12 @@ public class FoodView : Item
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<SnakeView>())
+        SnakeView snakeView = collision.GetComponent<SnakeView>();
+        if (snakeView)
         {
+            snakeView.FoodEaten(this);
+            Controller.InvokeOnFoodEaten();
+
             gameObject.SetActive(false);
         }
     }

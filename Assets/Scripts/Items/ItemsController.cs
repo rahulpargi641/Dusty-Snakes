@@ -17,86 +17,60 @@ public class ItemsController
 
     public IEnumerator SpawnFoodItems()
     {
-        yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
-
-        while (true) // gameloop
+        while (model.GameRunning) 
         {
-            SpawnFoodAtRandomPos();
-            
+            Vector2Int randomFoodPos;
+            FoodController spawnedFood;
+            SpawnFoodAtRandomPosition(out randomFoodPos, out spawnedFood);
+
             yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
+
+            if(!model.FoodEaten)
+                UnspawnTheFood();
         }
     }
 
-    private void SpawnFoodAtRandomPos()
+    private void SpawnFoodAtRandomPosition(out Vector2Int randomFoodPos, out FoodController spawnedFood)
     {
-        Vector2Int randomFoodPos;
-        FoodController spawnedFood;
-
         randomFoodPos = GenerateRandomPosNotAtSnakeBody();
         spawnedFood = FoodService.Instance.SpawnRandomFood(randomFoodPos);
 
-        model.SpawnedFoods.Add(randomFoodPos, spawnedFood);
+        model.FoodEaten = false;
     }
 
-    private void ProcessIfSpawnedFoodNotEaten(Vector2Int foodPos, FoodController spawnedFood) // remove spawned from via events
+    private void UnspawnTheFood() // remove spawned from via events
     {
-        if (model.SpawnedFoods.ContainsValue(spawnedFood))
-        {
-            //spawnedFood.gameObject.SetActive(false);
-            GetEatenFoodAndRemoveFromDictionary(foodPos);
-        }
-    }
-
-    private PowerUpController GetEatenPowerupAndRemoveFromDictionary(Vector2Int powerUpPos)
-    {
-        if (model.SpawnedPowerUps.TryGetValue(powerUpPos, out PowerUpController powerUpToDestroy))
-        {
-            model.SpawnedPowerUps.Remove(powerUpPos);
-        }
-
-        return powerUpToDestroy;
+        // Send back to Food Pool and deactivate
+        Debug.Log("Food got unspawned successfully");
     }
 
     public IEnumerator SpawnPowerUpItems()
     {
         yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
 
-        while (true)
+        while (model.GameRunning)
         {
-            SpawnRandomPowerUp();
-            //ProcessIfSpawnedPowerUpNotEaten(randomPowerUpPos, spawnedPowerUp);
+            Vector2Int randomPowerUpPos;
+            PowerUpController spawnedPowerUp;
+            SpawnPowerUpAtRandomPosition(out randomPowerUpPos, out spawnedPowerUp);
 
             yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
+            if(!model.PowerUpEaten)
+                UnspawnedThePowerUp();
         }
     }
 
-    private void SpawnRandomPowerUp()
+    private void SpawnPowerUpAtRandomPosition(out Vector2Int randomPowerUpPos, out PowerUpController spawnedPowerUp)
     {
-        Vector2Int randomPowerUpPos;
-        PowerUpController spawnedPowerUp;
         randomPowerUpPos = GenerateRandomPosNotAtSnakeBody();
 
-        //powerUpToSpawn = RandomItemSelector(view.powerUps);
         spawnedPowerUp = PowerUpService.Instance.SpawnRandomPowerUp(randomPowerUpPos);
-        model.SpawnedPowerUps.Add(randomPowerUpPos, spawnedPowerUp);
     }
 
-    private void ProcessIfSpawnedPowerUpNotEaten(Vector2Int randomPowerUpPos, PowerUpController powerUp)
+    private void UnspawnedThePowerUp()
     {
-        if (model.SpawnedPowerUps.ContainsValue(powerUp))
-        {
-            //powerUp.gameObject.SetActive(false);
-            GetEatenPowerupAndRemoveFromDictionary(randomPowerUpPos);
-        }
-    }
-
-    private FoodController GetEatenFoodAndRemoveFromDictionary(Vector2Int foodPosition)
-    {
-        if (model.SpawnedFoods.TryGetValue(foodPosition, out FoodController eatenFood))
-        {
-            model.SpawnedFoods.Remove(foodPosition);
-        }
-        return eatenFood;
+        // send back to pool
+        Debug.Log("PowerUp Unspawned successfully");
     }
 
     private Vector2Int GenerateRandomPosNotAtSnakeBody()
@@ -110,9 +84,15 @@ public class ItemsController
         return RandomPowerUpPos;
     }
 
-    T RandomItemSelector<T>(T[] items)
+    public void FoodEaten()
     {
-        int randomIndex = UnityEngine.Random.Range(0, items.Length);
-        return items[randomIndex];
+        model.FoodEaten = true;
+        Debug.Log("Food Up Eaten Successfully");
+    }
+
+    public void PowerUpEaten()
+    {
+        model.PowerUpEaten = true;
+        Debug.Log("Power Up Eaten Successfully");
     }
 }
