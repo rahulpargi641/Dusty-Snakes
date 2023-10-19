@@ -5,8 +5,8 @@ public class ItemsModel
 { 
     public int FoodSpawnIntervalDelay { get; private set; }
     public int PowerUpSpawnIntervalDelay { get; private set; }
-    public int LevelWidth { get; set; } // Spawn Area
-    public int LevelHeight { get; set; } // Spawn Area
+    public float SpawnAreaWidth { get; set; }
+    public float SpawnAreaHeight { get; set; } 
     public bool GameRunning { get; set; } = true;
     public bool FoodEaten { get; set; } = false;
     public bool PowerUpEaten { get; set; } = false;
@@ -19,7 +19,7 @@ public class ItemsModel
 
         FoodSpawnIntervalDelay = itemsSO.foodSpawnIntervalDelay;
         PowerUpSpawnIntervalDelay = itemsSO.powerUpSpawnIntervalDelay;
-        LevelWidth = itemsSO.levelWidth;
-        LevelHeight = itemsSO.levelHeight;
+        SpawnAreaWidth = itemsSO.itemSpawnArea.x;
+        SpawnAreaHeight = itemsSO.itemSpawnArea.y;
     }
 }

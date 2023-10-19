@@ -78,7 +78,7 @@ public class ItemsController
         Vector2Int RandomPowerUpPos;
         do
         {
-            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, model.LevelWidth - 1), UnityEngine.Random.Range(1, model.LevelHeight - 1));
+            RandomPowerUpPos = new Vector2Int(UnityEngine.Random.Range(1, model.SpawnAreaWidth - 1), UnityEngine.Random.Range(1, model.SpawnAreaHeight - 1));
         } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
 
         return RandomPowerUpPos;
