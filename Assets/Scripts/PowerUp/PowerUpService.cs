@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpService : MonoSingletonGeneric<PowerUpService>
 {
-    [SerializeField] PowerUpView[] powerUps;
+    [SerializeField] PowerUpSO[] powerUpSOs;
     private List<PowerUpController> powerUpControllers = new List<PowerUpController>();
 
     // Start is called before the first frame update
@@ -15,11 +14,10 @@ public class PowerUpService : MonoSingletonGeneric<PowerUpService>
 
     public PowerUpController SpawnRandomPowerUp(Vector2 spawnPoint)
     {
-        PowerUpModel powerUpModel = new PowerUpModel();
+        int randomIdx = Random.Range(0, powerUpSOs.Length);
 
-        int randomIdx = Random.Range(0, powerUps.Length);
-        PowerUpView powerUpView = Instantiate(powerUps[randomIdx], spawnPoint, Quaternion.identity);
-
+        PowerUpModel powerUpModel = new PowerUpModel(powerUpSOs[randomIdx]);
+        PowerUpView powerUpView = Instantiate(powerUpSOs[randomIdx].powerUpView, spawnPoint, Quaternion.identity);
         PowerUpController powerUpController = new PowerUpController(powerUpModel, powerUpView);
 
         powerUpControllers.Add(powerUpController);

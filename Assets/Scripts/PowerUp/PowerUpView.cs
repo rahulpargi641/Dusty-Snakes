@@ -10,7 +10,7 @@ public class PowerUpView : MonoBehaviour
         SnakeView snakeView = collision.GetComponent<SnakeView>();
         if (snakeView)
         {
-            snakeView.PowerUpEaten(this);
+            snakeView.PowerUpEaten(Controller.GetPowerUpType());
             Controller.InvokeOnFoodEaten();
 
             gameObject.SetActive(false);
@@ -20,5 +20,5 @@ public class PowerUpView : MonoBehaviour
 
 public enum PowerUpType
 {
-    Shield, ScoreBoost, SpeedUp
+    Shield, ScoreBoost, SpeedBoost
 }

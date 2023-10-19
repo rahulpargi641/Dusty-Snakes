@@ -210,7 +210,7 @@ public class SnakeController
             AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
             Debug.Log("ScooreBoost Eaten");
         }
-        else if (eatenPowerUpType == PowerUpType.SpeedUp)
+        else if (eatenPowerUpType == PowerUpType.SpeedBoost)
         {
             ActivateSpeedBoostAsync();
             AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);

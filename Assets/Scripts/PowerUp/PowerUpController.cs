@@ -19,6 +19,11 @@ public class PowerUpController
         model.Controller = this;
     }
 
+    public PowerUpType GetPowerUpType()
+    {
+        return model.powerUpType;
+    }
+
     public void InvokeOnFoodEaten()
     {
         onPowerUpEaten?.Invoke();
