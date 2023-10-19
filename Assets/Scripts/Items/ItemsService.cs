@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemsService : MonoSingletonGeneric<ItemsService>
 {
-    [SerializeField] ItemsView itemsView;
+    [SerializeField] ItemsSO itemSO;
     private ItemsController itemsController;
 
     // Start is called before the first frame update
@@ -15,8 +15,8 @@ public class ItemsService : MonoSingletonGeneric<ItemsService>
 
     private void CreateItemsController()
     {
-        ItemsModel itemsModel = new ItemsModel();
-        ItemsView itemsView = Instantiate(this.itemsView);
+        ItemsModel itemsModel = new ItemsModel(itemSO);
+        ItemsView itemsView = Instantiate(itemSO.itemsView);
         itemsController = new ItemsController(itemsModel, itemsView);
     }
 }

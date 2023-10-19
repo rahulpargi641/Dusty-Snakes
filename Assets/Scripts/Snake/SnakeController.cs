@@ -171,7 +171,7 @@ public class SnakeController
         }
     }
 
-    public void ProcessSnakeEatingFood(Food eatenFood)
+    public void ProcessSnakeEatingFood(FoodView eatenFood)
     {
         if (eatenFood.foodType == FoodType.MassGainer)
         {
@@ -195,7 +195,7 @@ public class SnakeController
         AddScore(eatenFood.pointGain);
     }
 
-    public void ProcessSnakeEatingPowerUp(PowerUp eatenPowerUp)
+    public void ProcessSnakeEatingPowerUp(PowerUpView eatenPowerUp)
     {
         if (eatenPowerUp.powerUpType == PowerUpType.Shield)
         {

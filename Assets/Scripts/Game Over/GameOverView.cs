@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameWinController : MonoBehaviour
+public class GameOverView : MonoBehaviour
 {
     [SerializeField] Button m_PlayAgain;
     [SerializeField] string m_SceneToLoad;
+    [SerializeField] LevelController m_LevelController;
 
     private void Awake()
     {

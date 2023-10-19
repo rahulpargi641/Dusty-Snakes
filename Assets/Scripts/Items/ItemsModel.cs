@@ -2,21 +2,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsModel
-{
+{ 
     public int FoodSpawnIntervalDelay { get; private set; }
     public int PowerUpSpawnIntervalDelay { get; private set; }
-    public Food EatenFoodItem { get; set; }
-    public PowerUp EatenPowerUpItem { get; set; }
-    public Dictionary<Vector2Int, Food> Foods { get; set; } = new Dictionary<Vector2Int, Food>();
-    public Dictionary<Vector2Int, PowerUp> PowerUps { get; set; } = new Dictionary<Vector2Int, PowerUp>();
-    public int LevelWidth { get; set; }
-    public int LevelHeight { get; set; }
+    public FoodView EatenFoodItem { get; set; }
+    public PowerUpView EatenPowerUpItem { get; set; }
+    public Dictionary<Vector2Int, FoodView> SpawnedFoods { get; set; } = new Dictionary<Vector2Int, FoodView>();
+    public Dictionary<Vector2Int, PowerUpView> SpawnedPowerUps { get; set; } = new Dictionary<Vector2Int, PowerUpView>();
+    public int LevelWidth { get; set; } // Spawn Area
+    public int LevelHeight { get; set; } // Spawn Area
+
+    private ItemsSO itemsSO;
     
-    public ItemsModel()
+    public ItemsModel(ItemsSO itemsSO)
     {
-        FoodSpawnIntervalDelay = 1;
-        PowerUpSpawnIntervalDelay = 12;
-        LevelWidth = 30;
-        LevelHeight = 30;
+        this.itemsSO = itemsSO;
+
+        FoodSpawnIntervalDelay = itemsSO.foodSpawnIntervalDelay;
+        PowerUpSpawnIntervalDelay = itemsSO.powerUpSpawnIntervalDelay;
+        LevelWidth = itemsSO.levelWidth;
+        LevelHeight = itemsSO.levelHeight;
     }
 }

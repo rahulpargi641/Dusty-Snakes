@@ -18,7 +18,7 @@ public class SnakeView : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Food eatenFood = collision.GetComponent<Food>();
+        FoodView eatenFood = collision.GetComponent<FoodView>();
         if (eatenFood)
         {
             Controller.ProcessSnakeEatingFood(eatenFood);
@@ -27,7 +27,7 @@ public class SnakeView : MonoBehaviour
             return;
         }
 
-        PowerUp eatenPowerUp = collision.GetComponent<PowerUp>();
+        PowerUpView eatenPowerUp = collision.GetComponent<PowerUpView>();
         if (eatenPowerUp)
         {
             Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);

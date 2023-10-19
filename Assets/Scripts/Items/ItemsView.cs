@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ItemsView : MonoBehaviour
 {
-    public Food[] foods;
-    public PowerUp[] powerUps;
+    public FoodView[] foods;
+    public PowerUpView[] powerUps;
 
     public ItemsController Controller { private get; set; }
 
