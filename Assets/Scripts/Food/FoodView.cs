@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FoodView : MonoBehaviour
 {
-    public FoodType foodType;
     public FoodController Controller { private get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -10,7 +9,7 @@ public class FoodView : MonoBehaviour
         SnakeView snakeView = collision.GetComponent<SnakeView>();
         if (snakeView)
         {
-            snakeView.FoodEaten(this);
+            snakeView.FoodEaten(Controller.GetFoodType());
             Controller.InvokeOnFoodEaten();
 
             gameObject.SetActive(false);

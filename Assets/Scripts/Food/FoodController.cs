@@ -19,6 +19,11 @@ public class FoodController
         model.Controller = this;
     }
 
+    public FoodType GetFoodType()
+    {
+        return model.FoodType;
+    }
+
     public void InvokeOnFoodEaten()
     {
         onFoodEaten?.Invoke();

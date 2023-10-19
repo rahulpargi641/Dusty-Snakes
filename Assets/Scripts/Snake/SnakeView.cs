@@ -18,14 +18,14 @@ public class SnakeView : MonoBehaviour
     }
 
     // called by FoodView
-    public void FoodEaten(FoodView eatenFood)
+    public void FoodEaten(FoodType eatenFoodType)
     {
-        Controller.ProcessSnakeEatingFood(eatenFood);
+        Controller.ProcessSnakeEatingFood(eatenFoodType);
     }
 
     // called by PowerUpView
-    public void PowerUpEaten(PowerUpView eatenPowerUp)
+    public void PowerUpEaten(PowerUpType eatenPowerUpType)
     {
-        Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);
+        Controller.ProcessSnakeEatingPowerUp(eatenPowerUpType);
     }
 }

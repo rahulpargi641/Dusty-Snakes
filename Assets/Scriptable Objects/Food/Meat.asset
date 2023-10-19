@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f113af5473b99e84b8ac22e8c3cf8cab, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  foodView: {fileID: 0}
-  pointGain: 0
-  destroyAfterTime: 0
+  foodView: {fileID: -7199205847689581400, guid: d333328fd7ae1564f938c801e1a43456, type: 3}
+  pointGain: 25
+  destroyAfterTime: 8
