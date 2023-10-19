@@ -16,23 +16,23 @@ public class SnakeView : MonoBehaviour
         Controller.ProcessSnakeTranslation();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        FoodView eatenFood = collision.GetComponent<FoodView>();
-        if (eatenFood)
-        {
-            Controller.ProcessSnakeEatingFood(eatenFood);
-            eatenFood.gameObject.SetActive(false);
-            // Spawn food
-            return;
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    FoodView eatenFood = collision.GetComponent<FoodView>();
+    //    if (eatenFood)
+    //    {
+    //        Controller.ProcessSnakeEatingFood(eatenFood);
+    //        eatenFood.gameObject.SetActive(false);
+    //        // Spawn food
+    //        return;
+    //    }
 
-        PowerUpView eatenPowerUp = collision.GetComponent<PowerUpView>();
-        if (eatenPowerUp)
-        {
-            Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);
-            eatenPowerUp.gameObject.SetActive(false);
-            // Spawn Powerup
-        }
-    }
+    //    PowerUpView eatenPowerUp = collision.GetComponent<PowerUpView>();
+    //    if (eatenPowerUp)
+    //    {
+    //        Controller.ProcessSnakeEatingPowerUp(eatenPowerUp);
+    //        eatenPowerUp.gameObject.SetActive(false);
+    //        // Spawn Powerup
+    //    }
+    //}
 }

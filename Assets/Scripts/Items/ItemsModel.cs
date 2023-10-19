@@ -7,7 +7,7 @@ public class ItemsModel
     public int PowerUpSpawnIntervalDelay { get; private set; }
     public FoodView EatenFoodItem { get; set; }
     public PowerUpView EatenPowerUpItem { get; set; }
-    public Dictionary<Vector2Int, FoodView> SpawnedFoods { get; set; } = new Dictionary<Vector2Int, FoodView>();
+    public Dictionary<Vector2Int, FoodController> SpawnedFoods { get; set; } = new Dictionary<Vector2Int, FoodController>();
     public Dictionary<Vector2Int, PowerUpView> SpawnedPowerUps { get; set; } = new Dictionary<Vector2Int, PowerUpView>();
     public int LevelWidth { get; set; } // Spawn Area
     public int LevelHeight { get; set; } // Spawn Area

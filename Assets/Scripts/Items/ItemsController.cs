@@ -19,46 +19,41 @@ public class ItemsController
     {
         yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
 
-        while (true)
+        while (true) // gameloop
         {
-            Vector2Int randomFoodPos;
-            FoodView foodToSpawn, spawnedFood;
-
-            SpawnRandomFood(out randomFoodPos, out foodToSpawn, out spawnedFood);
-
-            yield return new WaitForSeconds(foodToSpawn.destroyAfterTime);
-
-            ProcessIfSpawnedFoodNotEaten(randomFoodPos, spawnedFood);
-
+            SpawnFoodAtRandomPos();
+            
             yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
         }
     }
 
-    private void SpawnRandomFood(out Vector2Int randomFoodPos, out FoodView foodToSpawn, out FoodView spawnedFood)
+    private void SpawnFoodAtRandomPos()
     {
-        randomFoodPos = GenerateRandomPosNotAtSnakeBody();
+        Vector2Int randomFoodPos;
+        FoodController spawnedFood;
 
-        foodToSpawn = RandomItemSelector(view.foods);
-        spawnedFood = GameObject.Instantiate(foodToSpawn, new Vector3(randomFoodPos.x, randomFoodPos.y), Quaternion.identity);
+        randomFoodPos = GenerateRandomPosNotAtSnakeBody();
+        spawnedFood = FoodService.Instance.SpawnRandomFood(randomFoodPos);
+
         model.SpawnedFoods.Add(randomFoodPos, spawnedFood);
     }
 
-    private void ProcessIfSpawnedFoodNotEaten(Vector2Int randomFoodPos, FoodView spawnedFood)
+    private void ProcessIfSpawnedFoodNotEaten(Vector2Int foodPos, FoodController spawnedFood) // remove spawned from via events
     {
         if (model.SpawnedFoods.ContainsValue(spawnedFood))
         {
-            //Destroy(food.gameObject);
-            spawnedFood.gameObject.SetActive(false);
-            GetEatenFoodAndRemoveFromDictionary(randomFoodPos);
+            //spawnedFood.gameObject.SetActive(false);
+            GetEatenFoodAndRemoveFromDictionary(foodPos);
         }
     }
 
-    private PowerUpView GetEatenPowerupAndRemoveFromDictionary(Vector2Int snakeCurrentPos)
+    private PowerUpView GetEatenPowerupAndRemoveFromDictionary(Vector2Int powerUpPos)
     {
-        if (model.SpawnedPowerUps.TryGetValue(snakeCurrentPos, out PowerUpView powerUpToDestroy))
+        if (model.SpawnedPowerUps.TryGetValue(powerUpPos, out PowerUpView powerUpToDestroy))
         {
-            model.SpawnedPowerUps.Remove(snakeCurrentPos);
+            model.SpawnedPowerUps.Remove(powerUpPos);
         }
+
         return powerUpToDestroy;
     }
 
@@ -100,11 +95,11 @@ public class ItemsController
         }
     }
 
-    private FoodView GetEatenFoodAndRemoveFromDictionary(Vector2Int removeAtPosition)
+    private FoodController GetEatenFoodAndRemoveFromDictionary(Vector2Int foodPosition)
     {
-        if (model.SpawnedFoods.TryGetValue(removeAtPosition, out FoodView eatenFood))
+        if (model.SpawnedFoods.TryGetValue(foodPosition, out FoodController eatenFood))
         {
-            model.SpawnedFoods.Remove(removeAtPosition);
+            model.SpawnedFoods.Remove(foodPosition);
         }
         return eatenFood;
     }
