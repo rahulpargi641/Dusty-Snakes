@@ -75,11 +75,11 @@ public class SnakeController
 
     private void ProcessTranslation()
     {
-        model.TimePassed += Time.deltaTime;
+        model.snakeMoveTimer += Time.deltaTime;
 
-        if (model.TimePassed > model.MoveTimerMax)
+        if (model.snakeMoveTimer > model.snakeMoveTimerMax)
         {
-            model.TimePassed -= model.MoveTimerMax;
+            model.snakeMoveTimer -= model.snakeMoveTimerMax;
 
             StoreSnakeHeadPositionAndDirection();
 

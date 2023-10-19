@@ -16,6 +16,6 @@ public class LevelModel
 
         LevelWidth = levelSO.levelWidth;
         LevelHeight = levelSO.levelHeight;
-        ScoreToWin = levelSO.scoreToWin;
+        ScoreToWin = levelSO.scoreToWin; // Use PlayerPrefs
     }
 }
