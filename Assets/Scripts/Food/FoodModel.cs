@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class FoodModel
+public class FoodModel : Item
 {
     public FoodController Controller { private get; set; }
-
-    public FoodModel()
+    private FoodSO foodSO;
+    public FoodModel(FoodSO foodSO)
     {
-
+        this.foodSO = foodSO;
+        pointGain = foodSO.pointGain;
+        destroyAfterTime = foodSO.destroyAfterTime;
     }
 }

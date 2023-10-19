@@ -192,7 +192,7 @@ public class SnakeController
             Debug.LogError("Eaten Food type is not set");
         }
 
-        AddScore(eatenFood.pointGain);  // change function name to InvokeSnakeAteFood
+        AddScore(20);  // change function name to InvokeSnakeAteFood
     }
 
     public void ProcessSnakeEatingPowerUp(PowerUpView eatenPowerUp)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpView : Item
+public class PowerUpView : MonoBehaviour
 {
     public PowerUpType powerUpType;
     public PowerUpController Controller { private get; set; }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FoodView : Item
+public class FoodView : MonoBehaviour
 {
     public FoodType foodType;
     public FoodController Controller { private get; set; }
