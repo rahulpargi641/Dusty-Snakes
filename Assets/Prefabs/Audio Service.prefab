@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - soundType: 0
-    clip: {fileID: 8300000, guid: f9b88b80e471fe94e92bfeab35d3df3d, type: 3}
+    clip: {fileID: 8300000, guid: 9e97c063e8bf3ba46869e1b24c86bd7b, type: 3}
     volume: 0.029
     pitch: 1
     loop: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
     loop: 0
   - soundType: 3
     clip: {fileID: 8300000, guid: 1df2ba080fc3818448af0c96783b1e7a, type: 3}
-    volume: 1
+    volume: 0.498
     pitch: 1
     loop: 0
   - soundType: 4
@@ -78,5 +78,10 @@ MonoBehaviour:
   - soundType: 6
     clip: {fileID: 8300000, guid: bb646e1819438804e896615857addb94, type: 3}
     volume: 1
+    pitch: 1
+    loop: 0
+  - soundType: 7
+    clip: {fileID: 8300000, guid: 4e1611e1ec0115449a998a9221946397, type: 3}
+    volume: 0.112
     pitch: 1
     loop: 0

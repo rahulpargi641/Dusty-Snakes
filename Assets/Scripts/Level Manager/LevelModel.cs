@@ -5,7 +5,8 @@ public class LevelModel
     public int LevelHeight { get; private set; }
     public int ScoreToWin { get; private set; }
     public int CurrentScore { get; set; } = 0;
-    public int transitionDuration { get; private set; }
+    public int LevelTransitionDuration { get; private set; }
+    public int TextDisplayDuration { get; private set; }
     public EGameState GameState { get; set; } = EGameState.Running;
     public LevelController Controller { private get; set; }
 
@@ -17,6 +18,7 @@ public class LevelModel
         LevelWidth = levelSO.levelWidth;
         LevelHeight = levelSO.levelHeight;
         ScoreToWin = levelSO.scoreToWin; // Use PlayerPrefs
-        transitionDuration = levelSO.transitionDuration;
+        LevelTransitionDuration = levelSO.transitionDuration;
+        TextDisplayDuration = levelSO.textDisplayDuration;
     }
 }

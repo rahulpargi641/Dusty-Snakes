@@ -4,14 +4,15 @@ using UnityEngine;
 public class SnakeService : MonoSingletonGeneric<SnakeService>
 {
     [SerializeField] SnakeSO snakeSO;
-    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform[] spawnPoints;
 
     private SnakeController snakeController;
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnSnake(spawnPoint);
+        foreach(Transform spawnPoint in spawnPoints) // spawns two snakes
+            SpawnSnake(spawnPoint);
     }
 
     public void SpawnSnake(Transform spawnPoint)

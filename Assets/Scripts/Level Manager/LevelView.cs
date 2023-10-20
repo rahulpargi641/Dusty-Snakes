@@ -5,6 +5,10 @@ public class LevelView : MonoBehaviour
     [SerializeField] GameObject gamePauseGO;
     [SerializeField] GameObject levelWinGO;
     [SerializeField] GameObject gameOverGO;
+    [SerializeField] GameObject speedBoostGO;
+    [SerializeField] GameObject scoreBoostGO;
+    [SerializeField] GameObject shieldGO;
+
     public LevelController Controller { private get; set; }
 
     private void Update()
@@ -47,5 +51,33 @@ public class LevelView : MonoBehaviour
     public void EnableGameOverGO()
     {
         gameOverGO.SetActive(true);
+    }
+
+    public void EnableSpeedBoostText()
+    {
+        speedBoostGO.SetActive(true);
+    }
+    public void DisableSpeedBoostText()
+    {
+        speedBoostGO.SetActive(false);
+    }
+
+    public void EnableScoreBoostText()
+    {
+        scoreBoostGO.SetActive(true);
+    }
+    public void DisableScoreBoostText()
+    {
+        scoreBoostGO.SetActive(false);
+    }
+
+    public void EnableShieldText()
+    {
+        shieldGO.SetActive(true);
+    }
+
+    public void DisableShieldText()
+    {
+        shieldGO.SetActive(false);
     }
 }

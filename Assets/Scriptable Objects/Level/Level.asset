@@ -17,3 +17,4 @@ MonoBehaviour:
   levelHeight: 30
   scoreToWin: 100
   transitionDuration: 3
+  textDisplayDuration: 2

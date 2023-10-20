@@ -64,6 +64,7 @@ public enum SoundType
     ShieldPickup,
     ScoreBoostPickup,
     SpeedBoostPickup,
-    SnakeCollide
+    SnakeCollide,
+    GameOver
 }
 

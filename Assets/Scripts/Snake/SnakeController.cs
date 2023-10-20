@@ -175,19 +175,13 @@ public class SnakeController
         {
             model.MassGainerFoodEatenCounter++;
             AddSnakeBodyPart();
-            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
         else if (eatenFoodType == FoodType.MassBurner)
         {
             model.MassBurnerFoodEatenCounter++;
             RemoveSnakeBodyPart();
-            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
-        }
-        else
-        {
-            Debug.LogError("Eaten Food type is not set");
         }
 
         InvokeSnakeAteFood(20);  // change function name to InvokeSnakeAteFood
@@ -199,24 +193,16 @@ public class SnakeController
         {
             ActivateShieldAsync();
             AudioService.Instance.PlaySound(SoundType.ShieldPickup);
-            Debug.Log("SHield Power Eaten");
         }
         else if (eatenPowerUpType == PowerUpType.ScoreBoost)
         {
             ActivateScoreBoostAsync();
-
             AudioService.Instance.PlaySound(SoundType.ScoreBoostPickup);
-            Debug.Log("ScooreBoost Eaten");
         }
         else if (eatenPowerUpType == PowerUpType.SpeedBoost)
         {
             ActivateSpeedBoostAsync();
             AudioService.Instance.PlaySound(SoundType.SpeedBoostPickup);
-            Debug.LogError("SPeed Up Consumed");
-        }
-        else
-        {
-            Debug.Log("Eaten Powerup type is not set.");
         }
     }
 
@@ -229,7 +215,6 @@ public class SnakeController
 
         model.ScoreBoostActive = false;
         ChangeToNormalColor();
-
     }
 
     private async void ActivateShieldAsync()
