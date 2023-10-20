@@ -16,6 +16,8 @@ public class GameOverView : MonoBehaviour
     private void RestartGame()
     {
         AudioService.Instance.PlaySound(SoundType.ButtonClick);
+        AudioService.Instance.StopSound(SoundType.GameOver);
+        AudioService.Instance.PlaySound(SoundType.BgMusic);
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
     }

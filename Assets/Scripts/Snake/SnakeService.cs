@@ -3,22 +3,20 @@ using UnityEngine;
 
 public class SnakeService : MonoSingletonGeneric<SnakeService>
 {
-    [SerializeField] SnakeSO snakeSO;
-    [SerializeField] Transform[] spawnPoints;
-
+    [SerializeField] SnakeSO[] snakeSOs;
     private SnakeController snakeController;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Transform spawnPoint in spawnPoints) // spawns two snakes
-            SpawnSnake(spawnPoint);
+        foreach(SnakeSO snakeSO in snakeSOs) // spawns two snakes
+            SpawnSnake(snakeSO);
     }
 
-    public void SpawnSnake(Transform spawnPoint)
+    public void SpawnSnake(SnakeSO snakeSO)
     {
         SnakeModel snakeModel = new SnakeModel(snakeSO);
-        SnakeView snakeView = Instantiate(snakeSO.snakeView, spawnPoint.position, snakeSO.snakeView.transform.rotation);
+        SnakeView snakeView = Instantiate(snakeSO.snakeView, (Vector2)snakeSO.spawnPos, snakeSO.snakeView.transform.rotation);
         snakeController = new SnakeController(snakeModel, snakeView);
     }
 

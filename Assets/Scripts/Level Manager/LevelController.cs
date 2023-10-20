@@ -43,7 +43,7 @@ public class LevelController
         AudioService.Instance.PlaySound(SoundType.GameOver);
     }
 
-    public void ProcessIfLevelWin() // Achievement System, get the score from score service
+    public void ProcessIfLevelWin() // Achievement System, get notified from the score service
     {
         if (model.CurrentScore >= model.ScoreToWin)
         {

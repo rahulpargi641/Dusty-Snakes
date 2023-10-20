@@ -25,12 +25,12 @@ public class SnakeController
             AddSnakeBodyPart();
     }
 
-    public void ProcessSnakeTranslation() // called every frame
+    public void ProcessSnakeTranslation(Vector2 snakeMoveInput) // called every frame in the view
     {
         switch (model.SnakeState)
         {
             case ESnakeState.Alive:
-                SetFacingDirection(); // Set Snake Facing Direction based on Input
+                SetFacingDirection(snakeMoveInput); // Set Snake Facing Direction based on Input
                 ProcessTranslation(); // Moving Snake One point to another
                 break;
             case ESnakeState.Dead:
@@ -38,38 +38,30 @@ public class SnakeController
         }
     }
 
-    private void SetFacingDirection() // called every frame
+    private void SetFacingDirection(Vector2 snakeMoveInput)
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if(snakeMoveInput.y > 0)
         {
             if (model.CurrentFacingDir != EDirection.Down)
-            {
-                model.CurrentFacingDir = EDirection.Up;
-            }
+               model.CurrentFacingDir = EDirection.Up;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if(snakeMoveInput.y < 0)
         {
             if (model.CurrentFacingDir != EDirection.Up)
-            {
                 model.CurrentFacingDir = EDirection.Down;
-            }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (model.CurrentFacingDir != EDirection.Right)
-            {
-                model.CurrentFacingDir = EDirection.Left;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
+        if(snakeMoveInput.x > 0)
         {
             if (model.CurrentFacingDir != EDirection.Left)
-            {
                 model.CurrentFacingDir = EDirection.Right;
-            }
+        }
+
+        if (snakeMoveInput.x < 0)
+        {
+            if (model.CurrentFacingDir != EDirection.Right)
+                model.CurrentFacingDir = EDirection.Left;
         }
     }
 
@@ -313,5 +305,10 @@ public class SnakeController
         model.SnakeState = ESnakeState.Dead;
         onSnakeDeath?.Invoke();
         AudioService.Instance.PlaySound(SoundType.SnakeCollide);
+    }
+
+    public SnakeType GetSnakeType()
+    {
+        return model.SnakeType;
     }
 }

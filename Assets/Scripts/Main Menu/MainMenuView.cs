@@ -11,6 +11,7 @@ public class MainMenuView : MonoBehaviour
     [SerializeField] GameObject MainMenuScreen;
     [SerializeField] GameObject InfoScreen;
     [SerializeField] string m_SceneToLoad;
+
     private void Awake()
     {
         m_StartButton.onClick.AddListener(StartGame);
@@ -38,6 +39,7 @@ public class MainMenuView : MonoBehaviour
         MainMenuScreen.SetActive(false);
         InfoScreen.SetActive(true);
     }
+
     private void GoToMainMenuScreen()
     {
         AudioService.Instance.PlaySound(SoundType.ButtonClick);
