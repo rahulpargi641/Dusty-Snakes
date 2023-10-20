@@ -15,12 +15,14 @@ public class GameOverView : MonoBehaviour
 
     private void RestartGame()
     {
+        AudioService.Instance.PlaySound(SoundType.ButtonClick);
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
     }
 
     private void QuitGame()
     {
+        AudioService.Instance.PlaySound(SoundType.ButtonClick);
         Application.Quit();
     }
 }

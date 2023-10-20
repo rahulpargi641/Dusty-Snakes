@@ -198,20 +198,20 @@ public class SnakeController
         if (eatenPowerUpType == PowerUpType.Shield)
         {
             ActivateShieldAsync();
-            AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
+            AudioService.Instance.PlaySound(SoundType.ShieldPickup);
             Debug.Log("SHield Power Eaten");
         }
         else if (eatenPowerUpType == PowerUpType.ScoreBoost)
         {
             ActivateScoreBoostAsync();
 
-            AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
+            AudioService.Instance.PlaySound(SoundType.ScoreBoostPickup);
             Debug.Log("ScooreBoost Eaten");
         }
         else if (eatenPowerUpType == PowerUpType.SpeedBoost)
         {
             ActivateSpeedBoostAsync();
-            AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
+            AudioService.Instance.PlaySound(SoundType.SpeedBoostPickup);
             Debug.LogError("SPeed Up Consumed");
         }
         else
@@ -327,6 +327,6 @@ public class SnakeController
 
         model.SnakeState = ESnakeState.Dead;
         onSnakeDeath?.Invoke();
-        AudioService.Instance.PlaySound(SoundType.Death);
+        AudioService.Instance.PlaySound(SoundType.SnakeCollide);
     }
 }
