@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3952063c04acc6c4ebced8a0309872cf, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  powerUpView: {fileID: 0}
+  powerUpView: {fileID: -8053227827790552189, guid: e5f5d73c8d250d24e8811facc70be062, type: 3}
   powerUpType: 0
-  PowerUpDuration: 0
+  PowerUpDuration: 10
   pointGain: 0

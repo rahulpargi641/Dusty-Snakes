@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,9 +23,6 @@ public class ItemsController
             SpawnFoodAtRandomPosition(out randomFoodPos, out spawnedFood);
 
             yield return new WaitForSeconds(model.FoodSpawnIntervalDelay);
-
-            if(!model.FoodEaten)
-                UnspawnTheFood();
         }
     }
 
@@ -34,14 +30,6 @@ public class ItemsController
     {
         randomFoodPos = GenerateRandomPosNotAtSnakeBody();
         spawnedFood = FoodService.Instance.SpawnRandomFood(randomFoodPos);
-
-        model.FoodEaten = false;
-    }
-
-    private void UnspawnTheFood() // remove spawned from via events
-    {
-        // Send back to Food Pool and deactivate
-        Debug.Log("Food got unspawned successfully");
     }
 
     public IEnumerator SpawnPowerUpItems()
@@ -55,8 +43,6 @@ public class ItemsController
             SpawnPowerUpAtRandomPosition(out randomPowerUpPos, out spawnedPowerUp);
 
             yield return new WaitForSeconds(model.PowerUpSpawnIntervalDelay);
-            if(!model.PowerUpEaten)
-                UnspawnedThePowerUp();
         }
     }
 
@@ -65,12 +51,6 @@ public class ItemsController
         randomPowerUpPos = GenerateRandomPosNotAtSnakeBody();
 
         spawnedPowerUp = PowerUpService.Instance.SpawnRandomPowerUp(randomPowerUpPos);
-    }
-
-    private void UnspawnedThePowerUp()
-    {
-        // send back to pool
-        Debug.Log("PowerUp Unspawned successfully");
     }
 
     private Vector2Int GenerateRandomPosNotAtSnakeBody()
@@ -82,17 +62,5 @@ public class ItemsController
         } while (SnakeService.Instance.GetWholeSnakeBodyPositions().IndexOf(RandomPowerUpPos) != -1);
 
         return RandomPowerUpPos;
-    }
-
-    public void FoodEaten()
-    {
-        model.FoodEaten = true;
-        Debug.Log("Food Up Eaten Successfully");
-    }
-
-    public void PowerUpEaten()
-    {
-        model.PowerUpEaten = true;
-        Debug.Log("Power Up Eaten Successfully");
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3952063c04acc6c4ebced8a0309872cf, type: 3}
   m_Name: ScoreBoost
   m_EditorClassIdentifier: 
-  powerUpView: {fileID: 0}
-  powerUpType: 0
-  PowerUpDuration: 0
+  powerUpView: {fileID: 7445167432333917417, guid: 8c04bd9aa8c14214fb9336a32f5713cb, type: 3}
+  powerUpType: 1
+  PowerUpDuration: 10
   pointGain: 0

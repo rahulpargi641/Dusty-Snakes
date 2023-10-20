@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3952063c04acc6c4ebced8a0309872cf, type: 3}
   m_Name: SpeedBoost
   m_EditorClassIdentifier: 
-  powerUpView: {fileID: 0}
-  powerUpType: 0
+  powerUpView: {fileID: 6627638398372308383, guid: 09b69e8869e742c42b7fa6e1d57ec9d6, type: 3}
+  powerUpType: 2
   PowerUpDuration: 0
   pointGain: 0

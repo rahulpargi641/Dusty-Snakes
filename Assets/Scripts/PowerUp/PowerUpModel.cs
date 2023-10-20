@@ -13,6 +13,6 @@ public class PowerUpModel : Item
     {
         this.powerUpSO = powerUpSO;
         powerUpType = powerUpSO.powerUpType;
-        durationTime = powerUpSO.PowerUpDuration;
+        activeDurationTime = powerUpSO.PowerUpDuration;
     }
 }

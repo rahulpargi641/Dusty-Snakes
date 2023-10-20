@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FoodController
 {
     private FoodModel model;
     private FoodView view;
-
-    public static event Action onFoodEaten;
 
     public FoodController(FoodModel model, FoodView view)
     {
@@ -19,13 +15,32 @@ public class FoodController
         model.Controller = this;
     }
 
-    public FoodType GetFoodType()
+    public void ProcessFoodEaten(SnakeView snakeView)
     {
-        return model.FoodType;
+        snakeView.FoodEaten(model.FoodType);
+        FoodService.Instance.ReturnFoodToPool(this);
     }
 
-    public void InvokeOnFoodEaten()
+    public void SetTransform(Vector2 spawnPoint)
     {
-        onFoodEaten?.Invoke();
+        view.transform.position = spawnPoint;
+    }
+
+    public void EnableFood()
+    {
+        view.gameObject.SetActive(true);
+        SendFoodToPoolAsync();
+    }
+
+    private async void SendFoodToPoolAsync()
+    {
+        await Task.Delay(model.activeDurationTime * 1000);
+
+        FoodService.Instance.ReturnFoodToPool(this);
+    }
+
+    public void DisableFood()
+    {
+        view.gameObject.SetActive(false);
     }
 }
