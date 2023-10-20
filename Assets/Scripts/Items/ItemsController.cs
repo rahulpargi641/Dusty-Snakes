@@ -49,7 +49,6 @@ public class ItemsController
     private void SpawnPowerUpAtRandomPosition(out Vector2Int randomPowerUpPos, out PowerUpController spawnedPowerUp)
     {
         randomPowerUpPos = GenerateRandomPosNotAtSnakeBody();
-
         spawnedPowerUp = PowerUpService.Instance.SpawnRandomPowerUp(randomPowerUpPos);
     }
 

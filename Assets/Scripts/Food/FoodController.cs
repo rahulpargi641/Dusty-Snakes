@@ -34,7 +34,7 @@ public class FoodController
 
     private async void SendFoodToPoolAsync()
     {
-        await Task.Delay(model.activeDurationTime * 1000);
+        await Task.Delay(model.activeDuration * 1000);
 
         FoodService.Instance.ReturnFoodToPool(this);
     }
