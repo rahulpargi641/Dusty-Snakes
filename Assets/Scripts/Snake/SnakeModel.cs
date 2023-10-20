@@ -16,6 +16,7 @@ public class SnakeModel
     public int PowerUpCoolDownTime { get; private set; }
     public bool ShieldActive { get; set; } = false;
     public bool ScoreBoostActive { get; set; } = false;
+    public SnakeBodyPartPool SnakeBodyPartPool { get; private set; } = new SnakeBodyPartPool();
 
     private SnakeSO snakeSO;
     public SnakeModel(SnakeSO snakeSO)

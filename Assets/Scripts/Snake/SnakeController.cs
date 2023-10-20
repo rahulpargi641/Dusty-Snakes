@@ -192,7 +192,7 @@ public class SnakeController
             Debug.LogError("Eaten Food type is not set");
         }
 
-        AddScore(20);  // change function name to InvokeSnakeAteFood
+        InvokeSnakeAteFood(20);  // change function name to InvokeSnakeAteFood
     }
 
     public void ProcessSnakeEatingPowerUp(PowerUpType eatenPowerUpType)
@@ -266,7 +266,7 @@ public class SnakeController
         view.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public void AddScore(int pointGain)
+    public void InvokeSnakeAteFood(int pointGain)
     {
         if (model.ScoreBoostActive)
             pointGain *= 2;
@@ -293,19 +293,29 @@ public class SnakeController
 
     void AddSnakeBodyPart()
     {
-        model.SnakeBodyParts.Add(new SnakeBodyPart(model.SnakeBodyParts.Count)); // get from the pool
+        //model.SnakeBodyParts.Add(new SnakeBodyPart(model.SnakeBodyParts.Count)); // get from the pool
+        SnakeBodyPart snakeBodyPart = model.SnakeBodyPartPool.GetSnakeBodyPart();
+        model.SnakeBodyParts.Add(snakeBodyPart);
         model.SnakeBodySize++;
+        snakeBodyPart.GetSnakeBodyPart().gameObject.SetActive(true);
     }
 
     void RemoveSnakeBodyPart()
     {
         if (model.SnakeBodySize < 1) return;
 
-        GameObject snakeBodyPartToDestroy =  model.SnakeBodyParts[model.SnakeBodyParts.Count - 1].GetSnakeBodyPart();
-        snakeBodyPartToDestroy.SetActive(false); // send back to pool
+        SendSnakeBodyPartBackToPool();
 
         model.SnakeBodyParts.RemoveAt(model.SnakeBodyParts.Count - 1);
         model.SnakeBodySize--;
+    }
+
+    private void SendSnakeBodyPartBackToPool()
+    {
+        SnakeBodyPart snakeBodyPartToRemove = model.SnakeBodyParts[model.SnakeBodyParts.Count - 1];
+        GameObject snakeBodyPartToRemoveGO = snakeBodyPartToRemove.GetSnakeBodyPart();
+        snakeBodyPartToRemoveGO.SetActive(false);
+        model.SnakeBodyPartPool.ReturnItem(snakeBodyPartToRemove);
     }
 
     public List<Vector2Int> GetWholeSnakeBodyPositions()  // Return the full list of positions occupied by the snake: Head + Body 

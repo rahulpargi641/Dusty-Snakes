@@ -10,7 +10,7 @@ public class SnakeBodyPart
     {
         snakeBodyPart = new GameObject("SnakeBody", typeof(SpriteRenderer));
         snakeBodyPart.GetComponent<SpriteRenderer>().sprite = GameAssetService.Instance.m_SnakeBody.GetComponent<SpriteRenderer>().sprite;
-        snakeBodyPart.GetComponent<SpriteRenderer>().sortingOrder = -bodyPartNo;
+        //snakeBodyPart.GetComponent<SpriteRenderer>().sortingOrder = -bodyPartNo;
         //transform = snakeBodyPart.transform;
     }
 
