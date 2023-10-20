@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 
 public class LevelController
 {
@@ -33,8 +34,10 @@ public class LevelController
         model.GameState = gameState;
     }
 
-    public void ProcessGameOver() // if snake dies
+    public async void ProcessGameOver() // if snake dies
     {
+        await Task.Delay(2 * 1000);
+
         view.EnableGameOverGO();
     }
 

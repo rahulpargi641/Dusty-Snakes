@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Egg
   m_EditorClassIdentifier: 
   foodView: {fileID: 3431003260841636319, guid: e9ca8750095006842a717636935da888, type: 3}
+  foodType: 0
   pointGain: 15
-  destroyAfterTime: 8
+  activeDuration: 8

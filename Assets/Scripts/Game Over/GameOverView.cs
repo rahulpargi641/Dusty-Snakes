@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 public class GameOverView : MonoBehaviour
 {
     [SerializeField] Button m_PlayAgain;
-    [SerializeField] string m_SceneToLoad;
-    [SerializeField] LevelController m_LevelController;
+    [SerializeField] Button m_QuitButton;
 
     private void Awake()
     {
         m_PlayAgain.onClick.AddListener(RestartGame);
+        m_QuitButton.onClick.AddListener(QuitGame);
     }
 
     private void RestartGame()
     {
-        SceneManager.LoadScene(m_SceneToLoad);
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
+    }
+
+    private void QuitGame()
+    {
+        Application.Quit();
     }
 }

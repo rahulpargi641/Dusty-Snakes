@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snakeView: {fileID: 7267613094687744216, guid: 50db849e24a272948a4755523ff67a75, type: 3}
   snakeType: 2
-  snakeMoveTimerMax: 0.2
-  PowerUpCoolDownTime: 10
+  snakeMoveTimerMax: 0.15
+  PowerUpCoolDownTime: 15

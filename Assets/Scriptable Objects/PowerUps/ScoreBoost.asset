@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpView: {fileID: 7445167432333917417, guid: 8c04bd9aa8c14214fb9336a32f5713cb, type: 3}
   powerUpType: 1
-  PowerUpDuration: 10
+  activeDuration: 15
   pointGain: 0

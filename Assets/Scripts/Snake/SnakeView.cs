@@ -17,6 +17,12 @@ public class SnakeView : MonoBehaviour
         Controller.ProcessSnakeTranslation();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Snake Collided with the box");
+        Controller.ProcessSnakeDeath();
+    }
+
     // called by FoodView
     public void FoodEaten(FoodType eatenFoodType)
     {

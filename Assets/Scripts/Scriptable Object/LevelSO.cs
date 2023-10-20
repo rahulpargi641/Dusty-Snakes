@@ -8,4 +8,5 @@ public class LevelSO : ScriptableObject
     public int levelWidth;
     public int levelHeight;
     public int scoreToWin;
+    public int transitionDuration;
 }

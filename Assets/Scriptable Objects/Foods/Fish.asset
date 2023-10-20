@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Fish
   m_EditorClassIdentifier: 
   foodView: {fileID: 7129291912836599433, guid: 183fbb600d910f140a8ed14f2ddf727b, type: 3}
+  foodType: 0
   pointGain: 20
-  destroyAfterTime: 8
+  activeDuration: 8
