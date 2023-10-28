@@ -15,20 +15,20 @@ public class LevelController
 
     public int GetLevelWidth()
     {
-        return model.Width;
+        return model.LevelWidth;
     }
 
     public int GetLevelHeight()
     {
-        return model.Height;
+        return model.LevelHeight;
     }
 
-    public GameState GetGameState()
+    public EGameState GetGameState()
     {
         return model.GameState;
     }
 
-    public void SetGameState(GameState gameState)
+    public void SetGameState(EGameState gameState)
     {
         model.GameState = gameState;
     }

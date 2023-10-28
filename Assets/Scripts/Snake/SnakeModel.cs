@@ -9,23 +9,26 @@ public class SnakeModel
     public int SnakeBodySize { get; set; } = 0;
     public List<SnakeVector> SnakeHeadPosVectors { get; set; } = new List<SnakeVector>();
     public List<SnakeBodyPart> SnakeBodyParts { get; set; } = new List<SnakeBodyPart>();
-    public float TimePassed { get; set; }
-    public float MoveTimerMax { get; private set; }
+    public float snakeMoveTimer { get; set; }
+    public float snakeMoveTimerMax { get; private set; }
     public int MassGainerFoodEatenCounter { get; set; }
     public int MassBurnerFoodEatenCounter { get; set; }
     public int PowerUpCoolDownTime { get; private set; }
     public bool ShieldActive { get; set; } = false;
     public bool ScoreBoostActive { get; set; } = false;
 
-    public SnakeModel()
+    private SnakeSO snakeSO;
+    public SnakeModel(SnakeSO snakeSO)
     {
+        this.snakeSO = snakeSO;
+
         CurrentSnakeHeadPos = new Vector2Int(10, 10);
         CurrentFacingDir = EDirection.Right;
         SnakeState = ESnakeState.Alive;
 
-        MoveTimerMax = 0.2f;
-        TimePassed = MoveTimerMax;
+        snakeMoveTimerMax = snakeSO.snakeMoveTimerMax;
+        snakeMoveTimer = snakeMoveTimerMax;
 
-        PowerUpCoolDownTime = 10;
+        PowerUpCoolDownTime = snakeSO.PowerUpCoolDownTime;
     }
 }

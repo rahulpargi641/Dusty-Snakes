@@ -75,11 +75,11 @@ public class SnakeController
 
     private void ProcessTranslation()
     {
-        model.TimePassed += Time.deltaTime;
+        model.snakeMoveTimer += Time.deltaTime;
 
-        if (model.TimePassed > model.MoveTimerMax)
+        if (model.snakeMoveTimer > model.snakeMoveTimerMax)
         {
-            model.TimePassed -= model.MoveTimerMax;
+            model.snakeMoveTimer -= model.snakeMoveTimerMax;
 
             StoreSnakeHeadPositionAndDirection();
 
@@ -171,16 +171,16 @@ public class SnakeController
         }
     }
 
-    public void ProcessSnakeEatingFood(FoodView eatenFood)
+    public void ProcessSnakeEatingFood(FoodType eatenFoodType)
     {
-        if (eatenFood.foodType == FoodType.MassGainer)
+        if (eatenFoodType == FoodType.MassGainer)
         {
             model.MassGainerFoodEatenCounter++;
             AddSnakeBodyPart();
             Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
-        else if (eatenFood.foodType == FoodType.MassBurner)
+        else if (eatenFoodType == FoodType.MassBurner)
         {
             model.MassBurnerFoodEatenCounter++;
             RemoveSnakeBodyPart();
@@ -192,25 +192,25 @@ public class SnakeController
             Debug.LogError("Eaten Food type is not set");
         }
 
-        AddScore(eatenFood.pointGain);  // change function name to InvokeSnakeAteFood
+        AddScore(20);  // change function name to InvokeSnakeAteFood
     }
 
-    public void ProcessSnakeEatingPowerUp(PowerUpView eatenPowerUp)
+    public void ProcessSnakeEatingPowerUp(PowerUpType eatenPowerUpType)
     {
-        if (eatenPowerUp.powerUpType == PowerUpType.Shield)
+        if (eatenPowerUpType == PowerUpType.Shield)
         {
             ActivateShieldAsync();
             AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
             Debug.Log("SHield Power Eaten");
         }
-        else if (eatenPowerUp.powerUpType == PowerUpType.ScoreBoost)
+        else if (eatenPowerUpType == PowerUpType.ScoreBoost)
         {
             ActivateScoreBoostAsync();
 
             AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
             Debug.Log("ScooreBoost Eaten");
         }
-        else if (eatenPowerUp.powerUpType == PowerUpType.SpeedUp)
+        else if (eatenPowerUpType == PowerUpType.SpeedBoost)
         {
             ActivateSpeedBoostAsync();
             AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);

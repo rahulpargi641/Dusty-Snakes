@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpView : Item
+public class PowerUpView : MonoBehaviour
 {
     public PowerUpType powerUpType;
     public PowerUpController Controller { private get; set; }
@@ -10,7 +10,7 @@ public class PowerUpView : Item
         SnakeView snakeView = collision.GetComponent<SnakeView>();
         if (snakeView)
         {
-            snakeView.PowerUpEaten(this);
+            snakeView.PowerUpEaten(Controller.GetPowerUpType());
             Controller.InvokeOnFoodEaten();
 
             gameObject.SetActive(false);
@@ -20,5 +20,5 @@ public class PowerUpView : Item
 
 public enum PowerUpType
 {
-    Shield, ScoreBoost, SpeedUp
+    Shield, ScoreBoost, SpeedBoost
 }

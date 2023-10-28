@@ -18,9 +18,9 @@ public class LevelView : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Controller.GetGameState() == GameState.Running)
+            if (Controller.GetGameState() == EGameState.Running)
                 PauseGame();
-            else if (Controller.GetGameState() == GameState.Pause)
+            else if (Controller.GetGameState() == EGameState.Pause)
                 ResumeGame();
         }
     }
@@ -28,14 +28,14 @@ public class LevelView : MonoBehaviour
     private void ResumeGame()
     {
         Time.timeScale = 1;
-        Controller.SetGameState(GameState.Running);
+        Controller.SetGameState(EGameState.Running);
         gamePauseGO.SetActive(false);
     }
 
     private void PauseGame()
     {
         Time.timeScale = 0;
-        Controller.SetGameState(GameState.Pause);
+        Controller.SetGameState(EGameState.Pause);
         gamePauseGO.SetActive(true);
     }
 

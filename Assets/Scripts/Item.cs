@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
-    public int pointGain;
-    public int destroyAfterTime;
+    protected int pointGain;
+    protected int durationTime;
 }

@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeService : MonoSingletonGeneric<SnakeService>
 {
-    [SerializeField] SnakeView snakeView;
+    [SerializeField] SnakeSO snakeSO;
     [SerializeField] Transform spawnPoint;
 
     private SnakeController snakeController;
@@ -17,8 +16,8 @@ public class SnakeService : MonoSingletonGeneric<SnakeService>
 
     public void SpawnSnake(Transform spawnPoint)
     {
-        SnakeModel snakeModel = new SnakeModel();
-        SnakeView snakeView = Instantiate(this.snakeView, spawnPoint.position, this.snakeView.transform.rotation);
+        SnakeModel snakeModel = new SnakeModel(snakeSO);
+        SnakeView snakeView = Instantiate(snakeSO.snakeView, spawnPoint.position, snakeSO.snakeView.transform.rotation);
         snakeController = new SnakeController(snakeModel, snakeView);
     }
 

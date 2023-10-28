@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodService : MonoSingletonGeneric<FoodService>
 {
-    [SerializeField] FoodView[] foods;
+    [SerializeField] FoodSO[] foodSOs;
     private List<FoodController> foodControllers = new List<FoodController>();
 
     // Start is called before the first frame update
@@ -15,16 +15,14 @@ public class FoodService : MonoSingletonGeneric<FoodService>
 
     public FoodController SpawnRandomFood(Vector2 spawnPoint)
     {
-        FoodModel foodModel = new FoodModel();
+        int randIdx = Random.Range(0, foodSOs.Length);
 
-        int randIdx = Random.Range(0, foods.Length);
-        FoodView foodView = Instantiate(foods[randIdx], spawnPoint, Quaternion.identity);
-
+        FoodModel foodModel = new FoodModel(foodSOs[randIdx]);
+        FoodView foodView = Instantiate(foodSOs[randIdx].foodView, spawnPoint, Quaternion.identity);
         FoodController foodController = new FoodController(foodModel, foodView);
 
         foodControllers.Add(foodController);
 
         return foodController;
     }
-
 }
