@@ -25,12 +25,12 @@ public class SnakeController
             AddSnakeBodyPart();
     }
 
-    public void ProcessSnakeTranslation() // called every frame
+    public void ProcessSnakeTranslation(Vector2 snakeMoveInput) // called every frame in the view
     {
         switch (model.SnakeState)
         {
             case ESnakeState.Alive:
-                SetFacingDirection(); // Set Snake Facing Direction based on Input
+                SetFacingDirection(snakeMoveInput); // Set Snake Facing Direction based on Input
                 ProcessTranslation(); // Moving Snake One point to another
                 break;
             case ESnakeState.Dead:
@@ -38,38 +38,30 @@ public class SnakeController
         }
     }
 
-    private void SetFacingDirection() // called every frame
+    private void SetFacingDirection(Vector2 snakeMoveInput)
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if(snakeMoveInput.y > 0)
         {
             if (model.CurrentFacingDir != EDirection.Down)
-            {
-                model.CurrentFacingDir = EDirection.Up;
-            }
+               model.CurrentFacingDir = EDirection.Up;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if(snakeMoveInput.y < 0)
         {
             if (model.CurrentFacingDir != EDirection.Up)
-            {
                 model.CurrentFacingDir = EDirection.Down;
-            }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (model.CurrentFacingDir != EDirection.Right)
-            {
-                model.CurrentFacingDir = EDirection.Left;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
+        if(snakeMoveInput.x > 0)
         {
             if (model.CurrentFacingDir != EDirection.Left)
-            {
                 model.CurrentFacingDir = EDirection.Right;
-            }
+        }
+
+        if (snakeMoveInput.x < 0)
+        {
+            if (model.CurrentFacingDir != EDirection.Right)
+                model.CurrentFacingDir = EDirection.Left;
         }
     }
 
@@ -90,8 +82,6 @@ public class SnakeController
             MoveSnakeBodyParts();
 
             ProcessIfSnakeBiteItself();
-
-            //ProcessSnakeBitingOtherSnake();
         }
     }
 
@@ -177,19 +167,13 @@ public class SnakeController
         {
             model.MassGainerFoodEatenCounter++;
             AddSnakeBodyPart();
-            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
         }
         else if (eatenFoodType == FoodType.MassBurner)
         {
             model.MassBurnerFoodEatenCounter++;
             RemoveSnakeBodyPart();
-            Debug.LogWarning("Snake ate the MassGainer food!" + model.MassGainerFoodEatenCounter);
             AudioService.Instance.PlaySound(SoundType.AteFood);
-        }
-        else
-        {
-            Debug.LogError("Eaten Food type is not set");
         }
 
         InvokeSnakeAteFood(20);  // change function name to InvokeSnakeAteFood
@@ -200,25 +184,17 @@ public class SnakeController
         if (eatenPowerUpType == PowerUpType.Shield)
         {
             ActivateShieldAsync();
-            AudioService.Instance.PlaySound(SoundType.PowerupShiledPickup);
-            Debug.Log("SHield Power Eaten");
+            AudioService.Instance.PlaySound(SoundType.ShieldPickup);
         }
         else if (eatenPowerUpType == PowerUpType.ScoreBoost)
         {
             ActivateScoreBoostAsync();
-
-            AudioService.Instance.PlaySound(SoundType.PowerupScoreBoosterPickup);
-            Debug.Log("ScooreBoost Eaten");
+            AudioService.Instance.PlaySound(SoundType.ScoreBoostPickup);
         }
         else if (eatenPowerUpType == PowerUpType.SpeedBoost)
         {
             ActivateSpeedBoostAsync();
-            AudioService.Instance.PlaySound(SoundType.PowerupSpeedUpPickup);
-            Debug.LogError("SPeed Up Consumed");
-        }
-        else
-        {
-            Debug.Log("Eaten Powerup type is not set.");
+            AudioService.Instance.PlaySound(SoundType.SpeedBoostPickup);
         }
     }
 
@@ -231,7 +207,6 @@ public class SnakeController
 
         model.ScoreBoostActive = false;
         ChangeToNormalColor();
-
     }
 
     private async void ActivateShieldAsync()
@@ -256,14 +231,14 @@ public class SnakeController
         ChangeToNormalColor();
     }
 
-    private void ChangeSnakeBodyColor(Color changeToColor)  // change entire snake body
+    private void ChangeSnakeBodyColor(Color changeToColor)
     {
-        view.GetComponent<SpriteRenderer>().color = changeToColor;
+        view.GetComponent<SpriteRenderer>().color = changeToColor; // change color of snake head
     }
 
     void ChangeToNormalColor()
     {
-        view.GetComponent<SpriteRenderer>().color = Color.white;
+        view.GetComponent<SpriteRenderer>().color = Color.white; // change color of snake head
     }
 
     public void InvokeSnakeAteFood(int pointGain)
@@ -281,13 +256,7 @@ public class SnakeController
             Vector2Int snakeBodyPartPos = snakeBodyPart.GetSnakeBodyPartPosition();
 
             if (model.CurrentSnakeHeadPos == snakeBodyPartPos)
-            {
-                if (model.ShieldActive) return;
-
-                model.SnakeState = ESnakeState.Dead;
-                onSnakeDeath?.Invoke();
-                AudioService.Instance.PlaySound(SoundType.Death);
-            }
+                ProcessSnakeDeath();
         }
     }
 
@@ -297,7 +266,7 @@ public class SnakeController
         SnakeBodyPart snakeBodyPart = model.SnakeBodyPartPool.GetSnakeBodyPart();
         model.SnakeBodyParts.Add(snakeBodyPart);
         model.SnakeBodySize++;
-        snakeBodyPart.GetSnakeBodyPart().gameObject.SetActive(true);
+        snakeBodyPart.GetSnakeBodyPartGO().gameObject.SetActive(true);
     }
 
     void RemoveSnakeBodyPart()
@@ -313,7 +282,7 @@ public class SnakeController
     private void SendSnakeBodyPartBackToPool()
     {
         SnakeBodyPart snakeBodyPartToRemove = model.SnakeBodyParts[model.SnakeBodyParts.Count - 1];
-        GameObject snakeBodyPartToRemoveGO = snakeBodyPartToRemove.GetSnakeBodyPart();
+        GameObject snakeBodyPartToRemoveGO = snakeBodyPartToRemove.GetSnakeBodyPartGO();
         snakeBodyPartToRemoveGO.SetActive(false);
         model.SnakeBodyPartPool.ReturnItem(snakeBodyPartToRemove);
     }
@@ -329,31 +298,17 @@ public class SnakeController
         return snakeFullBodyPosVectors;
     }
 
+    public void ProcessSnakeDeath()
+    {
+        if (model.ShieldActive) return;
 
-    // Later***
+        model.SnakeState = ESnakeState.Dead;
+        onSnakeDeath?.Invoke();
+        AudioService.Instance.PlaySound(SoundType.SnakeCollide);
+    }
 
-    //private void ProcessSnakeBitingOtherSnake()
-    //{
-    //    Vector2Int otherSnakeHeadCurrentPos = m_OtherSnake.GetCurrentSnakeHeadPos();
-
-    //    foreach (SnakeBodyPart snakeBodyPart in m_SnakeBodyParts)
-    //    {
-    //        Vector2Int snakeBodyPartGridPosition = snakeBodyPart.GetSnakeBodyPartPosition();
-    //        if (otherSnakeHeadCurrentPos == snakeBodyPartGridPosition)
-    //        {
-    //            if (m_ShieldActive)
-    //            {
-    //                Debug.LogError("SHiled is Active Snake cannot die");
-    //                return;
-    //            }
-    //            snakeState = ESnakeState.Dead;
-    //            //m_LevelController.SnakeCollided();
-    //            onSnakeDeath?.Invoke();
-    //            Debug.Log("Snake Collied With Other Snake Body!");
-    //            AudioService.Instance.PlaySound(SoundType.Death);
-    //        }
-    //    }
-
-    //}
-
+    public SnakeType GetSnakeType()
+    {
+        return model.SnakeType;
+    }
 }

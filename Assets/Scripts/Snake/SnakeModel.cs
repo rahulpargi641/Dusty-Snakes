@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SnakeModel
 {
+    public SnakeType SnakeType { get; private set; }
     public EDirection CurrentFacingDir { get; set; }
     public ESnakeState SnakeState { get; set; }
     public Vector2Int CurrentSnakeHeadPos { get; set; }
@@ -23,13 +24,14 @@ public class SnakeModel
     {
         this.snakeSO = snakeSO;
 
-        CurrentSnakeHeadPos = new Vector2Int(10, 10);
         CurrentFacingDir = EDirection.Right;
         SnakeState = ESnakeState.Alive;
 
+        SnakeType = snakeSO.snakeType;
+        CurrentSnakeHeadPos = snakeSO.spawnPos;
+
         snakeMoveTimerMax = snakeSO.snakeMoveTimerMax;
         snakeMoveTimer = snakeMoveTimerMax;
-
         PowerUpCoolDownTime = snakeSO.PowerUpCoolDownTime;
     }
 }

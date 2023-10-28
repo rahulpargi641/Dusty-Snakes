@@ -5,11 +5,13 @@ public class SnakeSO : ScriptableObject
 {
     public SnakeView snakeView;
     public SnakeType snakeType;
+    public Vector2Int spawnPos;
+
     public float snakeMoveTimerMax = 0.2f;
     public int PowerUpCoolDownTime = 10;
 }
 
 public enum SnakeType
 {
-    Fast, Slow, Normal
+    Snake1, Snake2
 }

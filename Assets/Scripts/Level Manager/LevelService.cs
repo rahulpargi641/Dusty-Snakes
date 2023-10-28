@@ -14,6 +14,7 @@ public class LevelService : MonoSingletonGeneric<LevelService>
         levelController = new LevelController(levelModel, levelView);
 
         SnakeController.onSnakeDeath += ProcessGameOver;
+        PowerUpController.onPowerUpEaten += DisplayPowerUpActivatedText;
     }
 
     private void OnDestroy()
@@ -26,6 +27,11 @@ public class LevelService : MonoSingletonGeneric<LevelService>
         levelController.ProcessGameOver();
     }
 
+    public void DisplayPowerUpActivatedText(PowerUpType pickedPowerUpType)
+    {
+        levelController.DisplayPowerUpActivatedText(pickedPowerUpType);
+    }
+
     public int GetLevelWidth()
     {
         return levelController.GetLevelWidth();
@@ -35,4 +41,5 @@ public class LevelService : MonoSingletonGeneric<LevelService>
     {
         return levelController.GetLevelHeight();
     }
+
 }

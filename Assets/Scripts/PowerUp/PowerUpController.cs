@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ public class PowerUpController
 {
     private PowerUpModel model;
     private PowerUpView view;
+
+    public static event Action<PowerUpType> onPowerUpEaten;
 
     public PowerUpController(PowerUpModel model, PowerUpView view)
     {
@@ -18,6 +21,9 @@ public class PowerUpController
     public void ProcessPowerUpEaten(SnakeView snakeView)
     {
         snakeView.PowerUpEaten(model.powerUpType);
+
+        onPowerUpEaten?.Invoke(model.powerUpType);
+
         PowerUpService.Instance.ReturnPowerUpToPool(this);
     }
 

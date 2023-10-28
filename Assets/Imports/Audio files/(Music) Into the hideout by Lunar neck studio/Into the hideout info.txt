@@ -1,0 +1,7 @@
+Title: Into the hideout
+File type: Wav
+Sample rate: 44100 hrz 24 bit
+Tempo: 160 bpm
+Signature: 6/4
+Key: C# Minor (with modulations)
+Loop: Yes

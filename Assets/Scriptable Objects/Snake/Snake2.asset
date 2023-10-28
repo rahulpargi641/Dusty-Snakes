@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24c78552011b944b994f3fbf135675c, type: 3}
+  m_Name: Snake2
+  m_EditorClassIdentifier: 
+  snakeView: {fileID: 7267613094687744216, guid: 50db849e24a272948a4755523ff67a75, type: 3}
+  snakeType: 1
+  spawnPos: {x: 10, y: 10}
+  snakeMoveTimerMax: 0.15
+  PowerUpCoolDownTime: 15

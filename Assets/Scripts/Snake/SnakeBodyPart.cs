@@ -4,14 +4,12 @@ public class SnakeBodyPart
 {
     private SnakeVector snakeBodyPartPosVector;
     private GameObject snakeBodyPart;
-    //Transform transform;
 
-    public SnakeBodyPart(int bodyPartNo) // body index - count of SnakeBodyPart list
+    public SnakeBodyPart() // body index - count of SnakeBodyPart list
     {
         snakeBodyPart = new GameObject("SnakeBody", typeof(SpriteRenderer));
         snakeBodyPart.GetComponent<SpriteRenderer>().sprite = GameAssetService.Instance.m_SnakeBody.GetComponent<SpriteRenderer>().sprite;
         //snakeBodyPart.GetComponent<SpriteRenderer>().sortingOrder = -bodyPartNo;
-        //transform = snakeBodyPart.transform;
     }
 
     public void SetSnakeBodyPartTransform(SnakeVector snakeHeadPosVector)
@@ -48,7 +46,7 @@ public class SnakeBodyPart
         return snakeBodyPartPosVector.GetSnakePosition();
     }
 
-    public GameObject GetSnakeBodyPart()
+    public GameObject GetSnakeBodyPartGO()
     {
         return snakeBodyPart;
     }

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Veggie
   m_EditorClassIdentifier: 
   foodView: {fileID: 5934658072990200981, guid: 8977117310eeaf945be8e9078d1224e5, type: 3}
-  pointGain: 30
-  destroyAfterTime: 8
+  foodType: 1
+  pointGain: 25
+  activeDuration: 8

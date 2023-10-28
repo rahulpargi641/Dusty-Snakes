@@ -8,6 +8,6 @@ public class SnakeBodyPartPool: ObjectPoolGeneric<SnakeBodyPart>
 
     protected override SnakeBodyPart CreateItem()
     {
-        return new SnakeBodyPart(0);
+        return new SnakeBodyPart();
     }
 }

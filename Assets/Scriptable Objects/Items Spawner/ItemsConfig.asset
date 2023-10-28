@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ItemsConfig
   m_EditorClassIdentifier: 
   itemsView: {fileID: 1854171059007094588, guid: f4d736c5e272e3f4f8f136d8c0dadf3c, type: 3}
-  foodSpawnIntervalDelay: 8
-  powerUpSpawnIntervalDelay: 12
+  foodSpawnIntervalDelay: 5
+  powerUpSpawnIntervalDelay: 16
   itemSpawnArea: {x: 29, y: 29}

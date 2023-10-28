@@ -58,11 +58,13 @@ public class Sound
 
 public enum SoundType
 {
+    BgMusic,
     ButtonClick,
     AteFood,
-    PowerupShiledPickup,
-    PowerupScoreBoosterPickup,
-    PowerupSpeedUpPickup,
-    Death,
-    SnakeCollide
+    ShieldPickup,
+    ScoreBoostPickup,
+    SpeedBoostPickup,
+    SnakeCollide,
+    GameOver
 }
+
