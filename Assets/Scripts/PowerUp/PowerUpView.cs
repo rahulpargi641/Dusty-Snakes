@@ -9,12 +9,7 @@ public class PowerUpView : MonoBehaviour
     {
         SnakeView snakeView = collision.GetComponent<SnakeView>();
         if (snakeView)
-        {
-            snakeView.PowerUpEaten(Controller.GetPowerUpType());
-            Controller.InvokeOnFoodEaten();
-
-            gameObject.SetActive(false);
-        }
+            Controller.ProcessPowerUpEaten(snakeView);
     }
 }
 

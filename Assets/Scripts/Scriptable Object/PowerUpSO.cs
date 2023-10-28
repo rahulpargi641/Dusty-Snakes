@@ -5,6 +5,6 @@ public class PowerUpSO : ScriptableObject
 {
     public PowerUpView powerUpView;
     public PowerUpType powerUpType;
-    public int PowerUpDuration;
+    public int activeDuration;
     public int pointGain;
 }

@@ -8,12 +8,7 @@ public class FoodView : MonoBehaviour
     {
         SnakeView snakeView = collision.GetComponent<SnakeView>();
         if (snakeView)
-        {
-            snakeView.FoodEaten(Controller.GetFoodType());
-            Controller.InvokeOnFoodEaten();
-
-            gameObject.SetActive(false);
-        }
+            Controller.ProcessFoodEaten(snakeView);
     }
 }
 

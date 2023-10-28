@@ -11,15 +11,6 @@ public class ItemsService : MonoSingletonGeneric<ItemsService>
     void Start()
     {
         CreateItemsController();
-
-        FoodController.onFoodEaten += FoodEaten;
-        PowerUpController.onPowerUpEaten += PowerUpEaten;
-    }
-
-    private void OnDestroy()
-    {
-        FoodController.onFoodEaten -= FoodEaten;
-        PowerUpController.onPowerUpEaten -= PowerUpEaten;
     }
 
     private void CreateItemsController()
@@ -27,15 +18,5 @@ public class ItemsService : MonoSingletonGeneric<ItemsService>
         ItemsModel itemsModel = new ItemsModel(itemSO);
         ItemsView itemsView = Instantiate(itemSO.itemsView);
         itemsController = new ItemsController(itemsModel, itemsView);
-    }
-
-    public void FoodEaten()
-    {
-        itemsController.FoodEaten();
-    }
-
-    public void PowerUpEaten()
-    {
-        itemsController.PowerUpEaten();
     }
 }

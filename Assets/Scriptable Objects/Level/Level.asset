@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level
   m_EditorClassIdentifier: 
   levelView: {fileID: 0}
-  levelWidth: 0
-  levelHeight: 0
-  scoreToWin: 0
+  levelWidth: 30
+  levelHeight: 30
+  scoreToWin: 100

@@ -10,6 +10,6 @@ public class FoodModel : Item
         this.foodSO = foodSO;
         FoodType = foodSO.foodType;
         pointGain = foodSO.pointGain;
-        durationTime = foodSO.destroyAfterTime;
+        activeDuration = foodSO.activeDuration;
     }
 }

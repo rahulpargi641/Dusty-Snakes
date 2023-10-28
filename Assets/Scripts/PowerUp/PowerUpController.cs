@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PowerUpController
 {
     private PowerUpModel model;
     private PowerUpView view;
-
-    public static event Action onPowerUpEaten;
 
     public PowerUpController(PowerUpModel model, PowerUpView view)
     {
@@ -19,13 +15,32 @@ public class PowerUpController
         model.Controller = this;
     }
 
-    public PowerUpType GetPowerUpType()
+    public void ProcessPowerUpEaten(SnakeView snakeView)
     {
-        return model.powerUpType;
+        snakeView.PowerUpEaten(model.powerUpType);
+        PowerUpService.Instance.ReturnPowerUpToPool(this);
     }
 
-    public void InvokeOnFoodEaten()
+    public void SetTransform(Vector2 spawnPoint)
     {
-        onPowerUpEaten?.Invoke();
+        view.transform.position = spawnPoint;
+    }
+
+    public void EnablePowerUp()
+    {
+        view.gameObject.SetActive(true);
+        SendPowerUpToPoolAsync();
+    }
+
+    private async void SendPowerUpToPoolAsync()
+    {
+        await Task.Delay(model.activeDuration * 1000);
+
+        PowerUpService.Instance.ReturnPowerUpToPool(this);
+    }
+
+    public void DisablePowerUp()
+    {
+        view.gameObject.SetActive(false);
     }
 }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PowerUpModel : Item
 {
@@ -13,6 +10,6 @@ public class PowerUpModel : Item
     {
         this.powerUpSO = powerUpSO;
         powerUpType = powerUpSO.powerUpType;
-        durationTime = powerUpSO.PowerUpDuration;
+        activeDuration = powerUpSO.activeDuration;
     }
 }

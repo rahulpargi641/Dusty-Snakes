@@ -1,28 +1,54 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodService : MonoSingletonGeneric<FoodService>
 {
     [SerializeField] FoodSO[] foodSOs;
-    private List<FoodController> foodControllers = new List<FoodController>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // subscribe to the events
-    }
+    private List<FoodController> foodControllers = new List<FoodController>();
+    private Dictionary<FoodSO, FoodPool> foodPools = new Dictionary<FoodSO, FoodPool>();
 
     public FoodController SpawnRandomFood(Vector2 spawnPoint)
     {
-        int randIdx = Random.Range(0, foodSOs.Length);
+        FoodPool selectedPool = SelectFoodPool();
 
-        FoodModel foodModel = new FoodModel(foodSOs[randIdx]);
-        FoodView foodView = Instantiate(foodSOs[randIdx].foodView, spawnPoint, Quaternion.identity);
-        FoodController foodController = new FoodController(foodModel, foodView);
+        FoodController foodController = selectedPool.GetFood();
+        foodController.SetTransform(spawnPoint);
+        foodController.EnableFood();
 
         foodControllers.Add(foodController);
 
         return foodController;
+    }
+
+    private FoodPool SelectFoodPool()
+    {
+        int randIdx = Random.Range(0, foodSOs.Length);
+        FoodSO selectedFoodSO = foodSOs[randIdx];
+
+        if (!foodPools.ContainsKey(selectedFoodSO))
+            CreateFoodPool(selectedFoodSO);
+
+        FoodPool selectedPool = foodPools[selectedFoodSO];
+        return selectedPool;
+    }
+
+    private void CreateFoodPool(FoodSO selectedFoodSO)
+    {
+        FoodModel foodModel = new FoodModel(selectedFoodSO);
+        FoodView foodView = selectedFoodSO.foodView;
+
+        FoodPool foodPool = new FoodPool();
+        foodPool.Initialize(foodModel, foodView);
+
+        foodPools[selectedFoodSO] = foodPool;
+    }
+
+    public void ReturnFoodToPool(FoodController foodController)
+    {
+        foodController.DisableFood();
+
+        foreach (var pool in foodPools.Values)
+            pool.ReturnItem(foodController);
     }
 }
