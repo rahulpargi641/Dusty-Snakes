@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6184206942278320292}
   - component: {fileID: 1414720004879734499}
   - component: {fileID: -8053227827790552189}
+  - component: {fileID: 3425737196891421531}
   m_Layer: 0
   m_Name: Diamond Shield
   m_TagString: Untagged
@@ -94,9 +95,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 7535928531513548958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5f33e4fc724d499b7460da2a5a59f, type: 3}
+  m_Script: {fileID: 11500000, guid: b608a498b9ce6fc48b923ba6a0992a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointGain: 0
-  m_DestroyAfterTime: 7
-  EP_PowerType: 0
+  pointGain: 0
+  destroyAfterTime: 8
+  powerUpType: 0
+--- !u!61 &3425737196891421531
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535928531513548958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0054984093, y: 0.040326357}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1.6, y: 1.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6370611, y: 0.56007624}
+  m_EdgeRadius: 0

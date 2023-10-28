@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9169621958361485272}
   - component: {fileID: 9020016564180129553}
   - component: {fileID: 6627638398372308383}
+  - component: {fileID: 6526576514654652439}
   m_Layer: 0
   m_Name: SoulFragment
   m_TagString: Untagged
@@ -94,9 +95,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4734286127864621507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5f33e4fc724d499b7460da2a5a59f, type: 3}
+  m_Script: {fileID: 11500000, guid: b608a498b9ce6fc48b923ba6a0992a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointGain: 0
-  m_DestroyAfterTime: 10
-  EP_PowerType: 2
+  pointGain: 8
+  destroyAfterTime: 0
+  powerUpType: 2
+--- !u!61 &6526576514654652439
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734286127864621507}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005829811, y: -0.005830288}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6, y: 1.6}
+    newSize: {x: 1.6, y: 1.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.39891624, y: 0.38725662}
+  m_EdgeRadius: 0
