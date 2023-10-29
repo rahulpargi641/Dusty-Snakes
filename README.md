@@ -49,7 +49,7 @@
            
     Observer Pattern:
         - Employed the observer pattern to decouple classes and facilitate event handling for events such as 
-          snake death,food and power-up consumption.
+          snake death, food and power-up consumption.
         - This facilitates game over and power-up activation screens and efficient score updates by the ScoreController.
     
     Scriptable Objects:
