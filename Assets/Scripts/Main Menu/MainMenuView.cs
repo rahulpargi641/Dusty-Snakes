@@ -1,49 +1,67 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MainMenuView : MonoBehaviour
+public class MainMenuVie : MonoBehaviour
 {
-    [SerializeField] Button m_StartButton;
-    [SerializeField] Button m_QuitButton;
-    [SerializeField] Button m_InfoButton;
-    [SerializeField] Button m_BackButton;
-    [SerializeField] GameObject MainMenuScreen;
-    [SerializeField] GameObject InfoScreen;
-    [SerializeField] string m_SceneToLoad;
+    [SerializeField] Button startButton;
+    [SerializeField] Button quitButton;
+    [SerializeField] Button howToPlay;
+    [SerializeField] GameObject instructionsScreen;
 
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        m_StartButton.onClick.AddListener(StartGame);
-        m_QuitButton.onClick.AddListener(QuitGame);
-        m_BackButton.onClick.AddListener(GoToMainMenuScreen);
-        m_InfoButton.onClick.AddListener(GoToInfoScreen);
+        startButton.onClick.AddListener(PlayGame);
+        quitButton.onClick.AddListener(QuitGame);
+        howToPlay.onClick.AddListener(ShowInstructionScreen);
+
+        AudioService.Instance.PlaySound(SoundType.BgMusic);
     }
 
-    private void StartGame()
+    private void Update()
     {
-        AudioService.Instance.PlaySound(SoundType.ButtonClick);
-        AudioService.Instance.PlaySound(SoundType.BgMusic);
-        SceneManager.LoadScene(m_SceneToLoad);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            HideInstructionsScreen();
+        }
+    }
+
+    private void PlayGame()
+    {
+        PlayButtonClickSound();
+
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+            nextSceneIndex = 0;
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     private void QuitGame()
     {
-        AudioService.Instance.PlaySound(SoundType.ButtonClick);
+        PlayButtonClickSound();
+
         Application.Quit();
     }
 
-    private void GoToInfoScreen()
+    private void ShowInstructionScreen()
     {
-        AudioService.Instance.PlaySound(SoundType.ButtonClick);
-        MainMenuScreen.SetActive(false);
-        InfoScreen.SetActive(true);
+        PlayButtonClickSound();
+
+        instructionsScreen.SetActive(true);
     }
 
-    private void GoToMainMenuScreen()
+    private void HideInstructionsScreen()
+    {
+        if (instructionsScreen.activeSelf)
+        {
+            instructionsScreen.SetActive(false);
+        }
+    }
+
+    private void PlayButtonClickSound()
     {
         AudioService.Instance.PlaySound(SoundType.ButtonClick);
-        InfoScreen.SetActive(false);
-        MainMenuScreen.SetActive(true);
     }
 }
