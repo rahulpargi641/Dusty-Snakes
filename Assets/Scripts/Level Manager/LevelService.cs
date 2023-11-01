@@ -20,6 +20,7 @@ public class LevelService : MonoSingletonGeneric<LevelService>
     private void OnDestroy()
     {
         SnakeController.onSnakeDeath -= ProcessGameOver;
+        PowerUpController.onPowerUpEaten -= DisplayPowerUpActivatedText;
     }
 
     private void ProcessGameOver()
