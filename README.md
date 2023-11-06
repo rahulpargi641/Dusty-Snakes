@@ -28,8 +28,15 @@
     - Pause screen with options to resume and quit the game.
     
 ### Screenshots
-
-   (Insert screenshots)
+   ![StartMenu](./Screenshots/StartMenu.png)
+   ![FishAndRedFragment](./Screenshots/FishAndRedFragment.png)
+   ![SpeedBoostActivated](./Screenshots/SpeedBoostActivated.png)
+   ![ShieldAndMeat](./Screenshots/ShieldAndMeat.png)
+   ![ShiledActivated](./Screenshots/ShiledActivated.png)
+   ![ScoreBoostActivated](./Screenshots/ScoreBoostActivated.png)
+   ![PotionAndStrawberry](./Screenshots/PotionAndStrawberry.png)
+   ![ScoreBoostActivated](./Screenshots/ScoreBoostActivated.png)
+   
   
 ### Code Structure and Game Design
 
