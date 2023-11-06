@@ -91,5 +91,5 @@
 
 ### Play the Game
 
-    To experience the game firsthand, play it directly by following this playable link.
+    To experience the game firsthand, play it directly by following this playable link:
    [Play in browser(WebGl)](https://rahul-pargi.itch.io/dusty-snakes)
