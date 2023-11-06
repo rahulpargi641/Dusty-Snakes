@@ -33,7 +33,6 @@
    ![SpeedBoostActivated](./Screenshots/SpeedBoostActivated.png)
    ![ShieldAndMeat](./Screenshots/ShieldAndMeat.png)
    ![ShiledActivated](./Screenshots/ShiledActivated.png)
-   ![NoDamage](./Screenshots/NoDamage.png)
    ![PotionAndStrawberry](./Screenshots/PotionAndStrawberry.png)
    ![ScoreBoostActivated](./Screenshots/ScoreBoostActivated.png)
    
